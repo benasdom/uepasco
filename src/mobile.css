@@ -1,0 +1,110 @@
+@media (max-width:999px){
+    body {
+        background-image: radial-gradient( rgba(10, 16, 19, 0.8) 10%, rgb(0, 0, 0) 40%), linear-gradient( rgba(3, 17, 25, 1) 90%, rgba(220, 220, 220, 0) 5%), url(imgs/pattern.webp);
+        background-position: fixed;
+        transition: all .6s ease-in-out;
+        background-repeat: no-repeat,repeat,repeat;
+        background-size: 150% 250%,200em 1em,100% 60%;
+        animation: halfmove 45s infinite linear;
+        background-position: bottom,100% -100%,center;
+        box-shadow: inset 0px 0px 0px rgba(0, 128, 0, 0);
+        flex: 1;
+    }
+    .searchnav{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+ 
+
+@keyframes halfmove {
+    35%{
+      background-image:
+    radial-gradient( rgba(10, 16, 19, 0.8)  10%, rgb(0, 0, 0) 40%),
+    linear-gradient( rgba(3, 17, 25, 1)  90%, rgba(220, 220, 220, 0) 5%),
+    url(imgs/pattern.webp);
+  
+      
+    }
+    
+    75%{
+      background-image:
+  
+    radial-gradient( rgba(10, 16, 19, 0.8)  10%, rgb(0, 0, 0) 40%),
+    linear-gradient( rgba(3, 17, 25, 1)  90%, rgba(220, 220, 220, 0) 5%),
+    url(imgs/pattern.webp);
+  
+  
+     
+    }
+  100%{
+  
+    background-position: bottom,-100% 100%,center;
+  
+  
+  
+  }
+  }
+  
+  
+    .footer{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: max-content;
+    }
+    .searchnav .twwo{
+        width:90% !important;
+    }
+    .foot1{
+        width: 100%;
+    }
+    .ptext{
+        font-size: 50px;
+    }
+    .titles{
+        font-size: 12px;;
+    }
+    .imgthumb{
+        width:30px;
+    }
+    .download{
+        padding: 5px;
+        height: 27px;
+        border-radius: 5px;
+        font-size: 10px;
+        width:70px;
+    }
+    .describe{
+        font-size: 7px;
+    }
+    .listcontent{
+        width: 100%;
+        height: 70vh;
+    }
+    .reglate{
+        display: none;
+    }
+    .mlist{
+        
+        display: flex;
+        flex-direction: column;
+    }
+   .onne{
+    display: none;
+   }
+    .mlist a{
+        display: none;
+    }
+    .page{
+        overflow: hidden;
+    }
+    .rightmenu{
+        display:flex;
+        visibility: visible;
+        opacity: 1;;
+    }
+}
