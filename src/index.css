@@ -34,7 +34,7 @@ html{
   background:rgb(34, 34, 34);
 }
  
-body{
+  body{
   background-image:
   radial-gradient( rgba(10, 16, 19, 0.8)  10%, rgb(0, 0, 0) 40%),
   linear-gradient( rgba(3, 17, 25, 1)  90%, rgba(220, 220, 220, 0) 5%),
