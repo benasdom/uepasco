@@ -13,7 +13,9 @@ function App() {
  const [NetworkError, setNetworkError] = useState("Type the course code in the search bar...🔎")
  const [Refreshing, setRefreshing] = useState(false)
  const [payload, setpayload] = useState([{createdOn:"",description:"",downloadLink:""}])
+ const [showpdf, setshowpdf] = useState(false)
  const bar = useRef(null)
+ const [pdflink, setpdflink] = useState("https://notfound.com")
 
  
 useEffect(() => {
@@ -70,6 +72,9 @@ useEffect(() => {
     <LoadComponet opacity={1} indexed={100}/>
      :<LoadComponet opacity={0} indexed={-100}/>
    }
+   {showpdf?
+<Showfiles pdflink={pdflink} setshowpdf={setshowpdf}/>
+:false}
          <div className="scrldn"><div className="scrd">
 
         {/* <!-- <div className="started">get started</div> --> */}
@@ -78,7 +83,7 @@ useEffect(() => {
     </div> 
 
        </div>
-       {searching?<SearchList setsearching={setsearching} find={find} NetworkError={NetworkError} payload={payload} bar={bar} setfind={setfind}/>:""}
+       {searching?<SearchList setpdflink={setpdflink} pdflink={pdflink} setshowpdf={setshowpdf}  showpdf={showpdf} setsearching={setsearching} find={find} NetworkError={NetworkError} payload={payload} bar={bar} setfind={setfind}/>:""}
        <div className="footer">
         <div className="foot1">
             <img className="brands" title='uepasco' src={mainlogo} alt="" />
@@ -104,8 +109,16 @@ useEffect(() => {
     </>
   )
 }
-const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,Refreshing,NetworkError})=>{
-    
+const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,Refreshing,NetworkError,setshowpdf,pdflink,setpdflink})=>{
+    const fix=(res)=>{
+        setpdflink(res);
+        console.log(res)
+
+        openpdf();
+    }
+    const openpdf=()=>{
+    setshowpdf(true)
+    }
     return(
         <div className="searchlist">
             <div className="searchnav"> 
@@ -118,12 +131,10 @@ const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,Refreshin
                     .filter((a,b,c)=>c.indexOf(a)==b)
                     .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase()))
                      .map((a,b)=>{
-                    return a=<div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdf} alt="" className="imgthumb"/><div className="titles">{a.description}</div><div className="describe">{a.createdOn}</div><a target='_blank' href={a.downloadLink} className="download">Download</a></div> })
+                    return a=<div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdf} alt="" className="imgthumb"/>
+                    <div className="titles">{a.description}</div><div className="describe">{a.createdOn}</div><div href={a.downloadLink} onClick={(ev) => fix(ev.target.attributes.href.value)} className="download">open</div></div> })
                     :new Array(1).fill("").map((a,b)=>{
                     return a=<div key={b+""} className="filtered mn4" data-ptext="title..." data-texts="details..."><img src="" alt="" className="imgthumb"/><div className="desc err4">{NetworkError}</div></div>
-
-
-                    
                     })}
             </div>
             
@@ -154,6 +165,19 @@ const LoadComponet=({opacity,indexed})=>{
     
     Questions for various course codes        
         </div>  
+       </div> 
+    )
+}
+const Showfiles=({pdflink,setshowpdf})=>{
+    return (
+        <div className="texttit" id="waiting" >
+        <div className="viewer">
+            <div className="pdfloader">
+                <div className='imgclose'><div className='closesearch' onClick={()=>setshowpdf(false)}>x</div><a target='_blank' href={pdflink} className="download">Download</a><img className="logopdf" src={mainlogo} width="150" alt=""/></div>
+    <iframe src={pdflink} className="loadpdf" id="loadtext" data-text="Loading...."> Loading....</iframe>
+            </div>
+    
+         </div>  
        </div> 
     )
 }
