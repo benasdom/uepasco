@@ -7,7 +7,7 @@ export default function Contact() {
   const [spin, setspin] = useState(false);
   const sender=()=>{
     setspin(true);
-    sendMessage();
+   [...document.querySelectorAll(".contactvalue")].every(a=>a.value!="")?sendMessage():(()=>{alert("empty fields");setspin(false)})();
 
   }
   async function sendMessage() {
