@@ -20,6 +20,6 @@ export default function About() {
              </h2>
           </div>
     </div>
-    <Link to="/uepasco/" className='return'>👈 </Link>
+    <a href="/uepasco" className='return'>👈 </a>
         </div>  )
 }

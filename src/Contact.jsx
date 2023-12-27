@@ -61,7 +61,7 @@ export default function Contact() {
           </div>
  
     </div>
-    <Link to="/uepasco/" className='return'>👈 </Link>
+    <a href="/uepasco" className='return'>👈 </a>
         </div>  )
 }
 
