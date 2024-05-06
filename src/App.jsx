@@ -20,6 +20,7 @@ function App() {
  const bar = useRef(null)
  const [pdflink, setpdflink] = useState("https://notfound.com")
 
+
  
 useEffect(() => {
  
@@ -167,9 +168,9 @@ const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,Refreshin
             <div className="listcontent">
             {
                    find!="" && payload.length>1?payload
-                    .filter((a,b,c)=>c.indexOf(a)==b)
-                    .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase()))
-                    .map((a,b)=>{
+                   .filter((a,b,c)=>c.indexOf(a)==b)
+                   .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase()))
+                      .map((a,b)=>{
                     return a=<div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdf} alt="" className="imgthumb"/>
                     <div className="titles">{a.description}</div><div className="describe">{a.createdOn}</div><div href={a.downloadLink} onClick={(ev) => fix(ev.target.attributes.href.value)} className="download">open</div></div> })
                     :new Array(1).fill("").map((a,b)=>{
