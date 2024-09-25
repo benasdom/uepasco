@@ -35,29 +35,86 @@ html{
 }
  
   body{
+    display: flex;
   background-image:
   radial-gradient( rgba(10, 16, 19, 0.8)  10%, rgb(0, 0, 0) 40%),
   linear-gradient( rgba(3, 17, 25, 1)  90%, rgba(220, 220, 220, 0) 5%),
-  url("https://benasdom.github.io/uepasco/imgs/pattern.webp");
+  url(imgs/pattern.webp);
     background-position: fixed;
   transition: all .6s ease-in-out; 
    background-repeat: no-repeat,repeat,repeat;
-  background-size:100% 200%,200em 1em,100% 60%;
+  background-size:100% 100%,200em 1em,2000px 400px;
   animation: halfmove 45s infinite linear;
   background-position:center,100% -100%,center;
   box-shadow: inset 0px 0px 0px rgba(0, 128, 0, 0);
-  flex:1;
 }
 
+.sideimgs{
+  display:flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height:200px;
+}
+.landingpage{
+  display: flex;
+  justify-content: space-between;
+}
+.navbottom{
+  display: none;
+  
+}
+.micropic{
+  width:200px;
+  position: absolute;
+  object-fit:cover;
+  object-position: center;
+  border-radius: 50%;
+  box-shadow: inset 5px 200px 1px black;
+  filter:drop-shadow(0px -10px 100px rgb(255, 255, 255));
+  animation:fade-in  linear;
+  animation-timeline:view(900px 0px);   
+   }
+  @keyframes fade-in {
+     0%{
+         opacity: 0;
+         filter:grayscale(1);
+         }
+ 
+     40%{
+         opacity: 0;
+         transform: scale(1,1)translateY(200px) ;
+         filter:grayscale(0);
+        }
+    
+     100%{ 
+         opacity: 1;
+         transform: translateY(0px);
+     }
+     
+  }
+.welcmessage{
+  font-size: 10px;
+  z-index: 2;
+}
+.micropic:nth-child(odd){
+  margin-bottom: -600px;
+  left:90px;
 
+
+}
+
+  .micropic:nth-child(even){
+  margin-top: -300px;
+  right: 90px;
+    box-shadow: inset 5px 200px 1px black;
+  filter:drop-shadow(0px -10px 100px rgb(255, 255, 255));
+}
 @keyframes halfmove {
   35%{
     background-image:
   radial-gradient( rgba(10, 16, 19, 0.8)  10%, rgb(0, 0, 0) 40%),
   linear-gradient( rgba(3, 17, 25, 1)  90%, rgba(220, 220, 220, 0) 5%),
-  URL("https://benasdom.github.io/uepasco/imgs/pattern.webp");
-
-    
+  URL(imgs/pattern.webp);
   }
   
   75%{
@@ -65,7 +122,7 @@ html{
 
   radial-gradient( rgba(10, 16, 19, 0.8)  10%, rgb(0, 0, 0) 40%),
   linear-gradient( rgba(3, 17, 25, 1)  90%, rgba(220, 220, 220, 0) 5%),
-  URL("https://benasdom.github.io/uepasco/imgs/pattern.webp");
+  URL(imgs/pattern.webp);
 
 
    
@@ -100,10 +157,13 @@ html{
   opacity: .4;
 }
   .page:hover .fil:nth-child(2){
-  filter:drop-shadow( 0px 0px 0px white);
-  transform :rotateX(20deg);
-  transition-delay: 1s;
-  -webkit-mask-position: 500px 0px;
+  animation: turns 4s linear infinite;
+}
+@keyframes turns {
+  10%, 100%{
+    -webkit-mask-position: 400px 0px;
+
+  }
 }
 .twwo,.one{
 display: flex;
@@ -138,7 +198,7 @@ justify-content: center;
 }
 .leftcp{
   width:50%;
-   height: 70%;
+   height: 500px;
    text-align: right;
    padding: 20px;
 
@@ -170,12 +230,15 @@ font-weight: 600;
 .rborder{
   margin:3px ;
 }
-
+.cpage{
+  height: 100vh;
+}
 .contactp{
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
   flex-direction: row;
 }
 .rightcp{
@@ -183,6 +246,7 @@ font-weight: 600;
   justify-content: space-around;
   flex-direction: column;
   width: 20%;
+  height:400px;
   align-items: center;
  }
  
@@ -352,8 +416,8 @@ img{
   position: absolute;
    user-select: none;
   justify-content: center;
-  height: 300px;
-  width:300px;
+  height: 350px;
+  width:350px;
   top:200px;
   align-self: center;
   transition:all .8s ease-in-out;
@@ -379,7 +443,7 @@ img{
   letter-spacing: 3px;
   transition: all .7s ease-in-out;
   color:white;
-  font-size: 130px;
+  font-size: 140px;
   margin-top:230px;
   text-shadow: 0px 0px white;
   margin-left: 5px;
@@ -429,7 +493,7 @@ inset 5000px 0px 0px rgba(55, 55, 55, 0.784);
   }
       .fil:nth-child(2){
       top:100;
-      -webkit-mask-image:linear-gradient(140deg,#0000 40%, #000 10%, #0000 55%,#0000 100%);
+      -webkit-mask-image:linear-gradient(140deg,#0000 40%, #000 10%,#000 55%, #0000 5%, #0000 75%,#0000 100%);
       -webkit-mask-size:100% 100%;
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-position: -180px 0px;
@@ -471,7 +535,91 @@ padding:3px;
 
 }
 
+.midmessage{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.messagepic2:nth-child(2){
+  width:65%;
+  z-index: 1;
+  
+}
+.messagepic2:nth-child(1){
+  z-index: 2;
+  
+}
+  .messagepic{
+  object-fit:cover;
+  object-position: center;
+  filter:drop-shadow(0px -10px 20px rgb(254, 231, 255));
+}
+.messagepic2{
+  object-fit:cover;
+  width:30%;
+  object-position: center;
+  filter:drop-shadow(0px -10px 20px rgb(255, 255, 255));
+}
+.midleft:nth-child(odd){
+  padding-right:20%;
+  display:flex;
+  text-align: right;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+  .midleft:nth-child(even){
+  background:transparent;
+  border:10px double white;
+  margin-left:-110px;
+  border-radius:50%;
+}
+  .midleft{
+  display:flex;
+  height:200px;
+  letter-spacing:1px;
+  color:black;
+  font-size:20px;
+  font-weight: 600;
+  padding:20px;
+  border-radius: 5px 100px 100px 5px;
+  background:white;
 
+}
+.welcome{
+font-size: 20px;
+color:black;
+height:50px;
+padding-bottom: 20px;
+font-weight: 900;
+}
+
+.tel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+}
+.telegram{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: white;
+  height:200px;
+  font-size: 50px;
+  font-weight: 600;
+}
+
+.welcmessage{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color:black;
+  text-align: center;
+
+}
 .logo::after{
   content:"";
   bottom:0;
@@ -496,7 +644,7 @@ padding:3px;
     }
    
  
-.loading{
+.loading{ 
 display: flex;
 flex-direction: row;
 height:150px;
@@ -691,7 +839,6 @@ text-decoration: none;
   align-items: center;
   transition: 2s ease-in-out;
   flex-direction: column;
-  height:100vh;
   overflow-y:scroll;
 }
    
@@ -724,7 +871,7 @@ text-decoration: none;
   width: 70%;
   font-size: 25px;
   padding-left:20px;
-  padding-right: 20px;;
+  padding-right: 20px;
 }
 .searchnav{
   height:15vh;
@@ -830,6 +977,14 @@ text-align: center;
   margin: 100px auto;
   width: 300px;
   height: 300px;
+}
+.prehuge{
+  width:90%;
+  display:flex;
+  align-items:center;
+  position: absolute;
+  margin-top:-300px;
+  justify-content:space-between;
 }
 
 .cube {

@@ -42,7 +42,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="page">
+    <div className="page cpage">
     
     <div className="notfound">
        
@@ -61,7 +61,7 @@ export default function Contact() {
           </div>
  
     </div>
-    <a href="/uepasco" className='return'>👈 </a>
+    <Link to="/uepasco/" className='return'>👈 </Link>
         </div>  )
 }
 

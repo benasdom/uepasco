@@ -17,8 +17,28 @@
         padding-right: 5px;
         padding-left: 5px;
     }
+ .hide{
+  display: none;
+ }
+.leftcp{
+  display: none;
+}
+.cpage{
+  height:100vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width:100%;
+  align-items: center;
+  margin:0px;
+  background:rgb(4, 7, 10);
+  overflow-x:hidden;
+}
 
- 
+.contactp{
+  display: flex;
+  flex-direction: column;
+}
 
 @keyframes halfmove {
     35%{
@@ -38,7 +58,7 @@
     url(imgs/pattern.webp);
   
   
-     
+
     }
   100%{
   
@@ -49,7 +69,34 @@
   }
   }
   
+  .micropic:nth-child(odd){
+    margin-bottom: -400px;
+    left:40px;
+    width:70px;
+    box-shadow: inset 5px 200px 1px black;
+    filter:drop-shadow(0px -10px 50px rgb(255, 255, 255));
   
+  
+  }
+  .messagepic2{
+    padding-bottom: 20px;
+  }
+  .welcome{
+    font-size: 10px;
+  }
+    .micropic:nth-child(even){
+    width: 70px;
+    margin-top: -300px;
+    right: 40px;
+    box-shadow: inset 5px 200px 1px black;
+    filter:drop-shadow(0px -10px 50px rgb(255, 255, 255));
+    }
+  .telegram{
+    width:100%;
+    border-left: 0px;
+    border-right: 0px;
+    padding:30px;
+  }
     .footer{
         display: flex;
         flex-direction: column;
@@ -77,6 +124,65 @@
         border-radius: 5px;
         font-size: 10px;
         width:70px;
+    }
+    .homepic{
+      width:30px;
+    }
+    .navbottom{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: row;
+      background:rgb(0, 0, 0);
+      height: 100px;
+    }
+    .nt{
+      font-size: 10px--;
+    }
+    .nbottomlist{
+      position: relative;
+      display: flex;
+      color:rgb(171, 169, 169);
+      align-items: center;
+      position:fixed;
+      bottom:5px;
+      width:94%;
+      overflow: hidden;
+      height: 70px;
+      margin:2px;
+      border-radius: 10px;
+      z-index: 5;
+      background:rgba(20, 24, 24, 0.97);
+      backdrop-filter: blur(.5rem);
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+      .navb .nt{
+        font-size: 10px;
+        color:rgb(161, 161, 161);
+        text-align: center;
+        margin-top:3px;
+      }
+  
+        .navb{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding:10px;
+        
+      }
+
+        .navb i{
+      height:30px;
+      width:  30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 7px;
+      margin:1px;
     }
     .describe{
         font-size: 7px;
