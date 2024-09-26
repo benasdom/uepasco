@@ -567,7 +567,6 @@ padding:3px;
 }
   .midleft:nth-child(even){
   background:transparent;
-  border:10px double white;
   margin-left:-110px;
   border-radius:50%;
   width:200px;

@@ -83,8 +83,16 @@
   .welcome{
     font-size: 10px;
   }
-  .midleft:nth-child(even){
-  margin-left: -60px;
+ 
+    .midleft:nth-child(even){
+  margin-left: -150px;
+  height: 250px;
+  width: 250px;
+
+  }
+  .midleft:nth-child(odd){
+    padding-right:100px;
+    width:250px;
   }
     .micropic:nth-child(even){
     width: 70px;
