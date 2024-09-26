@@ -102,9 +102,6 @@
         flex-wrap: wrap;
         height: max-content;
     }
-    .midmessage{
-      display:none;
-    }
     .searchnav .twwo{
         width:90% !important;
     }

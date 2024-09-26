@@ -536,7 +536,7 @@ padding:3px;
   align-items: center;
 }
 .messagepic2:nth-child(2){
-  width:65%;
+  width:750px;
   z-index: 1;
   
 }
@@ -551,12 +551,12 @@ padding:3px;
 }
 .messagepic2{
   object-fit:cover;
-  width:30%;
+  width:300px;
   object-position: center;
   filter:drop-shadow(0px -10px 20px rgb(255, 255, 255));
 }
 .midleft:nth-child(odd){
-  padding-right:20%;
+  padding-right:100px;
   display:flex;
   text-align: right;
   flex-direction: column;
