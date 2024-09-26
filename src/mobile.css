@@ -76,11 +76,15 @@
   
   
   }
+
   .messagepic2{
     padding-bottom: 20px;
   }
   .welcome{
     font-size: 10px;
+  }
+  .midleft:nth-child(even){
+  margin-left: -60px;
   }
     .micropic:nth-child(even){
     width: 70px;

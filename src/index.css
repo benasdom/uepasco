@@ -546,6 +546,8 @@ padding:3px;
 }
   .messagepic{
   object-fit:cover;
+  border-radius: 50%;
+  z-index: 1.1;
   object-position: center;
   filter:drop-shadow(0px -10px 20px rgb(254, 231, 255));
 }
