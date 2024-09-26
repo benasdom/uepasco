@@ -568,6 +568,8 @@ padding:3px;
   border:10px double white;
   margin-left:-110px;
   border-radius:50%;
+  width:200px;
+  height:200px;
 }
   .midleft{
   display:flex;
