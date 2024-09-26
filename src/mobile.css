@@ -95,6 +95,7 @@
     border-right: 0px;
     padding:30px;
   }
+ 
     .footer{
         display: flex;
         flex-direction: column;
@@ -143,15 +144,14 @@
       color:rgb(171, 169, 169);
       align-items: center;
       position:fixed;
-      bottom:5px;
-      width:94%;
+      bottom:0px;
+      width:100%;
       overflow: hidden;
-      height: 70px;
-      margin:2px;
+      padding-bottom:25px;
+      height: 80px;
       border-radius: 10px;
       z-index: 5;
-      background:rgba(20, 24, 24, 0.97);
-      backdrop-filter: blur(.5rem);
+      background:rgb(20, 24, 24);
       flex-direction: row;
       justify-content: space-around;
     }

@@ -56,7 +56,7 @@ export default function Contact() {
  <Search phold={"your email"}/>
  <Search phold={"phone number"}/>
  <Tarea phold={"your message"}/>
- <div className="download " onClick={sender}>{spin?<img src={spinner} className="spinner" width={200}/>:false}Submit</div>
+ <div className="download " onClick={sender}>{spin?<img src={spinner} className="spinner" width={50}/>:"Submit"}</div>
             </div>
           </div>
  
