@@ -150,6 +150,10 @@
     .nt{
       font-size: 10px--;
     }
+    .welcmessage{
+    font-size: 13px;
+    text-align: left;
+    }
     .nbottomlist{
       position: relative;
       display: flex;

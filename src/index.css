@@ -613,6 +613,7 @@ font-weight: 900;
 .welcmessage{
   display: flex;
   align-items: center;
+  font-size: 20px;
   text-align: center;
   color:black;
   text-align: center;
