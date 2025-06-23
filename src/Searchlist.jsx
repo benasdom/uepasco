@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Search from './Search'
 import ConvertApi from 'convertapi-js'
 import pdfpic from '/imgs/pdf.png'
 import { CloseCircleOutlined } from '@ant-design/icons'
+import spinner from '/imgs/loader.svg'
 
 
-const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setpdflink})=>{
+const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setpdflink,setactualDlink})=>{
+    const [spin, setspin] = useState(false)
     const fix=(res)=>{
-        setpdflink(res);
-        converttotext(res)
-        openpdf();
+        setspin(true)
+         let namedfile=res.split("=")[1]
+
+fetch(`http://localhost:5175/api/files/${namedfile}`)
+  .then(response => response.json())
+  .then(data => {setpdflink(data.previewLink);setactualDlink(data.directDownload);converttotext(data.directDownload)})
+  .finally(()=>{        setspin(false);
+
+   openpdf() })
+
     }
     const converttotext = async (mypdfurl)=>{
       let convertApi = ConvertApi.auth('secret_SNFY1Dcfii6Na6RL')
@@ -26,7 +35,8 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
     return(
         <div className="searchlist">
             <div className="searchnav"> 
-            <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>{<CloseCircleOutlined/>}</div>
+            <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
+            {spin?<img src={spinner} className="spinner" width={200}/>:<CloseCircleOutlined/>}</div>
                        <Search eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 </div>
             <div className="listcontent">

@@ -26,6 +26,8 @@ function App() {
  const [spin, setspin] = useState(false)
  const bar = useRef(null)
  const [pdflink, setpdflink] = useState("https://notfound.com")
+ const [Files, setFiles] = useState([{name:"",previewLink:"",fileType:"",viewLink:"",directDownload:""}])
+ const [actualDlink, setactualDlink] = useState("https://notfound.com")
 
 
  
@@ -152,7 +154,7 @@ Practice makes perfect. Keep your self busy with the resources we provide.
      :<LoadComponet opacity={0} indexed={-100}/>
    }
    {showpdf?
-<Showfiles pdflink={pdflink} mainlogo={mainlogo} setshowpdf={setshowpdf}/>
+<Showfiles actualDlink={actualDlink} pdflink={pdflink} mainlogo={mainlogo} setshowpdf={setshowpdf}/>
 :false}
          <div className="scrldn"><div className="scrd">
 
@@ -162,7 +164,7 @@ Practice makes perfect. Keep your self busy with the resources we provide.
     </div> 
 
        </div>
-       {searching?<SearchList mainlogo={mainlogo}  setextractedtext={extractedtext} extractedtext={extractedtext} setpdflink={setpdflink} pdflink={pdflink} setshowpdf={setshowpdf}  showpdf={showpdf} setsearching={setsearching} find={find} NetworkError={NetworkError} payload={payload} bar={bar} setfind={setfind}/>:""}
+       {searching?<SearchList mainlogo={mainlogo}  setextractedtext={extractedtext} extractedtext={extractedtext} setpdflink={setpdflink} pdflink={pdflink} setshowpdf={setshowpdf}  showpdf={showpdf} setsearching={setsearching} find={find} NetworkError={NetworkError} payload={payload} bar={bar} setfind={setfind} setactualDlink={setactualDlink}/>:""}
        <div className="footer">
         <div className="foot1">
             <img className="brands" title='uepasco' src={mainlogo} alt="" />
