@@ -204,7 +204,7 @@ font-size: 120px;
 font-weight: 600;
 }
 .spinner{
-  width:30px;
+  width:25px;
   margin:3px;
   object-fit: cover;
   object-position: center;

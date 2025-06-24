@@ -75,7 +75,9 @@ useEffect(() => {
             },
             body: JSON.stringify(params)
           })
-          .then(()=> {alert('Form submitted successfully !');setspin(false);}
+          .then(()=> {alert('Form submitted successfully !');setspin(false);
+            document.querySelector("#suggested").value=""
+          }
           )
         } catch (error) {
           alert("Failed to submit");

@@ -1,4 +1,14 @@
-# .gitignore
+node_modules/
 .env
 .env.local
-node_modules
+.DS_Store
+dist/
+backend/
+.vercel/
+*.log
+*.pid
+.cache/
+.temp/
+*.tmp
+.vscode/
+.idea/

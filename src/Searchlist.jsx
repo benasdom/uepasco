@@ -12,12 +12,11 @@ const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,Netwo
         setspin(true)
          let namedfile=res.split("=")[1]
 
-fetch(`http://localhost:5175/api/files/${namedfile}`)
+fetch(`https://pasco-lovat.vercel.app/api/files/${namedfile}`)
   .then(response => response.json())
-  .then(data => {setpdflink(data.previewLink);setactualDlink(data.directDownload);converttotext(data.directDownload)})
-  .finally(()=>{        setspin(false);
-
-   openpdf() })
+  .then(data => {setpdflink(data.previewLink);setactualDlink(data.directDownload);converttotext(data.directDownload);openpdf()})
+  .catch(err=>{alert(err.message)})
+  .finally(()=>{setspin(false);})
 
     }
     const converttotext = async (mypdfurl)=>{
