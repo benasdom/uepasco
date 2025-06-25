@@ -160,14 +160,15 @@
       color:rgb(171, 169, 169);
       align-items: center;
       position:fixed;
-      bottom:0px;
-      width:100%;
+      bottom:20px;
+      width:70%;
       overflow: hidden;
-      padding-bottom:25px;
+      padding:15px;
       height: 80px;
       border-radius: 10px;
       z-index: 5;
       background:rgb(20, 24, 24);
+      border-radius: 30px;
       flex-direction: row;
       justify-content: space-around;
     }
