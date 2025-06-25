@@ -10,7 +10,7 @@ import SearchList from './Searchlist'
 import Showfiles from './Showfiles'
 import studd from '/imgs/stud7.png'
 import LoadComponet from './Loadcomponent'
-import { SmileFilled, TeamOutlined } from '@ant-design/icons'
+import { SmileFilled, TeamOutlined ,MessageOutlined} from '@ant-design/icons'
 
 
 
@@ -179,7 +179,7 @@ Practice makes perfect. Keep your self busy with the resources we provide.
         </div>
         <div className="foot1">
         <div className="twwo" title="make a suggestion">
-                    <div className="search">{spin?<img src={spinner} className="spinner" width={200}/>:<i className="fa fa-envelope"></i>}</div>
+                    <div className="search">{spin?<img src={spinner} className="spinner" width={200}/>:<MessageOutlined/>}</div>
                     
                     <div className="input"><input type="text"  id='suggested' className="find" placeholder="Make a suggestion"/></div>
                     <div className="slash" onClick={sender}>

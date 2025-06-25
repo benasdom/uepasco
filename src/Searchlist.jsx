@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Search from './Search'
 import ConvertApi from 'convertapi-js'
 import pdfpic from '/imgs/pdf.png'
-import { CloseCircleOutlined } from '@ant-design/icons'
+import { CloseCircleOutlined,ExportOutlined,InfoCircleOutlined } from '@ant-design/icons'
 import spinner from '/imgs/loader.svg'
 
 
@@ -33,6 +33,7 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
     }
     return(
         <div className="searchlist">
+            
             <div className="searchnav"> 
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
             {spin?<img src={spinner} className="spinner" width={200}/>:<CloseCircleOutlined/>}</div>
@@ -45,7 +46,9 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
                    .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase()))
                       .map((a,b)=>{
                     return a=<div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdfpic} alt="" className="imgthumb"/>
-                    <div className="titles">{a.description}</div><div className="describe">{a.createdOn}</div><div href={a.downloadLink} onClick={(ev) => fix(ev.target.attributes.href.value)} className="download">open</div></div> })
+                    <div className="pinfo">
+                        <div className="titles">{a.description}</div><div className="describe">{a.createdOn}</div>
+                        </div><div href={a.downloadLink} onClick={(ev) => fix(ev.target.attributes.href.value)} className="download">{<ExportOutlined style={{marginRight:"5px"}}/>} open</div></div> })
                     :new Array(1).fill("").map((a,b)=>{
                     return a=<div key={b+""} className="filtered mn4" data-ptext="title..." data-texts="details..."><img src="" alt="" className="imgthumb"/><div className="desc err4">{NetworkError}</div></div>
                     })}
