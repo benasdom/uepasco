@@ -46,7 +46,7 @@ useEffect(() => {
   useLayoutEffect(() => {
     fetch("https://benasdom.github.io/ugpascoapi/ugpasco.json")
     .then(res=>res.json()).then(res=>setpayload(res.data))
-    .catch(err=>setTimeout(()=>{setNetworkError("Oops! kindly check your internet connectivity 🔌💻🥺 "+err);network(`${err}`)},500));
+    .catch(err=>setTimeout(()=>{setNetworkError("Oops! kindly check your internet connectivity 🔌💻🥺 "+err.replace(/TypeError:/gim,"."));network(`${err.replace(/TypeError:/gim,".")}`)},500));
  
   }, [payload,find])
   const sender=()=>{

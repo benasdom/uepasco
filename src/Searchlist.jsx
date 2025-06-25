@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import Search from './Search'
 import ConvertApi from 'convertapi-js'
 import pdfpic from '/imgs/pdf.png'
-import { CloseCircleOutlined,ExportOutlined,InfoCircleOutlined } from '@ant-design/icons'
+import { CloseCircleOutlined,ExportOutlined,InfoCircleOutlined,ArrowLeftOutlined, DashboardOutlined,AppstoreOutlined,UserOutlined,
+PieChartOutlined,BarChartOutlined,  HomeOutlined,} from '@ant-design/icons'
+import premimg from '/imgs/premium.png'
 import spinner from '/imgs/loader.svg'
+import mainlogo from '/imgs/Untitled.png'
 
 
 const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setpdflink,setactualDlink})=>{
@@ -32,27 +35,44 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
     setshowpdf(true)
     }
     return(
-        <div className="searchlist">
-            
+        <div className="searchlist">       
             <div className="searchnav"> 
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
-            {spin?<img src={spinner} className="spinner" width={200}/>:<CloseCircleOutlined/>}</div>
+            {spin?<img src={spinner} className="spinner" width={200}/>:<div className="backbtn"><ArrowLeftOutlined/></div>}</div>
                        <Search eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 </div>
-            <div className="listcontent">
+          <div className="bothsides">
+            <div className="sidemenubar">
+                <div className="mymenu">
+<div className="firstitem">
+    <div className="abs">
+    <img src={premimg} className="primg" alt="" />
+    <img src={premimg} className="primg" alt="" />
+    </div>
+    <div className="paid">Go premium </div>
+</div>
+    <div className="menuitems"><div className="inmenu">< AppstoreOutlined style={{marginRight:10}}/>Overview</div></div>
+    <div className="menuitems"><div className="inmenu"><BarChartOutlined style={{marginRight:10}}/>Dashboard</div></div>
+    <div className="menuitems"><div className="inmenu"><UserOutlined style={{marginRight:10}}/>Profile</div></div>
+
+                </div>
+            </div>
+              <div className="listcontent">
             {
                    find!="" && payload.length>1?payload
                    .filter((a,b,c)=>c.indexOf(a)==b)
-                   .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase()))
-                      .map((a,b)=>{
+                   .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase())).slice(0,30)
+                   .map((a,b)=>{
                     return a=<div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdfpic} alt="" className="imgthumb"/>
                     <div className="pinfo">
                         <div className="titles">{a.description}</div><div className="describe">{a.createdOn}</div>
                         </div><div href={a.downloadLink} onClick={(ev) => fix(ev.target.attributes.href.value)} className="download">{<ExportOutlined style={{marginRight:"5px"}}/>} open</div></div> })
                     :new Array(1).fill("").map((a,b)=>{
-                    return a=<div key={b+""} className="filtered mn4" data-ptext="title..." data-texts="details..."><img src="" alt="" className="imgthumb"/><div className="desc err4">{NetworkError}</div></div>
+                    return a=<div key={b+""} className="filtered mn4" data-ptext="title..." data-texts="details..."><img src="" alt="" className="imgthumb"/><div className="desc err4">
+                        <img className="reglate" src={mainlogo} style={{marginRight:10}} alt=""/>{NetworkError}</div></div>
                     })}
             </div>
+          </div>
         </div>
     )
 }
