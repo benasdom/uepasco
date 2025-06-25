@@ -124,8 +124,12 @@
         height: max-content;
     }
     .searchnav .twwo{
-        width:90% !important;
+        width:86% !important;
         margin-right: 10px;
+    }
+    .backbtn{
+      padding:16px;
+      margin-bottom: 5px;
     }
     .searchlist{
       height:100%;
