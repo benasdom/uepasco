@@ -42,7 +42,8 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
         <div className="searchlist">       
             <div className="searchnav"> 
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
-            {spin?<img src={spinner} className="spinner" width={200}/>:<div className="backbtn"><ArrowLeftOutlined/></div>}</div>
+            {spin?<img src={spinner} className="spinner" width={200}/>:<div className="backbtn"><ArrowLeftOutlined/></div>}
+            </div>
                        <Search eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 </div>
           <div className="bothsides">
