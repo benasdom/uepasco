@@ -124,7 +124,7 @@
         height: max-content;
     }
     .searchnav .twwo{
-        width:86% !important;
+        width:85% !important;
         margin-right: 10px;
     }
     .backbtn{
@@ -233,7 +233,7 @@
     .listcontent{
         width: 100%;
         min-height:unset;
-      height:120% !important;
+        height:100% !important;
         padding-top: 0px;
         top:0;
     }
