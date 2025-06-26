@@ -505,7 +505,7 @@ inset 5000px 0px 0px rgba(55, 55, 55, 0.784);
       -webkit-mask-size:100% 100%;
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-position: -20px 0px;
-      animation: turns 20s linear forwards;
+      animation: turns 1.2s linear forwards;
 
   
   }
