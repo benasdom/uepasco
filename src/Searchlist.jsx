@@ -73,7 +73,9 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
             {
                    find!="" && payload.length>1?payload
                    .filter((a,b,c)=>c.indexOf(a)==b)
-                   .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase())).slice(0,30)
+                   .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase()))
+                   .sort((a,b)=>b.createdOn.slice(0,4)*1-a.createdOn.slice(0,4)*1)
+                   .slice(0,30)
                    .map((a,b)=>{
                     return a=<div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdfpic} alt="" className="imgthumb"/>
                     <div className="pinfo">
