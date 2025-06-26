@@ -19,7 +19,7 @@
         justify-content: space-between;
         padding-right: 5px;
         padding-left: 5px;
-        height: calc(7vh - 5px);
+        height: 7vh;
         
     }
     
@@ -241,7 +241,7 @@
         padding-top: 0px;
         height: 100%;
         overflow-y: scroll;
-        height:93vh;
+        height:92vh;
         top:0;
     }
     .reglate{
