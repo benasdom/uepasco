@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import Search from './Search'
 import ConvertApi from 'convertapi-js'
 import pdfpic from '/imgs/pdf.png'
-import { CloseCircleOutlined,ExportOutlined,InfoCircleOutlined,ArrowLeftOutlined, DashboardOutlined,AppstoreOutlined,UserOutlined,
-PieChartOutlined,BarChartOutlined,  HomeOutlined,} from '@ant-design/icons'
+import { CloseCircleOutlined,ExportOutlined,InfoCircleOutlined,
+    ArrowLeftOutlined,FileProtectOutlined, DashboardOutlined,AppstoreOutlined,UserOutlined,
+PieChartFilled,  HomeOutlined,GoldFilled,DollarOutlined,SolutionOutlined,ScheduleOutlined,
+MoneyCollectFilled,TeamOutlined,
+StarFilled,
+} from '@ant-design/icons'
 import premimg from '/imgs/premium.png'
 import spinner from '/imgs/loader.svg'
 import mainlogo from '/imgs/Untitled.png'
@@ -43,7 +47,7 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
 </div>
           <div className="bothsides">
             <div className="sidemenubar">
-                <div className="mymenu">
+                <div className="mymenubox">
 <div className="firstitem">
     <div className="abs">
     <img src={premimg} className="primg" alt="" />
@@ -51,11 +55,18 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
     </div>
     <div className="paid">Go premium </div>
 </div>
-    <div className="menuitems"><div className="inmenu">< AppstoreOutlined style={{marginRight:10}}/>Overview</div></div>
-    <div className="menuitems"><div className="inmenu"><BarChartOutlined style={{marginRight:10}}/>Dashboard</div></div>
-    <div className="menuitems"><div className="inmenu"><UserOutlined style={{marginRight:10}}/>Profile</div></div>
+                <div className="mymenu">
 
-                </div>
+    <div className="menuitems"><div className="inmenu">< AppstoreOutlined className='micon'/>Overview</div></div>
+    <div className="menuitems"><div className="inmenu"><FileProtectOutlined className='micon'/>Solved with slides <div className="prem">Premium</div></div></div>
+    <div className="menuitems"><div className="inmenu"><PieChartFilled className='micon'/>Dashboard</div></div>
+    <div className="menuitems"><div className="inmenu"><GoldFilled className='micon'/>Leaderboard</div></div>
+    <div className="menuitems"><div className="inmenu"><MoneyCollectFilled className='micon'/>Referal Details</div></div>
+    <div className="menuitems"><div className="inmenu"><DollarOutlined className='micon'/>Earn</div></div>
+    <div className="menuitems"><div className="inmenu"><ScheduleOutlined className='micon'/>Advertise your business</div></div>
+    <div className="menuitems"><div className="inmenu"><SolutionOutlined className='micon'/>NSS Guide</div></div>
+    <div className="menuitems"><div className="inmenu"><TeamOutlined className='micon'/>Job Application Guide</div></div>
+                </div></div>
             </div>
               <div className="listcontent">
             {
