@@ -82,7 +82,7 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
                    .map((a,b)=>{
                     return a=<div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdfpic} alt="" className="imgthumb"/>
                     <div className="pinfo">
-                        <div className="titles">{(a.description).replace(/o/gi,["⭕","🅾"][b%2])}</div><div className="describe">{a.createdOn}</div>
+                        <div className="titles">{(a.description).replace(/o/gi,["⚾","⚽"][b%2])}</div><div className="describe">{a.createdOn}</div>
                         </div><div href={a.downloadLink} onClick={(ev) => fix(ev.target.attributes.href.value)} className="download">{<ExportOutlined style={{marginRight:"5px"}}/>} open</div></div> })
                     :new Array(1).fill("").map((a,b)=>{
                     return a=<div key={b+""} className="filtered mn4" data-ptext="title..." data-texts="details..."><img src="" alt="" className="imgthumb"/><div className="desc err4">

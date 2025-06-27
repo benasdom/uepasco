@@ -18,7 +18,7 @@ function App() {
  const [loader, setloader] = useState(true)
  const [searching, setsearching] = useState(false)
  const [find, setfind] = useState("")
- const [NetworkError, setNetworkError] = useState("Type the course c🍪de in the search bar...🔎")
+ const [NetworkError, setNetworkError] = useState("Type the course c⚾de in the search bar...🔎")
  const [Refreshing, setRefreshing] = useState(false)
  const [payload, setpayload] = useState([{createdOn:"",description:"",downloadLink:""}])
  const [showpdf, setshowpdf] = useState(false)

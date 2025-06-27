@@ -976,6 +976,7 @@ margin-top:-150px;
   right:0;
   padding-right:10px;
   overflow:hidden;
+  pointer-events:none;
   border-radius: 20px;
   width: 70%;
   margin-top: 10px;

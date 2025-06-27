@@ -86,7 +86,7 @@
   }
 
   .welcome{
-    font-size: 15px;
+    font-size: 12px;
   }
   .bothsides{
     display: flex;
@@ -101,6 +101,10 @@
   .midleft{
     width:100%;
     margin-left: -10px;
+    padding-left:10px;
+  }
+  .difficon{
+    display:none !important;
   }
     .micropic:nth-child(even){
     width: 70px;
@@ -185,7 +189,7 @@
       font-size: 10px--;
     }
     .welcmessage{
-    font-size: 10px;
+    font-size: 9px;
     width:80%;
     text-align:end;
     }
