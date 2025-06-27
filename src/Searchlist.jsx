@@ -14,6 +14,7 @@ import mainlogo from '/imgs/Untitled.png'
 
 
 const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setpdflink,setactualDlink})=>{
+   
     const [spin, setspin] = useState(false)
     const fix=(res)=>{
         setspin(true)
@@ -25,10 +26,10 @@ fetch(`https://pasco-lovat.vercel.app/api/files/${namedfile}`)
   .catch(err=>{alert(err.message)})
   .finally(()=>{setspin(false);})
 
-    }
-    const converttotext = async (mypdfurl)=>{
-      let convertApi = ConvertApi.auth('secret_SNFY1Dcfii6Na6RL')
-      let params = convertApi.createParams()
+}
+const converttotext = async (mypdfurl)=>{
+let convertApi = ConvertApi.auth('secret_SNFY1Dcfii6Na6RL')
+let params = convertApi.createParams()
 params.add('File', new URL(mypdfurl));
 let result = await convertApi.convert('pdf', 'txt', params)
 let textres = result.dto.Files.map(a=>a.Url)
@@ -86,6 +87,9 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
                         <img className="reglate" src={mainlogo} style={{marginRight:10}} alt=""/>{NetworkError}</div></div>
                     })}
             </div>
+          </div>
+          <div className="toast">
+            <div className="toastmessage"><InfoCircleOutlined className='micon'/> This was an error</div>
           </div>
         </div>
     )

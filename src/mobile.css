@@ -85,11 +85,8 @@
   
   }
 
-  .messagepic2{
-    padding-bottom: 20px;
-  }
   .welcome{
-    font-size: 10px;
+    font-size: 15px;
   }
   .bothsides{
     display: flex;
@@ -97,15 +94,13 @@
     align-items: center;
     flex-direction: column;
   }
-    .midleft:nth-child(even){
-  margin-left: -150px;
-  height: 250px;
-  width: 250px;
-
+  .midmessage{
+    width:85%;
+    border-radius:20px;
   }
-  .midleft:nth-child(odd){
-    padding-right:100px;
-    width:250px;
+  .midleft{
+    width:100%;
+    margin-left: -10px;
   }
     .micropic:nth-child(even){
     width: 70px;
@@ -181,8 +176,9 @@
       font-size: 10px--;
     }
     .welcmessage{
-    font-size: 13px;
-    text-align: left;
+    font-size: 10px;
+    width:80%;
+    text-align:end;
     }
     .nbottomlist{
       position: relative;

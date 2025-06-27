@@ -145,7 +145,7 @@ Practice makes perfect. Keep your self busy with the resources we provide.
       </div>
 <div className="tel">
   <div className="telegram">
-    Join our telegram community 
+    <span className="itext">Join</span>our telegram community 
   </div>
 
 </div>
