@@ -18,7 +18,7 @@ function App() {
  const [loader, setloader] = useState(true)
  const [searching, setsearching] = useState(false)
  const [find, setfind] = useState("")
- const [NetworkError, setNetworkError] = useState("Type the course code in the search bar...🔎")
+ const [NetworkError, setNetworkError] = useState("Type the course c🍪de in the search bar...🔎")
  const [Refreshing, setRefreshing] = useState(false)
  const [payload, setpayload] = useState([{createdOn:"",description:"",downloadLink:""}])
  const [showpdf, setshowpdf] = useState(false)
@@ -46,7 +46,7 @@ useEffect(() => {
   useLayoutEffect(() => {
     fetch("https://benasdom.github.io/ugpascoapi/ugpasco.json")
     .then(res=>res.json()).then(res=>setpayload(res.data))
-    .catch(err=>setTimeout(()=>{setNetworkError("Oops! kindly check your internet connectivity 🔌💻🥺 "+err.replace(/TypeError:/gim,"."));network(`${err.replace(/TypeError:/gim,".")}`)},500));
+    .catch(err=>setTimeout(()=>{setNetworkError("Oops! kindly check y🍪ur internet connectivity 🔌💻🥺 "+err.replace(/TypeError:/gim,"."));network(`${err.replace(/TypeError:/gim,".")}`)},500));
  
   }, [payload,find])
   const sender=()=>{
@@ -129,7 +129,8 @@ useEffect(() => {
 </div>
 <div className="midmessage">
   <div className="midleft">
-<div className="welcome">✨ Welcome ! </div>
+<div className="welcome">🤗Welcome !<span className="prem4 difficon">👋🏾</span>
+</div>
 <div className="welcmessage">
 
 Practice makes perfect. Keep your self busy with the resources we provide.

@@ -43,7 +43,7 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
         <div className="searchlist">       
             <div className="searchnav"> 
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
-            {spin?<img src={spinner} className="spinner" width={200}/>:<div className="backbtn"><ArrowLeftOutlined/></div>}
+            {spin?<img src={spinner} className="spinner" width={200}/>:<div className="backbtn"><ArrowLeftOutlined/><span className='prem3'></span></div>}
             </div>
                        <Search eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 </div>
@@ -55,21 +55,23 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
     <img src={premimg} className="primg" alt="" />
     <img src={premimg} className="primg" alt="" />
     </div>
-    <div className="paid">Go premium </div>
+    <div className="paid">✨Go premium ✨</div>
 </div>
                 <div className="mymenu">
 
-    <div className="menuitems"><div className="inmenu">< AppstoreOutlined className='micon'/>Overview</div></div>
-    <div className="menuitems"><div className="inmenu"><FileProtectOutlined className='micon'/>Solved with slides <div className="prem">Premium</div></div></div>
+    <div className="menuitems"><div className="inmenu">< AppstoreOutlined className='micon'/>Overview </div></div>
+    <div className="menuitems"><div className="inmenu"><FileProtectOutlined className='micon'/>Solved with slides <div className="prem">✨</div></div></div>
     <div className="menuitems"><div className="inmenu"><PieChartFilled className='micon'/>Dashboard</div></div>
     <div className="menuitems"><div className="inmenu"><GoldFilled className='micon'/>Leaderboard</div></div>
     <div className="menuitems"><div className="inmenu"><MoneyCollectFilled className='micon'/>Referal Details</div></div>
-    <div className="menuitems"><div className="inmenu"><DollarOutlined className='micon'/>Earn</div></div>
-    <div className="menuitems"><div className="inmenu"><ScheduleOutlined className='micon'/>Advertise your business</div></div>
+    <div className="menuitems"><div className="inmenu"><DollarOutlined className='micon'/>Earn <div className="prem2">💰😎✨</div></div></div>
+    <div className="menuitems"><div className="inmenu"><ScheduleOutlined className='micon'/>Advertise your business <div className="prem3">📺</div></div></div>
     <div className="menuitems"><div className="inmenu"><SolutionOutlined className='micon'/>NSS Guide</div></div>
     <div className="menuitems"><div className="inmenu"><TeamOutlined className='micon'/>Job Application Guide</div></div>
                 </div></div>
             </div>
+            <div className="menucomp"></div>
+
               <div className="listcontent">
             {
                    find!="" && payload.length>1?payload
@@ -80,7 +82,7 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
                    .map((a,b)=>{
                     return a=<div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdfpic} alt="" className="imgthumb"/>
                     <div className="pinfo">
-                        <div className="titles">{a.description}</div><div className="describe">{a.createdOn}</div>
+                        <div className="titles">{(a.description).replace(/o/gi,["⭕","🅾"][b%2])}</div><div className="describe">{a.createdOn}</div>
                         </div><div href={a.downloadLink} onClick={(ev) => fix(ev.target.attributes.href.value)} className="download">{<ExportOutlined style={{marginRight:"5px"}}/>} open</div></div> })
                     :new Array(1).fill("").map((a,b)=>{
                     return a=<div key={b+""} className="filtered mn4" data-ptext="title..." data-texts="details..."><img src="" alt="" className="imgthumb"/><div className="desc err4">

@@ -5,6 +5,7 @@ const Search=({setsearching,setfind,bar,eprop})=>{
     const [spin, setspin] = useState(false)
     return(
     <div className="twwo" title="search"  onClick={()=>(setsearching(true))}>
+        <span className='prema'></span>
                     <div className="search"><i className="fa fa-search"></i></div>
                     
                     <div className="input"><input type="text" style={{pointerEvents:eprop}} ref={bar} onChange={(e)=>{return setfind(e.target.value.trim(""))}}  className="find" placeholder="Search..."/></div>
