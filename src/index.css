@@ -304,8 +304,8 @@ clip-path: polygon(100% 0, 38% 0, 20% 0, 3% 9%, 11% 0, 0 0, 0 39%, 39% 10%, 0 47
 .twwo:hover{
 border-top:1px double  rgba(57, 57, 57, 0);;
 border-left:1px double  rgba(57, 57, 57, 0);;
-border-right:1px double  rgba(57, 57, 57, 0);;
-border-bottom:1px solid  rgba(255, 255, 255, 0.647);;
+border-right:1px double  rgba(57, 57, 57, 0);
+border-bottom:1px solid  rgba(255, 255, 255, 0.9);;
 }
 .onne{
 width:40px;
