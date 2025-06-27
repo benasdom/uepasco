@@ -113,6 +113,7 @@
     width:100%;
     border-left: 0px;
     border-right: 0px;
+    height:unset;
     padding:30px;
   }
  
