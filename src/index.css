@@ -65,7 +65,7 @@ box-shadow: inset 0px 0px 0px rgba(0, 128, 0, 0);
   background-image:
   radial-gradient(rgba(10, 16, 19, 0.65)  10%, rgb(0, 0, 0) 40%),
   linear-gradient(rgba(3, 17, 25, 1)  90%, rgba(220, 220, 220, 0) 5%),
-  url("imgs/pattern.webp");
+  url("/imgs/pattern.webp");
   background-position: fixed;
   transition: all .6s ease-in-out; 
   background-repeat: no-repeat,repeat,repeat;
