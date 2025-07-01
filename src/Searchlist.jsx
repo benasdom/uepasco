@@ -8,14 +8,17 @@ PieChartFilled,  HomeOutlined,GoldFilled,DollarOutlined,SolutionOutlined,Schedul
 MoneyCollectFilled,TeamOutlined,
 StarFilled,
 } from '@ant-design/icons'
-import premimg from '/imgs/premium.png'
 import spinner from '/imgs/loader.svg'
 import mainlogo from '/imgs/Untitled.png'
+import Overview from './menu/overview'
 
 
 const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setpdflink,setactualDlink})=>{
    
     const [spin, setspin] = useState(false)
+    const [fetchError, setfetchError] = useState(false)
+    const [currentView, setcurrentView] = useState("")
+    const [errorMessage, seterrorMessage] = useState("")
     const fix=(res)=>{
         setspin(true)
          let namedfile=res.split("=")[1]
@@ -23,7 +26,7 @@ const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,Netwo
 fetch(`https://pasco-lovat.vercel.app/api/files/${namedfile}`)
   .then(response => response.json())
   .then(data => {setpdflink(data.previewLink);setactualDlink(data.directDownload);converttotext(data.directDownload);openpdf()})
-  .catch(err=>{alert(err.message)})
+  .catch(err=>{seterrorMessage(err.message);setspin(false);setfetchError(true)})
   .finally(()=>{setspin(false);})
 
 }
@@ -39,42 +42,42 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
     const openpdf=()=>{
     setshowpdf(true)
     }
+    const handleMenu=()=>{
+             document.querySelector(".menucomp").style.cssText="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);pointer-events:all;";
+            document.querySelector(".listcontent").style.cssText="clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);pointer-events:none;";
+        }
     return(
         <div className="searchlist">       
             <div className="searchnav"> 
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
             {spin?<img src={spinner} className="spinner" width={200}/>:<div className="backbtn"><ArrowLeftOutlined/><span className='prem3'></span></div>}
             </div>
-                       <Search eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
+                       <Search handleMenu={handleMenu} eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 </div>
           <div className="bothsides">
             <div className="sidemenubar">
-                <div className="mymenubox">
+                <div className="mymenubox" onClick={handleMenu}>
 <div className="firstitem">
     <div className="abs">
-    <img src={premimg} className="primg" alt="" />
-    <img src={premimg} className="primg" alt="" />
     </div>
     <div className="paid">✨Go premium ✨</div>
 </div>
                 <div className="mymenu">
 
-    <div className="menuitems"><div className="inmenu">< AppstoreOutlined className='micon'/>Overview </div></div>
-    <div className="menuitems"><div className="inmenu"><FileProtectOutlined className='micon'/>Solved with slides <div className="prem">✨</div></div></div>
-    <div className="menuitems"><div className="inmenu"><PieChartFilled className='micon'/>Dashboard</div></div>
-    <div className="menuitems"><div className="inmenu"><GoldFilled className='micon'/>Leaderboard</div></div>
-    <div className="menuitems"><div className="inmenu"><MoneyCollectFilled className='micon'/>Referal Details</div></div>
-    <div className="menuitems"><div className="inmenu"><DollarOutlined className='micon'/>Earn <div className="prem2">💰😎✨</div></div></div>
-    <div className="menuitems"><div className="inmenu"><ScheduleOutlined className='micon'/>Advertise your business <div className="prem3">📺</div></div></div>
-    <div className="menuitems"><div className="inmenu"><SolutionOutlined className='micon'/>NSS Guide</div></div>
-    <div className="menuitems"><div className="inmenu"><TeamOutlined className='micon'/>Job Application Guide</div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("dashboard")}}><div className="inmenu">< AppstoreOutlined className='micon'/>Dashboard </div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("solve")}}><div className="inmenu"><FileProtectOutlined className='micon'/>Solved with slides <div className="prem">✨</div></div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("leaderboard")}}><div className="inmenu"><GoldFilled className='micon'/>Leaderboard</div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("referal")}}><div className="inmenu"><MoneyCollectFilled className='micon'/>Referal Details</div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("earn")}}><div className="inmenu"><DollarOutlined className='micon'/>Earn <div className="prem2">💰😎✨</div></div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("advert")}}><div className="inmenu"><ScheduleOutlined className='micon'/>Advertise your business <div className="prem3">📺</div></div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("nss")}}><div className="inmenu"><SolutionOutlined className='micon'/>NSS Guide</div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("job")}}><div className="inmenu"><TeamOutlined className='micon'/>Job Application Guide</div></div>
                 </div></div>
             </div>
-            <div className="menucomp"></div>
-
+<div className="mcontent">
+         <Menucompt currentView={currentView} setcurrentView={setcurrentView}/>
               <div className="listcontent">
-            {
-                   find!="" && payload.length>1?payload
+            {      find!="" && payload.length>1?payload
                    .filter((a,b,c)=>c.indexOf(a)==b)
                    .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase()))
                    .sort((a,b)=>b.createdOn.slice(0,4)*1-a.createdOn.slice(0,4)*1)
@@ -89,12 +92,29 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
                         <img className="reglate" src={mainlogo} style={{marginRight:10}} alt=""/>{NetworkError}</div></div>
                     })}
             </div>
+            </div>
           </div>
-          <div className="toast">
-            <div className="toastmessage"><InfoCircleOutlined className='micon'/> This was an error</div>
-          </div>
+          {fetchError && <Toaster setfetchError={setfetchError} errorMessage={errorMessage} />}
         </div>
     )
 }
-
+const Toaster=({errorMessage,setfetchError})=>{
+    setTimeout(()=>setfetchError(false),2000)
+    return (
+        
+          <div className="toast">
+            <div className="toastmessage"><InfoCircleOutlined className='micon'/> {  "Sorry: 🔌 "+errorMessage.toLowerCase()}</div>
+          </div>
+    )
+}
+const Menucompt=({currentView,setcurrentView})=>{
+    return (
+        
+    <div className="menucomp">
+<div className="menuhead">
+    <Overview currentView={currentView} setcurrentView={setcurrentView}/>
+</div>
+    </div>
+    )
+}
 export default SearchList
