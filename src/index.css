@@ -351,6 +351,9 @@ height: 70%;
   color: rgb(219, 224, 237);
   font-size: 20px;
   }
+  .backbtn:hover{
+    opacity:.6;
+  }
   .backbtn{
     position:relative;
     border-radius: 10px;
