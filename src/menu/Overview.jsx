@@ -14,7 +14,8 @@ export default function Overview({currentView,setcurrentView}) {
   
     return (
         <div className="profile">
-          {currentView==views[0]?<Dashboard/>
+          <div className="wrap">
+            {currentView==views[0]?<Dashboard/>
           :(currentView==views[1]?<Nss/>
           :(currentView==views[2]?<Referal/>
           :(currentView==views[3]?<Solve/>
@@ -23,14 +24,22 @@ export default function Overview({currentView,setcurrentView}) {
           :(currentView==views[6]?<Advert/>
           :(currentView==views[7]?<Job/>:<MissingComp/>)))))))
           }
+          </div>
             <div className="onmenu">
-                <div onClick={()=>{setcurrentView("referal")}} className="in"><div className="prem4"></div> Referal</div>
-                <div onClick={()=>{setcurrentView("earn")}} className="in"><div className="prem4"></div> Earn</div>
-                <div onClick={()=>{setcurrentView("nss")}} className="in"><div className="prem4"></div> NSS guide</div>
-                <div onClick={()=>{setcurrentView("solve")}} className="in"><div className="prem4"></div> Solve with AI</div>
-                <div onClick={()=>{setcurrentView("advert")}} className="in"><div className="prem4"></div> Advertise</div>
-                <div onClick={()=>{setcurrentView("job")}} className="in"><div className="prem4"></div> Job guide</div>
-                <div onClick={()=>{setcurrentView("leaderboard")}} className="in"><div className="prem4"></div> leaderboard</div>
+                <div onClick={()=>{setcurrentView("referal")}} className="in">
+                     <div className="insp"><div className="prem4"></div>Referal</div></div>
+                <div onClick={()=>{setcurrentView("earn")}} className="in">
+                     <div className="insp"><div className="prem4"></div>Earn</div></div>
+                <div onClick={()=>{setcurrentView("nss")}} className="in">
+                     <div className="insp"><div className="prem4"></div>NSS guide</div></div>
+                <div onClick={()=>{setcurrentView("solve")}} className="in">
+                     <div className="insp"><div className="prem4"></div>Solve with AI</div></div>
+                <div onClick={()=>{setcurrentView("advert")}} className="in">
+                     <div className="insp"><div className="prem4"></div>Advertise</div></div>
+                <div onClick={()=>{setcurrentView("job")}} className="in">
+                     <div className="insp"><div className="prem4"></div>Job guide</div></div>
+                <div onClick={()=>{setcurrentView("leaderboard")}} className="in">
+                     <div className="insp"><div className="prem4"></div>leaderboard</div></div>
             </div>
 
     </div>

@@ -1,13 +1,41 @@
+import rbadge from '../../public/imgs/leader.png'
+import { EyeInvisibleFilled,EyeFilled,MoneyCollectOutlined,ThunderboltFilled } from '@ant-design/icons'
+import { useState } from 'react'
 
 const Leaderboard=()=>{
-    
+
+    const [position, setposition] = useState(0)
+
     return (
-          <div className="userlevel">
-                <div className="levelitem2 board">
-                    <div className="streak">Leaderboard 🏁</div>
-                    <div className="streak"></div>
-                </div>
-            </div>
+           <div className="rlevel">
+                           <img src={rbadge} className="refbadge" alt="" srcset="" />
+                         
+                       <div className="levelitem2 leaderb">
+                             <div className="refpage" style={{fontSize:40,width:200}}>🏁 Leaderboard</div>
+               
+                         
+                     
+                           <div className="streak"></div>
+                       </div>
+                       <div className='yourrefs'>You have (0) referals</div>
+                       <div className="reflist">
+            {Array(10).fill("").map((a,b)=>
+                           <div className='refblock' key={""+b}>
+                           <div className='refblockleft'></div>
+                           <div className='refblockcenter'>
+       
+                               <div className="refblockcenterdivone">Benjamin</div>
+                               <div className="refblockcenterdiv"> {new Date().toISOString().slice(0,10)}</div>
+                           </div>{()=>{setposition(b+1)}}
+                                               <div className='refblockend'><ThunderboltFilled className='micon'/>{position}{b+1}</div>
+       
+                           </div>
+                       )}
+                                         <div className="streak" style={{margin:10}}></div>
+       
+                       </div>
+                  
+                   </div>
     )
 }
 export default Leaderboard;

@@ -5,12 +5,14 @@ import pdfpic from '/imgs/pdf.png'
 import { CloseCircleOutlined,ExportOutlined,InfoCircleOutlined,
     ArrowLeftOutlined,FileProtectOutlined, DashboardOutlined,AppstoreOutlined,UserOutlined,
 PieChartFilled,  HomeOutlined,GoldFilled,DollarOutlined,SolutionOutlined,ScheduleOutlined,
+LogoutOutlined,
 MoneyCollectFilled,TeamOutlined,
 StarFilled,
 } from '@ant-design/icons'
 import spinner from '/imgs/loader.svg'
 import mainlogo from '/imgs/Untitled.png'
 import Overview from './menu/overview'
+
 
 
 const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setpdflink,setactualDlink})=>{
@@ -30,6 +32,14 @@ fetch(`https://pasco-lovat.vercel.app/api/files/${namedfile}`)
   .finally(()=>{setspin(false);})
 
 }
+const leave=()=>{
+    if(confirm("Do you wish to logout"))
+    {
+        localStorage.removeItem("userInfo");
+        location.reload();
+
+    }
+    }
 const converttotext = async (mypdfurl)=>{
 let convertApi = ConvertApi.auth('secret_SNFY1Dcfii6Na6RL')
 let params = convertApi.createParams()
@@ -63,16 +73,18 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
     <div className="paid">✨Go premium ✨</div>
 </div>
                 <div className="mymenu">
-
-    <div className="menuitems" onClick={()=>{setcurrentView("dashboard")}}><div className="inmenu">< AppstoreOutlined className='micon'/>Dashboard </div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("solve")}}><div className="inmenu"><FileProtectOutlined className='micon'/>Solved with slides <div className="prem">✨</div></div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("dashboard")}}><div className="inmenu">< AppstoreOutlined className='micon'/>General </div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("solve")}}><div className="inmenu"><FileProtectOutlined className='micon'/>Solved with slides <div className="prem3">✨</div></div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("leaderboard")}}><div className="inmenu"><GoldFilled className='micon'/>Leaderboard</div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("referal")}}><div className="inmenu"><MoneyCollectFilled className='micon'/>Referal Details</div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("earn")}}><div className="inmenu"><DollarOutlined className='micon'/>Earn <div className="prem2">💰😎✨</div></div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("advert")}}><div className="inmenu"><ScheduleOutlined className='micon'/>Advertise your business <div className="prem3">📺</div></div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("earn")}}><div className="inmenu"><DollarOutlined className='micon'/>Earn <div className="prem3">💰</div></div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("advert")}}><div className="inmenu"><ScheduleOutlined className='micon'/>Advertise your business <div className="prem3">📢</div></div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("nss")}}><div className="inmenu"><SolutionOutlined className='micon'/>NSS Guide</div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("job")}}><div className="inmenu"><TeamOutlined className='micon'/>Job Application Guide</div></div>
-                </div></div>
+                </div>
+    <div className="menuitems logout" onClick={leave}><div className="inmenu"><LogoutOutlined className='micon'/>Logout</div></div>
+                
+                </div>
             </div>
 <div className="mcontent">
          <Menucompt currentView={currentView} setcurrentView={setcurrentView}/>

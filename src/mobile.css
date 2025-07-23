@@ -265,6 +265,31 @@
     .reglate{
         display: none;
     }
+    .half:first-child{
+      display:none;
+    }
+    .regbox{
+      width:90%;
+      padding-top: 100px;
+      padding-bottom: 10px;
+    }
+    .register{
+      top:0;
+      height:100vh;
+      
+    }
+    .half{
+      width:calc(100% - 10px);
+      height:50vh;
+    }
+    .tinylogo{
+      width:100px;
+      height:100px;
+      right:unset;
+      top:0;
+      align-self: center;
+      margin:auto;
+    }
     .mlist{
         
         display: flex;
