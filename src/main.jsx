@@ -6,6 +6,7 @@ import './index.css'
 import About from './About.jsx';
 import Contact from './Contact.jsx';
 import Notfound from './Notfound.jsx';
+import Payment from './menu/Payment.jsx';
 import './mobile.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Route path="/uepasco" element={<App />} />
   <Route path="/uepasco/contact" element={<Contact />} />
   <Route path="/uepasco/about" element={<About />} />
+  <Route path="/uepasco/payment" element={<Payment />} />
   <Route path="*" element={<Notfound />} />
 </Routes>
 </Router> 

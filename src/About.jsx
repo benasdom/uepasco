@@ -18,7 +18,7 @@ export default function About() {
 
           <div className="">
             <h2 className="not-found-text2">
-              If you wish to know more about us visit <a className='link' target='_blank' href="https://benasdom.github.io/ue"> 👉 unityelites.com 👈</a>
+              If you wish to know more about us visit <a className='link' target='_blank' href="https://benasdom.github.io/ue"> 👉 unityelites 👈</a>
              </h2>
           </div>
     </div>

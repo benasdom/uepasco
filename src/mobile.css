@@ -197,11 +197,18 @@
     .nt{
       font-size: 10px--;
     }
+    .endsin{
+      justify-content: center;
+      align-items: center;
+      padding:10px;
+      width:unset;
+    }
     .welcmessage{
     font-size: 9px;
     width:80%;
     text-align:end;
     }
+    
     .nbottomlist{
       position: relative;
       display: flex;
@@ -254,6 +261,13 @@
     .mn4{
    height:92vh;
 }
+.pcontainer2,.pcontainer{
+  display:flex;
+  align-items: center;
+  justify-content:unset;
+
+
+}
     .mcontent,.menucomp{
         width: 100%;
         padding-top: 0px;
@@ -261,6 +275,12 @@
         overflow-y: scroll;
         height:92vh;
         top:0;
+    }
+    .payopts{
+      display: flex;
+      flex-direction:row;
+      width:calc(100% - 15px);
+      flex-wrap: wrap;
     }
     .reglate{
         display: none;

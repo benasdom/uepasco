@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import domain from "./authfetch";
 
 const rand = Math.floor(Math.random() * 4);
-
 export default function Register({setshows}) {
     const [email, setemail] = useState("");
     const [firstName, setfirstName] = useState("");

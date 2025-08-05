@@ -10,6 +10,7 @@ MoneyCollectFilled,TeamOutlined,
 StarFilled,
 } from '@ant-design/icons'
 import spinner from '/imgs/loader.svg'
+import { Link } from 'react-router-dom'
 import mainlogo from '/imgs/Untitled.png'
 import Overview from './menu/overview'
 
@@ -60,7 +61,7 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
         <div className="searchlist">       
             <div className="searchnav"> 
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
-            {spin?<img src={spinner} className="spinner" width={200}/>:<div className="backbtn"><ArrowLeftOutlined/><span className='prem3'></span></div>}
+            {spin?<img src={spinner} className="spinner" width={200}/>:<div className="backbtn"><div className="ba"><ArrowLeftOutlined/><span className='prem3'></span></div></div>}
             </div>
                        <Search handleMenu={handleMenu} eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 </div>
@@ -70,7 +71,8 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
 <div className="firstitem">
     <div className="abs">
     </div>
-    <div className="paid">✨Go premium ✨</div>
+    <Link to="/uepasco/Payment">
+    <div className="paid">✨Go premium ✨</div></Link>
 </div>
                 <div className="mymenu">
     <div className="menuitems" onClick={()=>{setcurrentView("dashboard")}}><div className="inmenu">< AppstoreOutlined className='micon'/>General </div></div>
