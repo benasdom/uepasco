@@ -62,7 +62,7 @@ const Payment = () => {
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        setcounter(" "+days + "days " + hours + "hours " + minutes + "minutes " + seconds + "seconds left");
+        setcounter(" "+days + "days " + hours + "hours " + minutes + "minutes " + seconds + " seconds left");
       if (distance < 0) {
         clearInterval(x);
         document.querySelector(".endsin").innerHTML = "Promo has ended";

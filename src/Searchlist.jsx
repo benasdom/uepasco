@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Search from './Search'
-import ConvertApi from 'convertapi-js'
 import pdfpic from '/imgs/pdf.png'
 import { CloseCircleOutlined,ExportOutlined,InfoCircleOutlined,
     ArrowLeftOutlined,FileProtectOutlined, DashboardOutlined,AppstoreOutlined,UserOutlined,
@@ -16,21 +15,28 @@ import Overview from './menu/overview'
 
 
 
-const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setpdflink,setactualDlink})=>{
+const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setextract,setpdflink,setactualDlink})=>{
    
     const [spin, setspin] = useState(false)
     const [fetchError, setfetchError] = useState(false)
     const [currentView, setcurrentView] = useState("")
     const [errorMessage, seterrorMessage] = useState("")
     const fix=(res)=>{
-        setspin(true)
+        setextract("loading...");
+        setspin(true);
          let namedfile=res.split("=")[1]
-
-fetch(`https://pasco-lovat.vercel.app/api/files/${namedfile}`)
+        //  https://pasco-lovat.vercel.app/api/files/
+fetch(`http://localhost:5175/api/files/${namedfile}`)
   .then(response => response.json())
-  .then(data => {setpdflink(data.previewLink);setactualDlink(data.directDownload);converttotext(data.directDownload);openpdf()})
+  .then(data => {setpdflink(data.previewLink);setactualDlink(data.directDownloa);openpdf(namedfile)})
   .catch(err=>{seterrorMessage(err.message);setspin(false);setfetchError(true)})
   .finally(()=>{setspin(false);})
+
+   fetch(`http://localhost:5175/api/solutions/${namedfile}`)
+  .then(response => response.json())
+  .then(data => {setextract(data.extractedText);data.error?setextract(data.error):false})
+  .catch(err=>{setextract("Extraction failed");setfetchError(true)})
+
 
 }
 const leave=()=>{
@@ -41,16 +47,7 @@ const leave=()=>{
 
     }
     }
-const converttotext = async (mypdfurl)=>{
-let convertApi = ConvertApi.auth('secret_SNFY1Dcfii6Na6RL')
-let params = convertApi.createParams()
-params.add('File', new URL(mypdfurl));
-let result = await convertApi.convert('pdf', 'txt', params)
-let textres = result.dto.Files.map(a=>a.Url)
-fetch(textres).then(res=>res.text()).then(res=>console.log(res))
-
-    }
-    const openpdf=()=>{
+    const openpdf=(url)=>{
     setshowpdf(true)
     }
     const handleMenu=()=>{
@@ -61,9 +58,9 @@ fetch(textres).then(res=>res.text()).then(res=>console.log(res))
         <div className="searchlist">       
             <div className="searchnav"> 
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
-            {spin?<img src={spinner} className="spinner" width={200}/>:<div className="backbtn"><div className="ba"><ArrowLeftOutlined/><span className='prem3'></span></div></div>}
+            {spin?<img src={spinner} className="spinner" width={200}/>:<div className="bbtn"><div className="ba"><ArrowLeftOutlined/><span className='prem3'></span></div></div>}
             </div>
-                       <Search handleMenu={handleMenu} eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
+            <Search handleMenu={handleMenu} eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 </div>
           <div className="bothsides">
             <div className="sidemenubar">

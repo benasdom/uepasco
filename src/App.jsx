@@ -15,6 +15,7 @@ import Register from './menu/Register'
 
 
 
+
 function App() {
  const [loader, setloader] = useState(true)
  const [searching, setsearching] = useState(false)
@@ -23,6 +24,7 @@ function App() {
  const [Refreshing, setRefreshing] = useState(false)
  const [payload, setpayload] = useState([{createdOn:"",description:"",downloadLink:""}])
  const [showpdf, setshowpdf] = useState(false)
+ const [extract, setextract] = useState("loading...")
  const [shows, setshows] = useState(true)
  const [extractedtext, setextractedtext] = useState("")
  const [spin, setspin] = useState(false)
@@ -34,6 +36,24 @@ function App() {
  const [maxscore, setmaxscore] = useState(0)
  const [dated, setdated] = useState("")
  
+                const [counter,setcounter]=useState("")
+    const [ticket,setticket]=useState("🎫")
+    const countdownDate = new Date("Jan 2, 2026 00:00:00").getTime();
+    const x = setInterval(function () {
+      const now = new Date().getTime();
+      const distance = countdownDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        setcounter(" "+days + "days " + hours + "hours " + minutes + "minutes " + seconds + " seconds left");
+      if (distance < 0) {
+        clearInterval(x);
+        document.querySelector(".endsin").innerHTML = "Promo has ended";
+      }
+    }, 1000);
+
 
 
  
@@ -62,7 +82,7 @@ useEffect(() => {
   useLayoutEffect(() => {
     fetch("https://benasdom.github.io/ugpascoapi/ugpasco.json")
     .then(res=>res.json()).then(res=>setpayload(res.data))
-    .catch(err=>setTimeout(()=>{setNetworkError("Oops! kindly check y🍪ur internet connectivity 🔌💻🥺 "+err.replace(/TypeError:/gim,"."));network(`${err}`)},500));
+    .catch(err=>setTimeout(()=>{setNetworkError("Oops! kindly check y🍪ur internet connectivity 🔌💻🥺 "+err);network(`${err}`)},500));
   }, [find])
   const sender=()=>{
     setspin(true);
@@ -72,7 +92,9 @@ useEffect(() => {
   async function sendMessage() {
   
      
-        const token = '6715619579:AAEVuhwuW1Mwj09YQU3nyDDICHAZb0iiLQo';
+        const token = "";
+        console.log(token)
+;
         const chatId = '815965867';
         const payload =document.querySelector("#suggested").value;
     
@@ -109,7 +131,8 @@ useEffect(() => {
   return (
     <>
     <div className="page">
-        <div className="landingpage">
+<div className="promo" style={{position:"relative",fontWeight:600}}>🎉 Promotion ends in: <p className="">{`${ticket} ${counter}`}</p></div>
+          <div className="landingpage">
             <ul className="mlist">
                 <img className="reglate" src={mainlogo} alt=""/>
 
@@ -172,7 +195,7 @@ Practice makes perfect. Keep your self busy with the resources we provide.
      :<LoadComponet opacity={0} indexed={-100}/>
    }
    {showpdf?
-<Showfiles actualDlink={actualDlink} pdflink={pdflink} mainlogo={mainlogo} setshowpdf={setshowpdf}/>
+<Showfiles actualDlink={actualDlink} pdflink={pdflink} mainlogo={mainlogo} setshowpdf={setshowpdf} extract={extract}/>
 :false}
          <div className="scrldn"><div className="scrd">
 
@@ -182,7 +205,7 @@ Practice makes perfect. Keep your self busy with the resources we provide.
     </div> 
 
        </div>
-       {searching?<SearchList mainlogo={mainlogo}  setextractedtext={extractedtext} extractedtext={extractedtext} setpdflink={setpdflink} pdflink={pdflink} setshowpdf={setshowpdf}  showpdf={showpdf} setsearching={setsearching} find={find} NetworkError={NetworkError} payload={payload} bar={bar} setfind={setfind} setactualDlink={setactualDlink}/>:""}
+       {searching?<SearchList mainlogo={mainlogo}  setextractedtext={extractedtext} extractedtext={extractedtext} setpdflink={setpdflink} pdflink={pdflink} setshowpdf={setshowpdf} setextract={setextract} extract={extract}  showpdf={showpdf} setsearching={setsearching} find={find} NetworkError={NetworkError} payload={payload} bar={bar} setfind={setfind} setactualDlink={setactualDlink}/>:""}
        <div className="footer">
         <div className="foot1">
             <img className="brands" title='uepasco' src={mainlogo} alt="" />

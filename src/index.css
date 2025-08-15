@@ -382,7 +382,7 @@ z-index:20000;
 }
 .page:hover .fil:nth-child(1){
   filter:drop-shadow( 0px 0px 0px rgba(255, 255, 255, 0));
-  opacity: .4;
+  opacity: 1;
 }
 
 @keyframes turns {
@@ -579,10 +579,10 @@ height: 70%;
   color: rgb(219, 224, 237);
   font-size: 20px;
   }
-  .backbtn:hover{
+  .bbtn:hover{
     opacity:.6;
   }
-  .backbtn{
+  .bbtn{
     position:relative;
     border-radius: 10px;
     display: flex;
@@ -636,6 +636,59 @@ height: 70%;
   }
   .payfeatures{
   min-height: 150px;
+}
+.soln{
+
+position:absolute;
+   height: 100%;
+   width:100%;
+   top:0;
+   left:0;
+   background:black;
+}
+.toptex::-webkit-scrollbar-thumb{
+  background:rgba(255, 255, 255, 0.08);
+  width:10px;
+}
+.toptex::-webkit-scrollbar{
+  width:5px;
+}
+.toptex{
+
+  display: flex;
+  height:85%;
+  overflow-y:scroll;
+  flex-direction:column;
+  border-radius:15px;
+  padding:30px;
+  width:50%;
+   border:1px solid transparent;
+   background:rgba(203, 213, 222, 0.1);
+   backdrop-filter: blur(5rem);
+   -webkit-backdrop-filter: blur(5rem);
+  margin:auto;
+}
+.toptex *{
+  margin-bottom:10px;
+  letter-spacing:1.5px;
+}
+.toptex h3{
+  font-weight:600;
+  text-align:center;
+  width:max-content;
+  padding:10px;
+  margin:auto;
+  background:rgba(255, 255, 255, 0.1);
+  border-radius:10px;
+}
+.toptex div::first-letter{
+font-weight:600;
+font-size:20px;
+}
+.toptex li{
+  font-size:13px;
+  color:rgb(149, 255, 0);
+  text-align:justify;
 }
   .pt{
     border-top: 1px solid rgba(255,255,255);
@@ -700,6 +753,7 @@ align-items: flex-end;
 flex-direction: column;
 justify-content: center;
 width:100%;
+background:rgb(9,10,12);
 padding-bottom: 2px;
 }
 
@@ -759,7 +813,9 @@ img{
   letter-spacing: 3px;
   transition: all .7s ease-in-out;
   color:white;
-  font-size: 140px;
+  font-size: 70px;
+  font-family:michroma;
+  font-weight:700;
   margin-top:230px;
   text-shadow: 0px 0px white;
   margin-left: 5px;
@@ -830,7 +886,7 @@ inset 5000px 0px 0px rgba(55, 55, 55, 0.784);
  }
 
   .mlist a li:hover{
-  box-shadow: inset  0px -100px 0px rgba(255,255,255,.5), 0px 0px 0px rgb(255 255 255);
+  box-shadow: inset  0px -100px 0px rgba(251, 254, 255, 0.9), 0px 0px 0px rgb(255 255 255);
   transition:all .3s ease-out;
   color:black;
 }
@@ -1051,10 +1107,23 @@ height:150px;
    background:rgba(203, 213, 222, 0.222);
    backdrop-filter: blur(5rem);
    -webkit-backdrop-filter: blur(5rem);
-  align-items: center;
   justify-content: center;
  }
+.promo{
+  background:repeating-conic-gradient(
+    from var(--angle),
+    rgb(82, 86, 87) 0deg 45deg,
+    rgb(61, 68, 78)90deg 250deg);
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-size:1400px 1400px;
+  height:40px;
+  text-align:center;
+  animation: spins 15s linear infinite;
 
+}
 .texttit{
  position: fixed;
  display: flex;
@@ -1097,9 +1166,9 @@ height:150px;
   flex-direction: column;
   flex-wrap: wrap;
   height: 100%;
-  padding:20px 15px 20px 15px;
   letter-spacing: 2px;
   width:100%;
+  background:rgb(9,10,12);
   box-shadow:
  inset 0px -300px 200px rgba(10, 16, 19, 0.9),
  inset 0px -700px 150px rgba(40, 50, 56, 0.8);
@@ -1189,6 +1258,24 @@ height:150px;
   align-items: center;
   height: 50px;
   flex-direction: row;
+}
+.pdfnavcontainer{
+  display:flex;
+  justify-content:space-between;
+  width:100%;
+
+}
+.pnleft{
+display:flex;
+flex-direction:row;
+height:50px;
+justify-content: center;
+align-items:center;
+}
+.pdfnav{
+  display:flex;
+  width:100%;
+
 }
 .notfound-text{
   color: rgba(42, 44, 50, 0.768);
