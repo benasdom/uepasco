@@ -9,6 +9,7 @@ import Search from './Search'
 import SearchList from './Searchlist'
 import Showfiles from './Showfiles'
 import studd from '/imgs/stud7.png'
+import PWAInstallButton from './PWAInstallButton'
 import LoadComponet from './Loadcomponent'
 import { SmileFilled, TeamOutlined ,MessageOutlined} from '@ant-design/icons'
 import Register from './menu/Register'
@@ -25,6 +26,7 @@ function App() {
  const [payload, setpayload] = useState([{createdOn:"",description:"",downloadLink:""}])
  const [showpdf, setshowpdf] = useState(false)
  const [extract, setextract] = useState("loading...")
+ const [dataerror, setdataerror] = useState("")
  const [shows, setshows] = useState(true)
  const [extractedtext, setextractedtext] = useState("")
  const [spin, setspin] = useState(false)
@@ -32,12 +34,13 @@ function App() {
  const [pdflink, setpdflink] = useState("https://notfound.com")
  const [Files, setFiles] = useState([{name:"",previewLink:"",fileType:"",viewLink:"",directDownload:""}])
  const [actualDlink, setactualDlink] = useState("https://notfound.com")
+ const [raw, setraw] = useState("")
  const [username, setusername] = useState("")
  const [maxscore, setmaxscore] = useState(0)
  const [dated, setdated] = useState("")
  
                 const [counter,setcounter]=useState("")
-    const [ticket,setticket]=useState("🎫")
+    const [ticket,setticket]=useState("🎟️")
     const countdownDate = new Date("Jan 2, 2026 00:00:00").getTime();
     const x = setInterval(function () {
       const now = new Date().getTime();
@@ -131,7 +134,7 @@ useEffect(() => {
   return (
     <>
     <div className="page">
-<div className="promo" style={{position:"relative",fontWeight:600}}>🎉 Promotion ends in: <p className="">{`${ticket} ${counter}`}</p></div>
+<div className="promo" style={{position:"relative",fontWeight:600}}><span class="inv-ico">🎁</span> Promotion ends in: <p className="ticket">{`${ticket} ${counter}`}</p></div>
           <div className="landingpage">
             <ul className="mlist">
                 <img className="reglate" src={mainlogo} alt=""/>
@@ -160,7 +163,6 @@ useEffect(() => {
         </div>
 
       <div className="phuge">
-
 <img className="huge fil" src={mainlogo} alt=""/>
 <img className="huge fil" src={mainlogo} alt=""/>
 <div className="ptext">ue-pasco</div>
@@ -173,6 +175,8 @@ useEffect(() => {
 
 Practice makes perfect. Keep your self busy with the resources we provide.
 </div>
+{/* <>Download Now !</> */}
+<PWAInstallButton />
 
   </div>
   <div className="midleft">
@@ -195,7 +199,7 @@ Practice makes perfect. Keep your self busy with the resources we provide.
      :<LoadComponet opacity={0} indexed={-100}/>
    }
    {showpdf?
-<Showfiles actualDlink={actualDlink} pdflink={pdflink} mainlogo={mainlogo} setshowpdf={setshowpdf} extract={extract}/>
+<Showfiles actualDlink={actualDlink} raw={raw} pdflink={pdflink} mainlogo={mainlogo} setshowpdf={setshowpdf} dataerror={dataerror} extract={extract}/>
 :false}
          <div className="scrldn"><div className="scrd">
 
@@ -205,7 +209,7 @@ Practice makes perfect. Keep your self busy with the resources we provide.
     </div> 
 
        </div>
-       {searching?<SearchList mainlogo={mainlogo}  setextractedtext={extractedtext} extractedtext={extractedtext} setpdflink={setpdflink} pdflink={pdflink} setshowpdf={setshowpdf} setextract={setextract} extract={extract}  showpdf={showpdf} setsearching={setsearching} find={find} NetworkError={NetworkError} payload={payload} bar={bar} setfind={setfind} setactualDlink={setactualDlink}/>:""}
+       {searching?<SearchList mainlogo={mainlogo} setdataerror={setdataerror} setraw={setraw} setextractedtext={extractedtext} extractedtext={extractedtext} setpdflink={setpdflink} pdflink={pdflink} setshowpdf={setshowpdf} setextract={setextract} extract={extract}  showpdf={showpdf} setsearching={setsearching} find={find} NetworkError={NetworkError} payload={payload} bar={bar} setfind={setfind} setactualDlink={setactualDlink}/>:""}
        <div className="footer">
         <div className="foot1">
             <img className="brands" title='uepasco' src={mainlogo} alt="" />
@@ -251,6 +255,4 @@ Practice makes perfect. Keep your self busy with the resources we provide.
 
 
 export default App
-
-
 

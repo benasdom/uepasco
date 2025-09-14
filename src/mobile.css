@@ -1,6 +1,9 @@
 @media (max-width:999px){
     body {
-        background-image: radial-gradient( rgba(10, 16, 19, 0.8) 10%, rgb(0, 0, 0) 40%), linear-gradient( rgba(3, 17, 25, 1) 90%, rgba(220, 220, 220, 0) 5%), url(imgs/pattern.webp);
+        background-image: rgba(10, 16, 19, 0.8)
+        radial-gradient( rgba(10, 16, 19, 0.8) 10%, rgb(0, 0, 0) 40%), 
+        linear-gradient( rgba(3, 17, 25, 1) 90%, rgba(220, 220, 220, 0) 5%), 
+        url(imgs/pattern.webp);
         background-position: fixed;
         transition: all .6s ease-in-out;
         background-repeat: no-repeat,repeat,repeat;
@@ -275,6 +278,12 @@
         overflow-y: scroll;
         height:92vh;
         top:0;
+    }
+    .promo{
+      display:none;
+    }
+    .mselect{
+    width:100%;
     }
     .payopts{
       display: flex;

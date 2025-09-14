@@ -12,32 +12,48 @@ import spinner from '/imgs/loader.svg'
 import { Link } from 'react-router-dom'
 import mainlogo from '/imgs/Untitled.png'
 import Overview from './menu/overview'
+import ModelComponent from './ModelComponent'
 
 
-
-const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setextract,setpdflink,setactualDlink})=>{
+const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setdataerror,setextract,setraw,setpdflink,setactualDlink})=>{
    
     const [spin, setspin] = useState(false)
     const [fetchError, setfetchError] = useState(false)
     const [currentView, setcurrentView] = useState("")
     const [errorMessage, seterrorMessage] = useState("")
+    const [selectModel, setselectModel] = useState(false)
+    const [selecttrue, setselecttrue] = useState(false)
+const [selectedVal,setselectedVal]=useState("");
+
     const fix=(res)=>{
-        setextract("loading...");
-        setspin(true);
-         let namedfile=res.split("=")[1]
-        //  https://pasco-lovat.vercel.app/api/files/
+        !selectModel?setselectModel(true):false;
+        selecttrue?getpayload(res):false;
+}
+
+const getpayload=(res)=>{
+    setselectModel(false);
+    setextract("loading...");
+    setdataerror("");
+    setspin(true);
+    let namedfile=res.split("=")[1]
+    //  https://pasco-lovat.vercel.app/api/files/
 fetch(`http://localhost:5175/api/files/${namedfile}`)
   .then(response => response.json())
-  .then(data => {setpdflink(data.previewLink);setactualDlink(data.directDownloa);openpdf(namedfile)})
+  .then(data => {setpdflink(data.previewLink);setraw(data.raw);setactualDlink(data.directDownload);openpdf(namedfile)})
   .catch(err=>{seterrorMessage(err.message);setspin(false);setfetchError(true)})
   .finally(()=>{setspin(false);})
 
-   fetch(`http://localhost:5175/api/solutions/${namedfile}`)
+   fetch(`http://localhost:5175/api/solutions`,{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({filename:namedfile,selectedVal})
+})
   .then(response => response.json())
-  .then(data => {setextract(data.extractedText);data.error?setextract(data.error):false})
-  .catch(err=>{setextract("Extraction failed");setfetchError(true)})
-
-
+  .then(data => {setextract(data.extractedText);data.error?setdataerror(data.error):setraw(data.raw)})
+  .catch(err=>{setdataerror("Extraction failed: "+err);setfetchError(true);console.log(err)})
+setselecttrue(false)
 }
 const leave=()=>{
     if(confirm("Do you wish to logout"))
@@ -58,7 +74,7 @@ const leave=()=>{
         <div className="searchlist">       
             <div className="searchnav"> 
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
-            {spin?<img src={spinner} className="spinner" width={200}/>:<div className="bbtn"><div className="ba"><ArrowLeftOutlined/><span className='prem3'></span></div></div>}
+            {spin?<img src={spinner} alt="..." className="spinner" width={200}/>:<div className="bbtn"><div className="ba"><ArrowLeftOutlined/><span className='prem3'></span></div></div>}
             </div>
             <Search handleMenu={handleMenu} eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 </div>
@@ -86,8 +102,9 @@ const leave=()=>{
                 </div>
             </div>
 <div className="mcontent">
-         <Menucompt currentView={currentView} setcurrentView={setcurrentView}/>
+         <Menucompt currentView={currentView} setcurrentView={setcurrentView} />
               <div className="listcontent">
+                {selectModel?<ModelComponent setselecttrue={setselecttrue} setselectedVal={setselectedVal} selectedVal={selectedVal} setselectModel={setselectModel}/>:false}
             {      find!="" && payload.length>1?payload
                    .filter((a,b,c)=>c.indexOf(a)==b)
                    .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase()))
@@ -112,20 +129,18 @@ const leave=()=>{
 const Toaster=({errorMessage,setfetchError})=>{
     setTimeout(()=>setfetchError(false),2000)
     return (
-        
-          <div className="toast">
-            <div className="toastmessage"><InfoCircleOutlined className='micon'/> {  "Sorry: 🔌 "+errorMessage.toLowerCase()}</div>
-          </div>
+<div className="toast">
+<div className="toastmessage"><InfoCircleOutlined className='micon'/> {  "Sorry: 🔌 "+errorMessage.toLowerCase()}</div>
+</div>
     )
 }
 const Menucompt=({currentView,setcurrentView})=>{
-    return (
-        
-    <div className="menucomp">
+return (
+<div className="menucomp">
 <div className="menuhead">
-    <Overview currentView={currentView} setcurrentView={setcurrentView}/>
+<Overview currentView={currentView} setcurrentView={setcurrentView}/>
 </div>
-    </div>
-    )
+</div>
+)
 }
 export default SearchList

@@ -5,7 +5,7 @@ const Advert=()=>{
              
           <div className="userlevel">
            
-                <div className="levelitem2 board" style={{height:350}}>
+                <div className="levelitem2 board" style={{height:"100%"}}>
                     <div className="streak">Run your Adds here</div>
                   <div className="iconlarge">
                     🎪

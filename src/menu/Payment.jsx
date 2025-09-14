@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ArrowLeftOutlined} from '@ant-design/icons'
+
 
 const tiers = [
   {
@@ -75,7 +77,7 @@ const Payment = () => {
           Choose Your Plan
         </h2>
            <h2 className="endsin" >
-          Promo Ending: <p className="cdown">{`${ticket} ${counter} `}</p>
+          <p className="cdown">{`${ticket} ${counter} `}</p>
         </h2>
         
         <div className="payopts">
@@ -83,21 +85,22 @@ const Payment = () => {
             <div
               key={index}
               className="pt">
-              <h3 className="tier">
-                {tier.name}
-              </h3>
              <div >
-                 <p className="" style={{color:"red",textDecoration:"line-through"}}>
+                 <p className="oprice" >
                 {tier.oldPrice}
               </p>
-              <p className="" style={{color:"gold"}}>
+              <p className="nprice" >
                 - {(tier.oldPrice?ticket:"")+tier.price}
               </p>
              </div>
+             
+              <h3 className="tier">
+                💎{tier.name}
+              </h3>
               <ul className="payfeatures">
-                <li> ✔ No pop up ads</li>
+                <li> <span style={{color:"rgb(0,120,250)"}}>✔</span> No pop up ads</li>
                 {tier.description.map((item, idx) => (
-                  <li key={idx}>✔ {item}</li>
+                  <li key={idx}><span style={{color:"rgb(0,120,250)"}}>✔</span> {item}</li>
                 ))}
               </ul>
               <button className="watch" style={{pointerEvents:"none"}}>
@@ -106,7 +109,7 @@ const Payment = () => {
             </div>
           ))}
         </div>
-            <Link to="/uepasco/" className='return' style={{position:"fixed",margin:"auto",bottom:0,marginBottom:10}}>👈 </Link>
+            <Link to="/uepasco/" className='return' style={{position:"fixed",margin:"auto",bottom:0,marginBottom:10}}><ArrowLeftOutlined/> </Link>
       </div>
     </div>
   );
