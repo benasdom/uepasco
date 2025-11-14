@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import rbadge from '../../public/imgs/coinstacked.png'
+import racoonearn from '../../public/imgs/racoon_earn.jpg'
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons'
 
 const Earn=()=>{
@@ -15,8 +16,10 @@ const Earn=()=>{
  <img src={rbadge} className="coinstack" alt="" srcset="" />
                    
                     <div className="streak">Earn</div>
+                    
                     <a href="#begin"><div className="seemore"><div className="begin">Begin</div><ArrowRightOutlined/></div></a>
-                  <div className="iconlarge">💰</div>
+                  {/* <div className="iconlarge">💰</div> */}
+                  <img src={racoonearn} className="racoon"/>
                     <div className="wish">
                        <span style={{fontWeight:600}}> What is this about?</span> ( 💸GHS 1,500+ Salary )
                     </div>

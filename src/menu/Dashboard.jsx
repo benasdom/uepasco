@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import domain,{fetchWithAuth} from './authfetch'
+import coins from '/imgs/coin.png'
+
 const Dashboard=()=>{
       const [userscore, setuserscore] = useState(null)
       const [maxscore, setmaxscore] = useState(0)
+      const [earning, setearning] = useState(null)
       const [streaks, setstreaks] = useState({steakScore:"",date:""})
     //   const [dp, setdp] = useState([bob,wayne,jessy,brown])
       const storeddata = JSON.parse(localStorage.getItem("userInfo"));
@@ -10,16 +13,26 @@ const Dashboard=()=>{
       let accessToken = storeddata?.accessToken;
       let refreshToken = storeddata?.refreshToken;
       let url = domain+'/api/v1/user/streak';
+      let url2 = domain+'/api/v1/user/wallet';
     
+      // useEffect(() => {
+      // storeddata?setmaxscore(storeddata?.highestStreakScore):false
+      //   if (accessToken.length && refreshToken.length && typeof(userscore=="number")) {
+      //     let options={
+      //       headers:{Authorization:`Bearer ${accessToken}`},
+      //     }
+      //     fetchWithAuth(url,options,refreshToken,(data)=>{setstreaks(data);setuserscore(data.streakScore)})
+      //   }
+      // }, [url]);
+      
       useEffect(() => {
-      storeddata?setmaxscore(storeddata?.highestStreakScore):false
-        if (accessToken.length && refreshToken.length && typeof(userscore=="number")) {
+        if (accessToken.length && refreshToken.length) {
           let options={
             headers:{Authorization:`Bearer ${accessToken}`},
           }
-          fetchWithAuth(url,options,refreshToken,(data)=>{setstreaks(data);setuserscore(data.streakScore)})
+          fetchWithAuth(url2,options,refreshToken,(data)=>{ console.log(data);setearning(data.referals);console.clear();console.log("earning",data)})
         }
-      }, []);
+      }, [url2]);
       
     const transformdata=()=>{
       let newdate=new Date((streaks.date.split(/T/gim)[0]));
@@ -120,8 +133,8 @@ const Dashboard=()=>{
         toupdate=false
       }},[userscore])
     return (
-          <div className="userlevel">
-                <div className="levelitem">
+          <div className="userlevel flex-col">
+                <div className="levelitem" >
 
                     <div className="litem">
                         <div className="hint">level</div>
@@ -136,19 +149,30 @@ const Dashboard=()=>{
                     </div>
 
                 </div>
-                <div className="levelitem2">
+              <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"70%"}}>
+                  <div className="levelitem2 dboard">
                     <div className="streak">⚡STREAK⚡</div>
                     <div className="streaka">
                         <div className="hint">streak score</div>
                         <div className="hint">Highest streak</div>
                     </div>
                     <div className="streaks">
-                        <div className="hint">{userscore !=null?userscore:1}</div>
-                        <div className="hint">{maxscore?maxscore:1}</div>
+                        <div className="hint streaknumbs">{userscore !=null?userscore:1}</div>
+                        <div className="hint streaknumbs">{maxscore?maxscore:1}</div>
 
                     </div>
-                    <div className="streak"></div>
+                    <div className="streak">{"⭐".repeat(10)}</div>
                 </div>
+                <div className="earndiv">
+                  <div className="earntext">
+                    Earned
+                  </div>
+                  <img src={coins} className="backdrop"/>
+
+                   <div className="earnval">GHS: {(earning!=0 && !earning)?"_____":earning}
+                  </div>
+                </div>
+              </div>
             </div>
     )
 }

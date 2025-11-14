@@ -130,6 +130,12 @@
         flex-wrap: wrap;
         height: max-content;
     }
+    .responses{
+      display:flex;
+    }
+    .tabs{
+      display:none;
+    }
 
     .searchnav .twwo{
         width:calc(100% - 65px);

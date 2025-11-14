@@ -11,11 +11,13 @@ StarFilled,
 import spinner from '/imgs/loader.svg'
 import { Link } from 'react-router-dom'
 import mainlogo from '/imgs/Untitled.png'
+import racoon from '/imgs/racoon_job.jpg'
 import Overview from './menu/overview'
+import LoadComponent from './Loadcomponent'
 import ModelComponent from './ModelComponent'
 
 
-const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setdataerror,setextract,setraw,setpdflink,setactualDlink})=>{
+const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setdataerror,setcredits,setextract,setraw,setpdflink,setactualDlink})=>{
    
     const [spin, setspin] = useState(false)
     const [fetchError, setfetchError] = useState(false)
@@ -31,10 +33,13 @@ const [selectedVal,setselectedVal]=useState("");
 }
 
 const getpayload=(res)=>{
+    let premiumstatus=JSON.parse(localStorage.userInfo).pStatus
     setselectModel(false);
     setextract("loading...");
     setdataerror("");
     setspin(true);
+
+
     let namedfile=res.split("=")[1]
     //  https://pasco-lovat.vercel.app/api/files/
 fetch(`http://localhost:5175/api/files/${namedfile}`)
@@ -42,16 +47,17 @@ fetch(`http://localhost:5175/api/files/${namedfile}`)
   .then(data => {setpdflink(data.previewLink);setraw(data.raw);setactualDlink(data.directDownload);openpdf(namedfile)})
   .catch(err=>{seterrorMessage(err.message);setspin(false);setfetchError(true)})
   .finally(()=>{setspin(false);})
-
+const tk= `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDY3OGMzNjAtZWNiZC00MzJmLTgzNmMtNzc5YTQ5MjlhYmYwIiwiZXhwIjoxNzYxNDI3NjYyLCJpYXQiOjE3NjE0MjY3NjJ9.aN0N9bH1bTsnSImahQqK4H3yvPRENmcjd8P1246B7NQ`
    fetch(`http://localhost:5175/api/solutions`,{
     method:"POST",
     headers:{
+        "Authorization":`Bearer ${tk}`,
         "Content-Type":"application/json"
     },
-    body:JSON.stringify({filename:namedfile,selectedVal})
+    body:JSON.stringify({filename:namedfile,selectedVal,premiumstatus})
 })
   .then(response => response.json())
-  .then(data => {setextract(data.extractedText);data.error?setdataerror(data.error):setraw(data.raw)})
+  .then(data => {setextract(data.extractedText);setcredits(data.creditsLeft);console.log(data);data.error?setdataerror(data.error):setraw(data.raw)})
   .catch(err=>{setdataerror("Extraction failed: "+err);setfetchError(true);console.log(err)})
 setselecttrue(false)
 }
@@ -72,15 +78,17 @@ const leave=()=>{
         }
     return(
         <div className="searchlist">       
-            <div className="searchnav"> 
+            <div className="searchnav" > 
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
-            {spin?<img src={spinner} alt="..." className="spinner" width={200}/>:<div className="bbtn"><div className="ba"><ArrowLeftOutlined/><span className='prem3'></span></div></div>}
+            <div className="bbtn"><div className="ba"><ArrowLeftOutlined/><span className='prem3'></span></div></div>
             </div>
             <Search handleMenu={handleMenu} eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 </div>
           <div className="bothsides">
             <div className="sidemenubar">
                 <div className="mymenubox" onClick={handleMenu}>
+                    <div className="rbackdrop"></div>
+                    <img className="racoon" src={racoon} alt="" />
 <div className="firstitem">
     <div className="abs">
     </div>
@@ -89,7 +97,7 @@ const leave=()=>{
 </div>
                 <div className="mymenu">
     <div className="menuitems" onClick={()=>{setcurrentView("dashboard")}}><div className="inmenu">< AppstoreOutlined className='micon'/>General </div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("solve")}}><div className="inmenu"><FileProtectOutlined className='micon'/>Solved with slides <div className="prem3">✨</div></div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("solve")}}><div className="inmenu"><FileProtectOutlined className='micon'/>Our Products <div className="prem3">✨</div></div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("leaderboard")}}><div className="inmenu"><GoldFilled className='micon'/>Leaderboard</div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("referal")}}><div className="inmenu"><MoneyCollectFilled className='micon'/>Referal Details</div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("earn")}}><div className="inmenu"><DollarOutlined className='micon'/>Earn <div className="prem3">💰</div></div></div>
@@ -113,8 +121,8 @@ const leave=()=>{
                    .map((a,b)=>{
                     return a=<div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdfpic} alt="" className="imgthumb"/>
                     <div className="pinfo">
-                        <div className="titles">{(a.description).replace(/o/gi,["⚾","⚽"][b%2])}</div><div className="describe">{a.createdOn}</div>
-                        </div><div href={a.downloadLink} onClick={(ev) => fix(ev.target.attributes.href.value)} className="download">{<ExportOutlined style={{marginRight:"5px"}}/>} open<span className='prema'></span></div></div> })
+                        <div className="titles">{(a.description).replace(/o/gi,["🧿","⭕"][b%2])}</div><div className="describe">{a.createdOn}</div>
+                        </div><div href={(/payment/i.test(a.downloadLink))?"":a.downloadLink} onClick={(ev) => fix(ev.target.attributes.href.value)} className="download">{<ExportOutlined style={{marginRight:"5px"}}/>} open<span className='prema'></span></div></div> })
                     :new Array(1).fill("").map((a,b)=>{
                     return a=<div key={b+""} className="filtered mn4" data-ptext="title..." data-texts="details..."><img src="" alt="" className="imgthumb"/><div className="desc err4">
                         <img className="reglate" src={mainlogo} style={{marginRight:10}} alt=""/>{NetworkError}</div></div>
@@ -123,6 +131,8 @@ const leave=()=>{
             </div>
           </div>
           {fetchError && <Toaster setfetchError={setfetchError} errorMessage={errorMessage} />}
+          
+{spin?<LoadComponent opacity={1} indexed={100} mainlogo={mainlogo}/>:<LoadComponent opacity={0} indexed={-100}/>}
         </div>
     )
 }
@@ -130,7 +140,7 @@ const Toaster=({errorMessage,setfetchError})=>{
     setTimeout(()=>setfetchError(false),2000)
     return (
 <div className="toast">
-<div className="toastmessage"><InfoCircleOutlined className='micon'/> {  "Sorry: 🔌 "+errorMessage.toLowerCase()}</div>
+<div className="successmessage">{  "🔴 Sorry: 🔌 "+errorMessage.toLowerCase()}</div>
 </div>
     )
 }

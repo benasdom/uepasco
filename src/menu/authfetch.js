@@ -2,18 +2,14 @@ const domain = "https://ue-past-questions-back.vercel.app"
 
 export async function fetchWithAuth(urlPath, option, refreshToken, setDataCallback, refreshUrl) {
   try {
-    // Retrieve the stored userInfo from localStorage dynamically
-    let stored = JSON.parse(localStorage.getItem("userInfo"));
-    
+    let stored = JSON.parse(localStorage.getItem("userInfo"));    
     if (!stored || !stored.accessToken) {
       throw new Error("No access token found in localStorage");
     }
-
     // Set Authorization header dynamically from localStorage accessToken
     option.headers = option.headers || {};
     option.headers.Authorization = `Bearer ${stored.accessToken}`;
     const response = await fetch(urlPath, option);
-    
     if (response.status === 401) {
       // Token expired, refresh it
       const newAccessToken = await refreshTokens(refreshToken, refreshUrl);

@@ -1,7 +1,8 @@
 import { InfoCircleFilled, LockOutlined, MailOutlined, MessageOutlined,UserAddOutlined, PhoneOutlined, ClockCircleOutlined, CheckCircleOutlined } from "@ant-design/icons";
-import bob from '../../public/imgs/bob.jpg';
-import jessy from '../../public/imgs/jessy.jpg';
+import jess from '../../public/imgs/jess.jpg';
 import brown from '../../public/imgs/brown.jpg';
+import jude from '../../public/imgs/jude.jpg';
+import racoon_learn from '../../public/imgs/racoon_learn.jpg';
 import guylogs from '../../public/imgs/guylogs.png';
 import logo from '../../public/imgs/untitled.jpg';
 import { useState, useEffect } from "react";
@@ -34,7 +35,7 @@ export default function Register({setshows}) {
     
 // Added missing state
 
-    const bb = [bob, jessy,guylogs, brown];
+    const bb = [jess, jude,guylogs, brown];
     const found = bb[rand];
 
     const seterrors = (pop) => {
@@ -292,11 +293,23 @@ activateuser()
         <div>
             <div className="register">
                 {showing && <div className="successmessage"></div>}
-
                 <img className="regpic" src={found} alt=""/>
                 <img className="regpic" src={found} alt=""/>
                 
                 <div className="regbox">
+                    <div className="racoonbox">
+                        
+                        <img className="racoondp" src={racoon_learn}/>
+
+
+                    <div className="racoonintro">
+                        <div className="rbackdrop" style={{zIndex:2}}></div>
+
+                        <div className="welcmessage">Welcome to UELearn</div>
+                        <div className="regnote">study with aura !</div>
+                    </div>
+
+                    </div>
                     <div className="half">
                         <div className="picked">
                             <img src={found} className="brown" alt=""/>
@@ -304,6 +317,7 @@ activateuser()
                         </div>
                     </div>
                     <div className="half">
+
                         <div className="regform">
                            {!showopage && mountsignup?(
                             <div className="mbox">
@@ -378,6 +392,7 @@ activateuser()
                             <div className="noted">
                                 <InfoCircleFilled className="micon"/> Dont have an account?
                             </div>
+                            
                             <div className="regbutton" style={{background:"black",color:"white"}} onClick={()=>{setmountsignup(true)}}>
                                 {"Sign Up Instead?"}
                             </div></div>
@@ -412,7 +427,7 @@ activateuser()
                         ):false}
                         </div>
                     </div>
-                    <img className="tinylogo" src={logo} alt=""/>
+                    <img className="tinylogo" style={{zIndex:2}} src={logo} alt=""/>
                 </div>
             </div>
         </div>

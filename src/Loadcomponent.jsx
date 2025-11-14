@@ -1,18 +1,26 @@
 import React from 'react'
+import racoonread from '/imgs/racoon_learn.jpg'
 
-const LoadComponet=({opacity,indexed,mainlogo})=>{
+
+const LoadComponent=({opacity,indexed,mainlogo})=>{
     return (
-        <div className="texttit" id="waiting" style={{opacity:opacity,zIndex:indexed}}>
-        <div className="mtitle" id="waittxt">
+        <div className="texttit" id="waiting" style={{zIndex:indexed}}>
+        <div className="mtitle" id="waittxt" style={{opacity:opacity}}>
+            <div className="rbackdrop"></div>
+            <img src={racoonread} className="racoonload" alt="" srcset="" />
             <div className="loading">
                 <div className="logo"><img src={mainlogo} width="150" alt=""/></div>
     <div className="loadtext" id="loadtext" data-text="Loading...."> Loading....</div>
             </div>
     
+
+<span style={{color:"rgba(205,205,245,.3)"}}>
     Questions for various course codes        
-        </div>  
+    
+    </span>
+    </div>  
        </div> 
     )
 }
 
-export default LoadComponet
+export default LoadComponent

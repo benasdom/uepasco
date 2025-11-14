@@ -1,4 +1,6 @@
 import rbadge from '../../public/imgs/leader.png'
+import racoonleaderboard from '../../public/imgs/racoon_leaderboard.jpg'
+import racoonrun from '../../public/imgs/racoon_goldmedal.jpg'
 import { EyeInvisibleFilled,EyeFilled,MoneyCollectOutlined,ThunderboltFilled } from '@ant-design/icons'
 import { useState } from 'react'
 
@@ -8,9 +10,15 @@ const Leaderboard=()=>{
 
     return (
            <div className="rlevel">
+            
+                           <img src={racoonrun} className="rgoldmedal refbadge" alt="" srcset="" />
+                           <img src={racoonleaderboard} className="racoonlboard refbadge" alt="" srcset="" />
+
                            <img src={rbadge} className="refbadge" alt="" srcset="" />
+
                          
                        <div className="levelitem2 leaderb">
+                        
                              <div className="refpage" style={{fontSize:40,width:200}}>🏁 Leaderboard</div>
                
                          
@@ -19,6 +27,7 @@ const Leaderboard=()=>{
                        </div>
                        <div className='yourrefs'>You have (0) referals</div>
                        <div className="reflist">
+
             {Array(10).fill("").map((a,b)=>
                            <div className='refblock' key={""+b}>
                            <div className='refblockleft'></div>
