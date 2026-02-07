@@ -92,25 +92,32 @@ const getuserdata=async ()=>{
 }
 
 useEffect(() => {
-  try{
- let updata= getuserdata();
-     document.body.onload=()=>{
-      console.log(updata)
+  try {
+    getuserdata().then((updata) => {
+      console.log("User data received:", updata)
+      const stored = JSON.parse(localStorage.getItem("userInfo") || '{}');
       if(updata.status==="success"){
-          localStorage.setItem("userInfo",JSON.stringify({...stored,...updata.data}))
+        localStorage.setItem("userInfo",JSON.stringify({...stored,...updata.data}))
         setusername(updata.data.firstName)
         setmaxscore(updata.data.highestStreakScore)
-      updata.data?setloader(false):false
-    }
-    else{
-      console.log("lets see",updata)
-    }}
-  }catch(err){
-    console.error(err)
+        setloader(false)
+      }
+      else{
+        console.log("User data structure:", updata)
+        // If response structure is different, try accessing data directly
+        if(updata.firstName){
+          localStorage.setItem("userInfo",JSON.stringify({...stored,...updata}))
+          setusername(updata.firstName)
+          setmaxscore(updata.highestStreakScore || 0)
+          setloader(false)
+        }
+      }
+    })
+  } catch(err){
+    console.error("Error fetching user data:", err)
+    setloader(false)
   }
-
-  
-  }, [])
+}, [])
   
   // Listen for storage changes (when user returns from Payment page)
   useEffect(() => {

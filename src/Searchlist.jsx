@@ -61,6 +61,8 @@ const getpayload=async (res)=>{
         setraw(pdfData.raw);
         setactualDlink(pdfData.directDownload);
         openpdf(namedfile);
+        setspin(false);
+
 
         // Fetch solutions via external-api proxy endpoint
         const options = {
@@ -71,7 +73,7 @@ const getpayload=async (res)=>{
                
    "filename": namedfile,
    "selectedVal": selectedVal,
-   "premiumstatus": "premiumstatus"
+   "premiumstatus": premiumstatus??"premiumstatus"
                     })
         };
         const solutionResponse = await fetchWithAuth(`${domain}/api/v1/request/solutions`, options);
@@ -86,12 +88,15 @@ const getpayload=async (res)=>{
             solutionData = solutionResponse.api_response?.data || solutionResponse;
             remainingCredits = solutionResponse.remaining_credits ?? 0;
             setcredits(remainingCredits);
+            // Update localStorage with new credits
+            const storedUser = JSON.parse(localStorage.getItem("userInfo") || '{}');
+            storedUser.credits = remainingCredits;
+            localStorage.setItem("userInfo", JSON.stringify(storedUser));
         } catch (e) {
             solutionData = solutionResponse;
         }
         
         setextract(solutionData.extractedText || "");
-        setcredits(solutionData.remaining_credits ?? 0);
         
         if (solutionData.error) {
             setdataerror(solutionData.error);

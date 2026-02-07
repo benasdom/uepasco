@@ -11,9 +11,9 @@ const Leaderboard=()=>{
     return (
            <div className="rlevel">
             
-                           <img src={racoonleaderboard} className="racoonlboard" alt="" srcset="" />
+                           <img src={racoonleaderboard} className="racoonlboard" alt="" srcSet="" />
                        <div className="levelitem2 leaderb">
-                           <img src={rbadge} className="refbadge" alt="" srcset="" />
+                           <img src={rbadge} className="refbadge" alt="" srcSet="" />
                         
                              <div className="refpage" style={{fontSize:30,width:200}}>🏁 Leaderboard</div>
                
@@ -23,7 +23,7 @@ const Leaderboard=()=>{
                        </div>
                        <div className='yourrefs'>You have (0) referals</div>
                        <div className="reflist">
-                           <img src={racoonrun} className="rgoldmedal" alt="" srcset="" />
+                           <img src={racoonrun} className="rgoldmedal" alt="" srcSet="" />
 
             {Array(10).fill("").map((a,b)=>
                            <div className='refblock' key={""+b}>
@@ -32,8 +32,8 @@ const Leaderboard=()=>{
        
                                <div className="refblockcenterdivone">Benjamin</div>
                                <div className="refblockcenterdiv"> {new Date().toISOString().slice(0,10)}</div>
-                           </div>{()=>{setposition(b+1)}}
-                                               <div className='refblockend'><ThunderboltFilled className='micon'/>{position}{b+1}</div>
+                           </div>
+                                               <div className='refblockend'><ThunderboltFilled className='micon'/>{b+1}</div>
        
                            </div>
                        )}

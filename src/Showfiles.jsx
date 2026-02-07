@@ -175,7 +175,7 @@ console.log("Hasty",founditems);
                             <div className="tabloads2 refloader"></div>
                             <div className="tabloads2 refloader"></div>
                             </div>}
-            {extract !="loading"?<div className="toptex"  dangerouslySetInnerHTML={{ __html: dataerror.length?
+            {extract !="loading"?<div className="toptex"  dangerouslySetInnerHTML={{ __html: dataerror.length && !savedquery?
          `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || extract)}`:raw
 )}}>
     </div>:<div className="toptex refloader2"></div>} </div>

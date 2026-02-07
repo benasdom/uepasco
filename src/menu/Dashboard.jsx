@@ -15,25 +15,27 @@ const Dashboard=()=>{
       let url = domain+'/api/v1/user/streak';
       let url2 = domain+'/api/v1/user/wallet';
     
-      // useEffect(() => {
-      // storeddata?setmaxscore(storeddata?.highestStreakScore):false
-      //   if (accessToken.length && refreshToken.length && typeof(userscore=="number")) {
-      //     let options={
-      //       headers:{Authorization:`Bearer ${accessToken}`},
-      //     }
-      //     fetchWithAuth(url,options,refreshToken,(data)=>{setstreaks(data);setuserscore(data.streakScore)})
-      //   }
-      // }, [url]);
-      
       useEffect(() => {
-        if (accessToken.length && refreshToken.length) {
+        // Set maxscore from localStorage on component mount
+        if (storeddata?.highestStreakScore) {
+          setmaxscore(storeddata.highestStreakScore);
+        }
+        
+        if (accessToken?.length > 0 && refreshToken?.length > 0) {
           let options={
             headers:{Authorization:`Bearer ${accessToken}`},
           }
           fetchWithAuth(url2,options).then((data)=>{ 
-            console.log(data);setearning(data.referals);console.clear();console.log("earning",data)
-          }
-)
+            console.log(data);
+            // Handle nested response structure and undefined cases
+            const referralData = data?.api_response?.data?.referals || data?.referals || [];
+            setearning(referralData);
+            console.clear();
+            console.log("earning", referralData)
+          }).catch((err)=>{
+            console.error("Error fetching wallet:", err);
+            setearning([]);
+          })
         }
       }, [url2]);
       

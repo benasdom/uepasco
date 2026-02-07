@@ -13,7 +13,7 @@ const Earn=()=>{
            
                <div className="sectionearn">
                  <div className="levelitem2 earnbox" id="earn" style={{height:350}}>
- <img src={rbadge} className="coinstack" alt="" srcset="" />
+ <img src={rbadge} className="coinstack" alt="" srcSet="" />
                    
                     <div className="streak">Earn</div>
                     
