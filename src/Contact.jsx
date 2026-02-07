@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react';
  import { Link } from 'react-router-dom';
  import spinner from '/imgs/loader.svg'
@@ -61,7 +60,7 @@ export default function Contact() {
           </div>
  
     </div>
-    <Link to="/uepasco/" className='return'>👈 </Link>
+  <Link to="/uelearn/" className='return'>👈 </Link>
         </div>  )
 }
 

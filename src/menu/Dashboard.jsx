@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import domain,{fetchWithAuth} from './authfetch'
+import {domain,fetchWithAuth} from './authfetch'
 import coins from '/imgs/coin.png'
 
 const Dashboard=()=>{
@@ -30,7 +30,10 @@ const Dashboard=()=>{
           let options={
             headers:{Authorization:`Bearer ${accessToken}`},
           }
-          fetchWithAuth(url2,options,refreshToken,(data)=>{ console.log(data);setearning(data.referals);console.clear();console.log("earning",data)})
+          fetchWithAuth(url2,options).then((data)=>{ 
+            console.log(data);setearning(data.referals);console.clear();console.log("earning",data)
+          }
+)
         }
       }, [url2]);
       
@@ -78,13 +81,16 @@ const Dashboard=()=>{
               headers:{"Content-Type":"application/json","Authorization":`Bearer ${accessToken}`},
               body:JSON.stringify((userscore ==0)?{streakScore:1}:{streakScore:userscore+1})
             }
-            fetchWithAuth(url,options,refreshToken,(data)=>{
+            fetchWithAuth(url,options,refreshToken)
+            .then(
+              (data)=>{
               try{
                 localStorage.setItem("userInfo",JSON.stringify({...data,accessToken,refreshToken,useractivedate:[...useractivedates,freshdate].slice(-2)}))}
               catch(err){alert(err)}
               // console.log(JSON.parse(localStorage.getItem("userInfo")))
     
-              })
+              }
+            )
           }    } else if (val > 1) {
             console.log("resetting")
     

@@ -11,15 +11,11 @@ const Leaderboard=()=>{
     return (
            <div className="rlevel">
             
-                           <img src={racoonrun} className="rgoldmedal refbadge" alt="" srcset="" />
-                           <img src={racoonleaderboard} className="racoonlboard refbadge" alt="" srcset="" />
-
-                           <img src={rbadge} className="refbadge" alt="" srcset="" />
-
-                         
+                           <img src={racoonleaderboard} className="racoonlboard" alt="" srcset="" />
                        <div className="levelitem2 leaderb">
+                           <img src={rbadge} className="refbadge" alt="" srcset="" />
                         
-                             <div className="refpage" style={{fontSize:40,width:200}}>🏁 Leaderboard</div>
+                             <div className="refpage" style={{fontSize:30,width:200}}>🏁 Leaderboard</div>
                
                          
                      
@@ -27,6 +23,7 @@ const Leaderboard=()=>{
                        </div>
                        <div className='yourrefs'>You have (0) referals</div>
                        <div className="reflist">
+                           <img src={racoonrun} className="rgoldmedal" alt="" srcset="" />
 
             {Array(10).fill("").map((a,b)=>
                            <div className='refblock' key={""+b}>

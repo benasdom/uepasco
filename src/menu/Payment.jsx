@@ -2,21 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeftOutlined} from '@ant-design/icons'
 import PaystackPop from '@paystack/inline-js'
-import domain,{fetchWithAuth} from './authfetch'
+import {domain,fetchWithAuth, LocalApiPath} from './authfetch'
 import mainlogo from '/imgs/Untitled.png'
 import LoadComponent from "../Loadcomponent";
 
 
-const Payment = () => {
-      const storeddata = JSON.parse(localStorage.getItem("userInfo"));
-      let accessToken = storeddata?.accessToken;
-      let refreshToken = storeddata?.refreshToken;
-      let urlPost = domain+'/api/v1/user/status';
+const Payment = ({ setcredits }) => {
+      let urlPost = domain+'/api/v1/user/credits';
     const [counter,setcounter]=useState("")
     const [paymentcode,setpaymentcode]=useState("")
     const [loadme,setloadme]=useState(false)
     const [status,setstatus]=useState("")
     const [ticket,setticket]=useState("🎟️")
+    const [fetchError, setfetchError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
     const countdownDate = new Date("Jan 2, 2026 00:00:00").getTime();
     const x = setInterval(function () {
       const now = new Date().getTime();
@@ -38,14 +37,15 @@ const getPaymentCode=async ()=>{
     setloadme(true)
 
   try{
-        const payresponse =await fetch("http://localhost:5175/api/payment");
+        const payresponse =await fetch(LocalApiPath+"/api/payment");
     const code= await payresponse.json();
     setpaymentcode(code);
     setloadme(false)
 
   }catch(err){
   setloadme(false)
-    alert(err)
+    setErrorMessage("🔴 Sorry 🔌: " + (err.message || "Failed to load payment code"));
+    setfetchError(true);
   }
 
 
@@ -73,26 +73,39 @@ getPaymentCode();
   email: 'sample@email.com',
   amount: 23400,
   onSuccess: (transaction) => {
-
     // console.log(transaction);
           let options={
             method:"PUT",
             headers:{
-              Authorization:`Bearer ${accessToken}`,
               "Content-Type":"application/json"
             },
-            body:JSON.stringify({status:premiumType}),
+            body:JSON.stringify({add:600}),
           }
           try{
-          fetchWithAuth(urlPost,options,refreshToken,(data)=>{
+          fetchWithAuth(urlPost,options)
+        .then(
+          (data)=>{
             setstatus(data);console.log(data);
             const udata=JSON.parse(localStorage.getItem("userInfo"));
-            localStorage.setItem("userInfo",JSON.stringify({...udata,pStatus:data.status}))
-          })}catch(err){
+            const updatedUserData = {
+              ...udata,
+              credits: (udata?.credits || 0) + 600,
+              lastCreditUpdate: new Date().toISOString(),
+              creditUpdateTime: Date.now()
+            };
+            localStorage.setItem("userInfo", JSON.stringify(updatedUserData));
+            setcredits && setcredits(updatedUserData.credits);
+            setErrorMessage("🟢 Payment successful! 🥳🥳 600 credits added to your account.");
+            setfetchError(true);
+          }
+        )
+        }catch(err){
           console.log(err);
-
+          setErrorMessage("🔴 Sorry 🔌: Error processing payment. Please contact support.");
+          setfetchError(true);
           }
   },
+  
 
   onLoad: (response) => {
   console.log("onLoad: ", response);
@@ -108,14 +121,14 @@ getPaymentCode();
   }
   return (
     <div className="pcontainer">
-
+      {fetchError && <Toaster setfetchError={setfetchError} errorMessage={errorMessage} />}
       <div className="pcontainer2">
 
         <h2 className="paytitle">
           Choose Your Plan
         </h2>
            <h2 className="endsin" >
-          <p className="cdown"><span style={{color:"purple",fontSize:20}}>PROMO:</span>{`${ticket} ${counter} `}</p>
+          <p className="cdown">PROMO: {`${ticket} ${counter} `}</p>
         </h2>
         <div className="payopts">
 
@@ -132,9 +145,8 @@ getPaymentCode();
                 - {(tier.oldPrice?ticket:"")+tier.price}
               </p>
              </div>
-             
               <h3 className="tier">
-                💎{tier.name}
+                <span className="goldtop"></span>💎{tier.name}
               </h3>
               <ul className="payfeatures">
                 <li> <span style={{color:"rgb(0,120,250)"}}>✔</span> No pop up ads</li>
@@ -149,8 +161,7 @@ getPaymentCode();
             </div>
           ))}
         </div>
-
-            <Link to="/uepasco/" className='return' style={{position:"fixed",margin:"auto",bottom:0,marginBottom:10}}><ArrowLeftOutlined/> </Link>
+            <Link to="/uelearn/" className='return' style={{position:"fixed",margin:"auto",bottom:0,marginBottom:10}}><ArrowLeftOutlined/> </Link>
       </div>
 {
     loadme?
@@ -215,4 +226,13 @@ const tiers = [
 
 
 export default Payment;
+
+const Toaster=({errorMessage,setfetchError})=>{
+    setTimeout(()=>setfetchError(false),2000)
+    return (
+<div className="toast">
+<div className="successmessage">{  ""+errorMessage.toLowerCase()}</div>
+</div>
+    )
+}
 

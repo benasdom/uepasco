@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
 
 const  Notfound=()=> {
@@ -22,7 +21,7 @@ const  Notfound=()=> {
         </div>
   </div>
   <br></br>
-  <Link to="/uepasco/" className='return'>👈 </Link>
+  <Link to="/uelearn/" className='return'>👈 </Link>
     </div>
 </>
    

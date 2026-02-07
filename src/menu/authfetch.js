@@ -1,8 +1,18 @@
-const domain = "https://ue-past-questions-back.vercel.app"
+export const domain = "https://ue-past-questions-back.vercel.app"
+export const LocalApiPath = "http://localhost:5175"
+// Provides an empty object {} if localStorage.getItem("userInfo") returns null.
+// This prevents JSON.parse from throwing an error.
+const userInfoString = localStorage.getItem("userInfo"); 
 
-export async function fetchWithAuth(urlPath, option, refreshToken, setDataCallback, refreshUrl) {
+export const userState= {
+  // Use a ternary operator or (userInfoString ? JSON.parse(userInfoString) : {})
+  ...JSON.parse(userInfoString ?? '{}') 
+};
+
+export async function fetchWithAuth(urlPath, option) {
   try {
-    let stored = JSON.parse(localStorage.getItem("userInfo"));    
+        let stored = JSON.parse(localStorage.getItem("userInfo"));    
+
     if (!stored || !stored.accessToken) {
       throw new Error("No access token found in localStorage");
     }
@@ -12,29 +22,38 @@ export async function fetchWithAuth(urlPath, option, refreshToken, setDataCallba
     const response = await fetch(urlPath, option);
     if (response.status === 401) {
       // Token expired, refresh it
-      const newAccessToken = await refreshTokens(refreshToken, refreshUrl);
+      const newAccessToken = await refreshTokens();
       // Update the Authorization header with the new access token
       option.headers.Authorization = `Bearer ${newAccessToken}`;
       
-      return fetchWithAuth(urlPath, option, refreshToken, setDataCallback, refreshUrl);
+      return fetchWithAuth(urlPath, option);
     }
+    
+    if (!response.ok) {
+      console.log(response);
+      throw new Error(`Fetch failed with status ${response.statusText}`);
+
+    }
+    
     const data = await response.json();
     console.log(data)
 
 
-    if (!response.ok) {
-      throw new Error(`Fetch failed with status ${JSON.stringify(data.error.details)} `);
-    }
-    
-    if (setDataCallback) setDataCallback(data.data); // Call the callback with fetched data
-    return data; // Return data for further use
+    return data.data; // Return data for further use
   } catch (error) {
     console.log("Error fetching data:",error);
-    throw error;
   }
 }
-export async function refreshTokens(refreshToken, refreshUrl = domain+"/api/v1/auth/refresh") {
+export async function refreshTokens(refreshUrl = domain+"/api/v1/auth/refresh") {
+
   try {
+            let stored = JSON.parse(localStorage.getItem("userInfo"));    
+
+        if (!stored || !stored.refreshToken) {
+      throw new Error("No refresh token found in localStorage");
+    }
+      const refreshToken = `${stored.refreshToken}`;
+
     const response = await fetch(refreshUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -42,7 +61,9 @@ export async function refreshTokens(refreshToken, refreshUrl = domain+"/api/v1/a
     });
 
     if (!response.ok) {
-      throw new Error("Failed to refresh token");
+      console.log(response.type,"Error 400")
+
+      throw new Error("Failed to refresh token due to "+response.type);
     }
 
     const data = await response.json();
@@ -50,7 +71,7 @@ export async function refreshTokens(refreshToken, refreshUrl = domain+"/api/v1/a
     const newAccessToken = data.data.token;
 
     // Retrieve the stored userInfo and update the accessToken
-    let stored = JSON.parse(localStorage.getItem("userInfo"));
+     stored = JSON.parse(localStorage.getItem("userInfo"));
     if (stored) {
       stored.accessToken = newAccessToken;
       localStorage.setItem("userInfo", JSON.stringify(stored)); // Update localStorage with new token
@@ -62,4 +83,3 @@ export async function refreshTokens(refreshToken, refreshUrl = domain+"/api/v1/a
     throw error;
   }
 }
-export default domain;

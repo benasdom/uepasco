@@ -2,14 +2,17 @@ import { CloseCircleOutlined,FileProtectOutlined,ArrowDownOutlined,SolutionOutli
 import React, { useEffect, useState } from 'react'
 import spinner from '/imgs/loader.svg'
 import { marked } from "marked";
-import domain, { fetchWithAuth } from './menu/authfetch';
+import { Link } from 'react-router-dom'
+import {domain, fetchWithAuth,LocalApiPath } from './menu/authfetch';
 import racoon_learn from '/imgs/racoon_learn.jpg'
+import racoon_save from '/imgs/save.jpg'
 
-
-const Showfiles=({pdflink,setshowpdf,mainlogo,actualDlink,credits,extract,dataerror,raw})=>{
+const Showfiles=({pdflink,courseName,selectedVal,setshowpdf,mainlogo,actualDlink,credits,extract,dataerror,raw})=>{
     const [solns, setsolns] = useState(false);
     const [storeme, setstoreme] = useState(false);
     const [rawView, setrawView] = useState(true);
+    const [savedquery, setsavedquery] = useState(null); // ADDED THIS LINE
+    const [founditems, setfounditems] = useState([]);
 
     const enableEdit=()=>{
         document.querySelector(".toptex").setAttribute("contenteditable","true");
@@ -17,7 +20,50 @@ const Showfiles=({pdflink,setshowpdf,mainlogo,actualDlink,credits,extract,dataer
     }    
   
     //  https://pasco-lovat.vercel.app/api/files/
+    // https://ue-past-questions-back.vercel.app/
+        const storedRaw = localStorage.getItem('userInfo');
+        const stored = JSON.parse(storedRaw);
+        const refreshToken = stored?.refreshToken;
+        if(!stored?.accessToken){
+            alert('Missing access token. Please login again.');
+            return;
+        }
+        const controller = new AbortController();
+        const timeout = setTimeout(()=>{
+            controller.abort();
+        }, 8000);
+    const findSaved=async ()=>{
+        try{
+    const options = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${stored.accessToken}`,
+        },
+        signal: controller.signal,
+    };  
 
+
+   let founditems = await fetchWithAuth(domain+`/api/v1/solutions/queries`,options);
+   // Extract nested response data (fetchWithAuth already returns data.data)
+   founditems = founditems?.api_response?.data || founditems;
+   setfounditems(founditems);
+console.log("Hasty",founditems);
+}
+        catch(err){
+            if(err.name === 'AbortError'){
+                alert('Save request timed out. Please try again.');
+            } else {
+                console.error('save error', err);
+                alert('Error saving solution: '+(err.message||err));
+            }
+        }finally{
+            clearTimeout(timeout);
+        }
+    }
+    useEffect(() => {
+      findSaved();
+    }, [])
+    
     return (
         <div className="texttit" id="waiting" >
         <div className="viewer">
@@ -28,7 +74,7 @@ const Showfiles=({pdflink,setshowpdf,mainlogo,actualDlink,credits,extract,dataer
                     <div className="bbtn"><div className="ba"><CloseCircleOutlined/><span className='prem3'></span></div></div> 
                     </div>
                     <div className="pnleft">
-                <a target='_blank' href={"http://localhost:5175"+actualDlink}  download className="bbtn">
+                <a target='_blank' href={LocalApiPath+actualDlink}  download className="bbtn">
                     {<ArrowDownOutlined/>} 
     <div className="prem3"></div></a>
                 <div className="download" onClick={()=>{setsolns(true)}} style={{marginBottom:5,fontSize:13}}>
@@ -37,37 +83,55 @@ const Showfiles=({pdflink,setshowpdf,mainlogo,actualDlink,credits,extract,dataer
     <img className="logopdf" src={mainlogo} width="150" alt=""/></div></div>
 
     </div>
-    <iframe src={"http://localhost:5175"+pdflink} className="loadpdf" id="loadtext" data-text="Loading...."> Loading....</iframe>
+    <iframe src={LocalApiPath+pdflink} className="loadpdf" id="loadtext" data-text="Loading...."> Loading....</iframe>
     {solns?
     <div  className="soln">
     <div  className="solntop">
-        <div className="closesearch" onClick={()=>{setsolns(false)}} >
+       <div className="rbackdrop" style={{zIndex:1}}></div>
+        <div className="closesearch" onClick={()=>{setsolns(false); setsavedquery(null);}} >
             <div className="bbtn"><div className="ba"><ArrowLeftOutlined/><span className='prem3'></span></div></div>
             
         </div>
+        {extract !="loading..."?
         <div className="solmenu">
-            <div className="download" style={{pointerEvents:"none"}}>credits Left:{credits??"0"}</div>
-            <div className="download" style={{pointerEvents:"none"}}>buy more</div>
-            <div className="download" style={{pointerEvents:"none"}}>credits</div>
+            <div className="solnav" style={{color:"golenrod"}} ><span className="goldtop">⚡</span>{credits??"0"}</div>
+                <Link to="/uelearn/Payment">
+            
+            <div className="solnav clickable" >
+            <span className="goldtop">
+            💸</span> Top up</div>
+            </Link>
             <div className="imgsmall">
              <img className="logopdf" src={mainlogo} width="200" alt=""/></div>
-        </div>
+        </div>:<div className="solmenu">
+            <div className="solnav refloader" ></div>
+            <div className="solnav refloader" ></div>
+            <div className="solnav refloader" ></div>
+
+            </div>}
 
         </div>
 
         {dataerror.length?<div className='aierror2'>Extraction failed 🚨🚨🚨</div>
         :(extract !="loading..."?<div className='aisuccess'>Extraction successfull <span>✔️✔️✔️</span></div>
         :false)}
-        {extract=="loading..."?false
+        {extract=="loading..."?<div  className="responses ">
+            <div className="download refloader" ></div>
+            <div className="download refloader" ></div>
+            <div className="download refloader" ></div></div>
         :<div className="responses"><div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div><div className="download" onClick={()=>{setrawView(false)}}><span>Raw</span><span className="prem4"></span></div>
         <div className="download" onClick={()=>{setrawView(true)}}><span>
-            Solved</span><span className="prem4"></span></div><div className='download' onClick={enableEdit}><span>Edit Response</span><span className="prem4"></span></div></div>}
-         <br></br><div className="midsection"><div className="tabs">
+            Solved</span><span className="prem4"></span></div><div className='download' onClick={enableEdit}><span>Edit Response</span><span className="prem4"></span></div>
+        {savedquery && <div className='download today' onClick={()=>{setsavedquery(null);setrawView(true)}} style={{background: 'rgb(115, 191, 2)'}}><span>☀️ TODAYS QUERY</span><span className="prem4"></span></div>}
+        </div>}
+         <br></br>
+         <div className="midsection">
+            {extract!="loading..."?<div className="tabs">
             <div className="rlearn" >
                 <img src={racoon_learn} alt="" className="racoon" style={{margin:10}}/>
             </div>
             <div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div>
-
+<div className="sidebarbtns">
             <div className='sideopts' onClick={()=>{setstoreme(true)}}><span className="prem2"></span>
                 <div className="tabbtn"><SaveOutlined size={10}/></div>
                 <div className="tabbtn" >save</div>
@@ -82,40 +146,79 @@ const Showfiles=({pdflink,setshowpdf,mainlogo,actualDlink,credits,extract,dataer
                 <div className="tabbtn">solved</div>
 
                 </div>
-            </div>
-            <div className="toptex"  dangerouslySetInnerHTML={{ __html: dataerror.length?
-         `<div class='aierror'>${dataerror}</div>`:(rawView?`${extract=="loading..."?
-            `<div class="aiload"><div class="think">🧠 Thinking ...</div><img alt='...' src='/imgs/loader.svg' class="spinner rey" width="200"/></div>`
-            :marked(extract)}`:raw
+                </div>
+                <div className="history">
+                <div className="tabbtn" style={{widt:"100%"}}><SolutionOutlined size={10}/><span style={{paddingLeft:10}}> Saved queries</span></div>
+                </div>
+        <div className="history-data">
+            {
+                founditems?.solutions?.length > 0?
+                founditems.solutions
+                .map((x,y)=>{return (
+        <div className="history-data-item" onClick={()=>{setsavedquery(x);setrawView(true)}} key={y+""} style={{ 
+            background: savedquery?.id === x.id ? '#e6f7ff14' : 'transparent',
+            borderLeft: savedquery?.id === x.id ? '4px solid #00ff11ff' : 'none'
+        }}>
+                
+                <div className="hdi-text">
+{x.course}
+                </div><div className="hdi-opts">...</div></div>)})
+                :(
+        <div className="history-data-item">
+                <div className="hdi-text">No saved queries</div>
+                </div>)}
+        </div>
+                         </div>:<div className="tabs ">
+                            <div className="tabloads refloader"></div>
+                            <div className="tabloads2 refloader"></div>
+                            <div className="tabloads2 refloader"></div>
+                            <div className="tabloads2 refloader"></div>
+                            <div className="tabloads2 refloader"></div>
+                            </div>}
+            {extract !="loading"?<div className="toptex"  dangerouslySetInnerHTML={{ __html: dataerror.length?
+         `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || extract)}`:raw
 )}}>
-    </div> </div>
+    </div>:<div className="toptex refloader2"></div>} </div>
                      
     </div>:false}
             </div>
 
          </div>  
-         {storeme?<Showsavebox setstoreme={setstoreme} extract={extract} mainlogo={mainlogo} />:false}
+         {storeme?<Showsavebox    
+         selectedVal={selectedVal}
+         courseName={courseName}
+         setstoreme={setstoreme}
+         extract={extract}
+         mainlogo={mainlogo}/>:false}
        </div> 
     )
 }
 
 export default Showfiles
 
-const Showsavebox=({setstoreme,extract,mainlogo})=>{
-    const [title, settitle] = useState("");
-    const [desc, setdesc] = useState(""); 
+const Showsavebox=({setstoreme,extract,courseName,selectedVal})=>{
+    const [notemessage,setnotemessage] = useState("");
     const [isSaving, setIsSaving] = useState(false);
+    const [fetchError, setfetchError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const saveme=async()=>{
-        // Basic client-side checks
+        if("Dont save bad responses" != notemessage){
+            setErrorMessage('Please type the note correctly to proceed');
+            setfetchError(true);
+            return;
+        }
         const storedRaw = localStorage.getItem('userInfo');
         if(!storedRaw){
-            alert('Please login to save solutions');
+            setErrorMessage('Please login to save solutions');
+            setfetchError(true);
             return;
         }
         const stored = JSON.parse(storedRaw);
+        const refreshToken = stored?.refreshToken;
         if(!stored?.accessToken){
-            alert('Missing access token. Please login again.');
+            setErrorMessage('Missing access token. Please login again.');
+            setfetchError(true);
             return;
         }
 
@@ -124,65 +227,70 @@ const Showsavebox=({setstoreme,extract,mainlogo})=>{
         const timeout = setTimeout(()=>{
             controller.abort();
         }, 8000); // 8s timeout to avoid long hangs
-
-        try{
-            const resp = await fetch(domain+"/api/savesolution",{
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${stored.accessToken}`
-                },
-                body: JSON.stringify({title,desc,solution:extract}),
-                signal: controller.signal
-            });
-
-            clearTimeout(timeout);
-
-            // If aborted, fetch will throw; check response
-            if(!resp.ok){
-                const errBody = await resp.text().catch(()=>null);
-                console.error('save resp not ok', resp.status, errBody);
-                alert('Error saving solution: '+(errBody || resp.statusText || resp.status));
-                return;
-            }
-
-            const data = await resp.json().catch(()=>null);
-            if(data && data.success){
-                alert('Saved successfully');
-                setstoreme(false);
-            } else {
-                console.error('save returned unexpected body', data);
-                alert('Error saving solution: '+(data?.error || JSON.stringify(data) || 'Unknown'));
-            }
-        }catch(err){
+try{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${stored.accessToken}`,
+        },
+        body: JSON.stringify({
+            courseName,
+            solution:extract,
+            validated:false,
+            modelName: selectedVal,
+        }),
+        signal: controller.signal,
+    };  
+   let final = await fetchWithAuth(domain+`/api/v1/solutions/`,options);
+   // Extract nested response data (fetchWithAuth already returns data.data)
+   final = final?.api_response?.data || final;
+console.log(final)
+}
+        catch(err){
             if(err.name === 'AbortError'){
-                alert('Save request timed out. Please try again.');
+                setErrorMessage('Save request timed out. Please try again.');
+                setfetchError(true);
             } else {
                 console.error('save error', err);
-                alert('Error saving solution: '+(err.message||err));
+                setErrorMessage('Error saving solution: '+(err.message||err));
+                setfetchError(true);
             }
         }finally{
             clearTimeout(timeout);
             setIsSaving(false);
+            setstoreme(false);
+
         }
     }
-                <div className={"bbtn savebtn" + (isSaving? ' disabled' : '')} onClick={()=>{ if(!isSaving) saveme(); }}>
-                    <div className="ba">{isSaving? 'Saving...' : 'Save Solution'}<span className='prem3'></span></div>
-                </div>
     return (
         <div className="storesoln">
-            <div className="storesolntop">
-                <div className="closesearch"   >
-                    <div className="bbtn" onClick={()=>{setstoreme(false)}}><div className="ba"><CloseCircleOutlined/><span className='prem3'></span></div></div>
-                </div>
-                <div className="imgsmall">
-                    <img className="logopdf" src={mainlogo} width="200" alt=""/></div>
-            </div>
+                     {fetchError && <Toaster setfetchError={setfetchError} errorMessage={errorMessage} />}
+
             <div className="storesolnbody">
-                <p>Save this as a good response</p>
-                <div className="download" onClick={saveme}><div className="ba">Save<span className='prem3'></span></div></div>
-                <div className="download" onClick={()=>{setstoreme(false)}}><div className="ba">reject<span className='prem3'></span></div></div>
+                <div className="savetitle" style={{zIndex:2}}>Save response</div>
+                <div className="saveimg">
+                    <img className="saveimgitem" src={racoon_save} />
+                    <div className="rbackdrop" style={{left:0,height:"220px",opacity:.8}}></div>
+
+                </div>
+                    <div className="bbtn2" style={{zIndex:2}} onClick={()=>{setstoreme(false)}}><div className="ba"><CloseCircleOutlined/><span className='prem3'></span></div></div> 
+
+                <p className="note">Note: Dont save bad responses</p>
+                <p className="notemessage">Saving your good responses helps you not to spend your credits for same topics</p>
+                <div className="savebox"><input type="text" onChange={(e) => setnotemessage(e.target.value)} className="savetext" placeholder="Please type the above 'Note'" /></div>
+                <div className="download btnlight" onClick={saveme}><div className="ba">{isSaving?"Saving...":"Save"}<span className='prem2'></span></div></div>
             </div>
         </div>
 
     )}
+
+    
+const Toaster=({errorMessage,setfetchError})=>{
+    setTimeout(()=>setfetchError(false),2000)
+    return (
+<div className="toast">
+<div className="successmessage">{  "🔴 "+errorMessage.toLowerCase()}</div>
+</div>
+    )
+}

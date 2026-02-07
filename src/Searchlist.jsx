@@ -15,9 +15,14 @@ import racoon from '/imgs/racoon_job.jpg'
 import Overview from './menu/overview'
 import LoadComponent from './Loadcomponent'
 import ModelComponent from './ModelComponent'
+import { domain, fetchWithAuth, LocalApiPath,userState } from './menu/authfetch'
 
-
-const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,NetworkError,setshowpdf,setdataerror,setcredits,setextract,setraw,setpdflink,setactualDlink})=>{
+const SearchList=({
+    setsearching,selectedVal,setselectedVal,
+    payload,find,setcourseName,setfind,bar,
+    setRefreshing,pdf,NetworkError,setshowpdf,
+    setdataerror,setcredits,setextract,setraw,
+    setpdflink,setactualDlink})=>{
    
     const [spin, setspin] = useState(false)
     const [fetchError, setfetchError] = useState(false)
@@ -25,41 +30,85 @@ const SearchList=({setsearching,payload,find,setfind,bar,setRefreshing,pdf,Netwo
     const [errorMessage, seterrorMessage] = useState("")
     const [selectModel, setselectModel] = useState(false)
     const [selecttrue, setselecttrue] = useState(false)
-const [selectedVal,setselectedVal]=useState("");
 
-    const fix=(res)=>{
+    const fix=(res, courseName)=>{
+        setcourseName(courseName);
         !selectModel?setselectModel(true):false;
         selecttrue?getpayload(res):false;
 }
 
-const getpayload=(res)=>{
+const getpayload=async (res)=>{
     let premiumstatus=JSON.parse(localStorage.userInfo).pStatus
     setselectModel(false);
     setextract("loading...");
     setdataerror("");
     setspin(true);
-
+    setfetchError(false);
+    seterrorMessage("");
 
     let namedfile=res.split("=")[1]
-    //  https://pasco-lovat.vercel.app/api/files/
-fetch(`http://localhost:5175/api/files/${namedfile}`)
-  .then(response => response.json())
-  .then(data => {setpdflink(data.previewLink);setraw(data.raw);setactualDlink(data.directDownload);openpdf(namedfile)})
-  .catch(err=>{seterrorMessage(err.message);setspin(false);setfetchError(true)})
-  .finally(()=>{setspin(false);})
-const tk= `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDY3OGMzNjAtZWNiZC00MzJmLTgzNmMtNzc5YTQ5MjlhYmYwIiwiZXhwIjoxNzYxNDI3NjYyLCJpYXQiOjE3NjE0MjY3NjJ9.aN0N9bH1bTsnSImahQqK4H3yvPRENmcjd8P1246B7NQ`
-   fetch(`http://localhost:5175/api/solutions`,{
-    method:"POST",
-    headers:{
-        "Authorization":`Bearer ${tk}`,
-        "Content-Type":"application/json"
-    },
-    body:JSON.stringify({filename:namedfile,selectedVal,premiumstatus})
-})
-  .then(response => response.json())
-  .then(data => {setextract(data.extractedText);setcredits(data.creditsLeft);console.log(data);data.error?setdataerror(data.error):setraw(data.raw)})
-  .catch(err=>{setdataerror("Extraction failed: "+err);setfetchError(true);console.log(err)})
-setselecttrue(false)
+    
+    try {
+        // Fetch PDF link
+        const pdfResponse = await fetch(`${LocalApiPath}/api/files/${namedfile}`);
+        
+        if (!pdfResponse.ok) {
+            throw new Error(`Failed to fetch PDF: ${pdfResponse.status}`);
+        }
+        
+        const pdfData = await pdfResponse.json();
+        setpdflink(pdfData.previewLink);
+        setraw(pdfData.raw);
+        setactualDlink(pdfData.directDownload);
+        openpdf(namedfile);
+
+        // Fetch solutions via external-api proxy endpoint
+        const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(
+                { 
+               
+   "filename": namedfile,
+   "selectedVal": selectedVal,
+   "premiumstatus": "premiumstatus"
+                    })
+        };
+        const solutionResponse = await fetchWithAuth(`${domain}/api/v1/request/solutions`, options);
+        if (!solutionResponse) {
+            throw new Error("No response from solutions API");
+        }
+        // Handle response from fetchWithAuth
+        // fetchWithAuth already returns data.data, so extract the nested api_response.data
+        let solutionData;
+        let remainingCredits;
+        try {
+            solutionData = solutionResponse.api_response?.data || solutionResponse;
+            remainingCredits = solutionResponse.remaining_credits ?? 0;
+            setcredits(remainingCredits);
+        } catch (e) {
+            solutionData = solutionResponse;
+        }
+        
+        setextract(solutionData.extractedText || "");
+        setcredits(solutionData.remaining_credits ?? 0);
+        
+        if (solutionData.error) {
+            setdataerror(solutionData.error);
+        } else {
+            setraw(solutionData.raw);
+        }
+
+    } catch(err) {
+        console.error("Error in getpayload:", err);
+        setdataerror("Extraction failed: " + (err.message || String(err)));
+        setfetchError(true);
+        seterrorMessage(err.message || "An error occurred");
+        setextract(String(err));
+    } finally {
+        setspin(false);
+        setselecttrue(false);
+    }
 }
 const leave=()=>{
     if(confirm("Do you wish to logout"))
@@ -82,17 +131,21 @@ const leave=()=>{
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
             <div className="bbtn"><div className="ba"><ArrowLeftOutlined/><span className='prem3'></span></div></div>
             </div>
+
             <Search handleMenu={handleMenu} eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
+
 </div>
+                        <div className="solnav" style={{color:"golenrod"}} >⚡{userState.credits??"0"}</div>
+
           <div className="bothsides">
             <div className="sidemenubar">
                 <div className="mymenubox" onClick={handleMenu}>
                     <div className="rbackdrop"></div>
-                    <img className="racoon" src={racoon} alt="" />
+                    <img className="racoonp" src={racoon} alt="" />
 <div className="firstitem">
     <div className="abs">
     </div>
-    <Link to="/uepasco/Payment">
+    <Link to="/uelearn/Payment">
     <div className="paid">✨Go premium ✨</div></Link>
 </div>
                 <div className="mymenu">
@@ -119,10 +172,10 @@ const leave=()=>{
                    .sort((a,b)=>b.createdOn.slice(0,4)*1-a.createdOn.slice(0,4)*1)
                    .slice(0,30)
                    .map((a,b)=>{
-                    return a=<div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdfpic} alt="" className="imgthumb"/>
+                    return <div className="filtered" key={b+""} data-ptext="title..." title={a.description.replace("-",",")} data-texts="details..."><img src={pdfpic} alt="" className="imgthumb"/>
                     <div className="pinfo">
                         <div className="titles">{(a.description).replace(/o/gi,["🧿","⭕"][b%2])}</div><div className="describe">{a.createdOn}</div>
-                        </div><div href={(/payment/i.test(a.downloadLink))?"":a.downloadLink} onClick={(ev) => fix(ev.target.attributes.href.value)} className="download">{<ExportOutlined style={{marginRight:"5px"}}/>} open<span className='prema'></span></div></div> })
+                        </div><div href={(/payment/i.test(a.downloadLink))?"":a.downloadLink} onClick={(ev) => fix(a.downloadLink,a.description)} className="download">{<ExportOutlined style={{marginRight:"5px"}}/>} open<span className='prema'></span></div></div> })
                     :new Array(1).fill("").map((a,b)=>{
                     return a=<div key={b+""} className="filtered mn4" data-ptext="title..." data-texts="details..."><img src="" alt="" className="imgthumb"/><div className="desc err4">
                         <img className="reglate" src={mainlogo} style={{marginRight:10}} alt=""/>{NetworkError}</div></div>

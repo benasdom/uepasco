@@ -6,7 +6,7 @@ import racoon_learn from '../../public/imgs/racoon_learn.jpg';
 import guylogs from '../../public/imgs/guylogs.png';
 import logo from '../../public/imgs/untitled.jpg';
 import { useState, useEffect } from "react";
-import domain from "./authfetch";
+import {domain} from "./authfetch";
 
 const rand = Math.floor(Math.random() * 4);
 export default function Register({setshows}) {
@@ -354,7 +354,7 @@ activateuser()
                             ) : (
                                 <>
                                     <div className="noted">
-                                        <InfoCircleFilled className="micon"/>Optional: Add referal code
+                                        <InfoCircleFilled  className="micon"/>Optional: Add referal code
                                     </div>
                                     <div className="regbutton" onClick={() => sethasref(true)}>
                                         Add referal code
