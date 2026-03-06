@@ -333,7 +333,7 @@ activateuser()
                     <div className="racoonintro">
                         <div className="rbackdrop" style={{zIndex:2}}></div>
 
-                        <div className="welcmessage">Welcome to UELearn</div>
+                        <div className="wmessage">Welcome to UELearn</div>
                         <div className="regnote">study with aura !</div>
                     </div>
 

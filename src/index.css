@@ -1456,6 +1456,17 @@ z-index:2;
   font-family:michroma;
 
 }
+.wmessage{
+   font-size: 13px;
+  display: flex;
+    width:90%;
+  align-items: right;
+  border-bottom:1px solid white;
+  text-align: center;
+  font-family:michroma;
+  color:white;
+  text-align: center;
+}
 .regnote{
   text-align:left;
   width:90%;
