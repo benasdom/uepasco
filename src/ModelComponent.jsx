@@ -1,5 +1,6 @@
 import {useState,useEffect} from 'react';
 import racoonread from '/imgs/racoon_learn.jpg'
+import { LocalApiPath } from './menu/authfetch';
 
 const ModelComponent=({setselectModel,setselectedVal,selectedVal,setselecttrue})=>{
     const [listed,setlisted]=useState({});
@@ -17,7 +18,7 @@ setselectModel(false);
     const fetchModels = () => {
         setloaded(false);
         seterror(null);
-        fetch("http://localhost:5175/api/files/models")
+        fetch(`${LocalApiPath}/api/files/models`)
             .then(res => {
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);

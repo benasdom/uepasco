@@ -12,7 +12,7 @@ import spinner from '/imgs/loader.svg'
 import { Link } from 'react-router-dom'
 import mainlogo from '/imgs/Untitled.png'
 import racoon from '/imgs/racoon_job.jpg'
-import Overview from './menu/overview'
+import Overview from './menu/Overview'
 import LoadComponent from './Loadcomponent'
 import ModelComponent from './ModelComponent'
 import { domain, fetchWithAuth, LocalApiPath,userState } from './menu/authfetch'
@@ -140,7 +140,7 @@ const leave=()=>{
             <Search handleMenu={handleMenu} eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 
 </div>
-                        <div className="solnav" style={{color:"golenrod"}} >⚡{userState.credits??"0"}</div>
+                        {/* <div className="solnav" style={{color:"golenrod"}} >⚡{userState.credits??"0"}</div> */}
 
           <div className="bothsides">
             <div className="sidemenubar">

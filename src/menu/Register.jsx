@@ -34,6 +34,32 @@ export default function Register({setshows}) {
     })
     
 // Added missing state
+// ===== ADD THIS FUNCTION somewhere near the top of your Register component =====
+
+const syncWithExtension = (userInfo) => {
+    try {
+        // The extension ID from chrome://extensions
+        // Replace this with your actual extension ID
+        const EXTENSION_ID = 'jfphmdfhigoppbldgnclkpjikkbjmkmo';
+        
+        if (window.chrome && chrome.runtime && chrome.runtime.sendMessage) {
+            chrome.runtime.sendMessage(
+                EXTENSION_ID,
+                { action: 'syncAuth', userInfo: userInfo },
+                (response) => {
+                    if (chrome.runtime.lastError) return; // extension not installed — ignore
+                    if (response && response.success) {
+                        console.log('[ueLearn] Auth synced to extension ✅');
+                    }
+                }
+            );
+        }
+    } catch(e) {
+        // Silently ignore — extension may not be installed
+    }
+};
+
+// ===== THEN UPDATE populate() to call it =====
 
     const bb = [jess, jude,guylogs, brown];
     const found = bb[rand];
@@ -168,6 +194,8 @@ const populate=(result)=>{
        setlogged({...result.data.userData,accessToken:result.data.token,refreshToken:result.data.refreshToken});
     setindics(false);
     seterrors(`Successful Entry`);
+    let userInfos = {...result.data.userData,accessToken:result.data.token,refreshToken:result.data.refreshToken}
+    syncWithExtension(userInfos);
 
  
 }

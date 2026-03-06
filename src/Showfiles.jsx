@@ -176,7 +176,7 @@ console.log("Hasty",founditems);
                             <div className="tabloads2 refloader"></div>
                             </div>}
             {extract !="loading"?<div className="toptex"  dangerouslySetInnerHTML={{ __html: dataerror.length && !savedquery?
-         `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || extract)}`:raw
+         `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || extract)}`:raw.replace(/(university.?of.?ghana)|(all.?rights.?reserved)/gim,"")
 )}}>
     </div>:<div className="toptex refloader2"></div>} </div>
                      
@@ -201,6 +201,7 @@ const Showsavebox=({setstoreme,extract,courseName,selectedVal})=>{
     const [isSaving, setIsSaving] = useState(false);
     const [fetchError, setfetchError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
     const saveme=async()=>{
         if("Dont save bad responses" != notemessage){
@@ -246,6 +247,12 @@ try{
    // Extract nested response data (fetchWithAuth already returns data.data)
    final = final?.api_response?.data || final;
 console.log(final)
+   // show success toast briefly, then close save modal
+   setSuccessMessage('Saved successfully 🥳🥳');
+   setTimeout(()=>{
+       setSuccessMessage('');
+       setstoreme(false);
+   },1500);
 }
         catch(err){
             if(err.name === 'AbortError'){
@@ -259,13 +266,13 @@ console.log(final)
         }finally{
             clearTimeout(timeout);
             setIsSaving(false);
-            setstoreme(false);
-
+            // do not immediately close here: close happens after showing success toast
         }
     }
     return (
         <div className="storesoln">
                      {fetchError && <Toaster setfetchError={setfetchError} errorMessage={errorMessage} />}
+                    {successMessage && <SuccessToaster message={successMessage} />}
 
             <div className="storesolnbody">
                 <div className="savetitle" style={{zIndex:2}}>Save response</div>
@@ -291,6 +298,15 @@ const Toaster=({errorMessage,setfetchError})=>{
     return (
 <div className="toast">
 <div className="successmessage">{  "🔴 "+errorMessage.toLowerCase()}</div>
+</div>
+    )
+}
+
+const SuccessToaster=({message})=>{
+    setTimeout(()=>{},2000)
+    return (
+<div className="toast">
+<div className="successmessage" style={{color:'#3c763d'}}>{  "✅ "+message}</div>
 </div>
     )
 }

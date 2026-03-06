@@ -1,19 +1,17 @@
 export const domain = "https://ue-past-questions-back.vercel.app"
-export const LocalApiPath = "http://localhost:5175"
+export const LocalApiPath ="https://pasco-lovat.vercel.app"
+//  "http://localhost:5175"
 
 // Provides an empty object {} if localStorage.getItem("userInfo") returns null.
 // This prevents JSON.parse from throwing an error.
 const userInfoString = localStorage.getItem("userInfo"); 
 
 export const userState= {
-  // Use a ternary operator or (userInfoString ? JSON.parse(userInfoString) : {})
   ...JSON.parse(userInfoString ?? '{}') 
 };
-
 export async function fetchWithAuth(urlPath, option) {
   try {
         let stored = JSON.parse(localStorage.getItem("userInfo"));    
-
     if (!stored || !stored.accessToken) {
       throw new Error("No access token found in localStorage");
     }
