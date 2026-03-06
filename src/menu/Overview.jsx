@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { InfoCircleOutlined } from "@ant-design/icons"
-import Dashboard from "./dashboard"
+import Dashboard from "./Dashboard"
 import Earn from "./Earn"
 import Leaderboard from "./Leaderboard"
 import Referal from "./Referal"
