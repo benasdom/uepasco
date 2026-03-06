@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeftOutlined, StarFilled, CrownFilled, WalletFilled, RocketFilled } from '@ant-design/icons'
 import PaystackPop from '@paystack/inline-js'
 import { domain, fetchWithAuth, LocalApiPath } from './authfetch'
-import mainlogo from '/imgs/Untitled.png'
+import mainlogo from '/imgs/titled.png'
 import stat1 from '/imgs/bob.jpg'
 import stat2 from '/imgs/jessy.jpg'
 import stat3 from '/imgs/jess.jpg'
