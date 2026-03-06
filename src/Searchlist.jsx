@@ -10,7 +10,7 @@ StarFilled,
 } from '@ant-design/icons'
 import spinner from '/imgs/loader.svg'
 import { Link } from 'react-router-dom'
-import mainlogo from '/imgs/Untitled.png'
+import mainlogo from '/imgs/titled.png'
 import racoon from '/imgs/racoon_job.jpg'
 import Overview from './menu/Overview'
 import LoadComponent from './Loadcomponent'
