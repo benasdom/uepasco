@@ -63,7 +63,7 @@ const Payment = ({ setcredits }) => {
         const popup = new PaystackPop();
         popup.resumeTransaction(code, {
           onSuccess: (transaction) => {
-            // ✅ Pass the reference to handleFinalize
+            // Pass the reference to handleFinalize
             handleFinalize(tier, udata, transaction.reference);
           },
           onCancel: () => setloadme(false),
