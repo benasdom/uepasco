@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useState,useRef } from 'react'
 import './index.css'
-import mainlogo from '/imgs/Untitled.png'
+import mainlogo from '/imgs/titled.png'
 import spinner from '/imgs/loader.svg'
 import uelogo from '/imgs/ueicon.webp'
 import inspo from '/imgs/jess.jpg'
