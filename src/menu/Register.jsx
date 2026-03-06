@@ -4,7 +4,7 @@ import brown from '../../public/imgs/brown.jpg';
 import jude from '../../public/imgs/jude.jpg';
 import racoon_learn from '../../public/imgs/racoon_learn.jpg';
 import guylogs from '../../public/imgs/guylogs.png';
-import logo from '../../public/imgs/untitled.jpg';
+import logo from '../../public/imgs/titled.jpg';
 import { useState, useEffect } from "react";
 import {domain} from "./authfetch";
 
