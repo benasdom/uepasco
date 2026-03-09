@@ -1261,12 +1261,18 @@ padding:3px;
   
 }
   .messagepic{
-  object-fit:cover;
-  border-radius:10px;
-  width:500px;
-  border-radius:50%;
-  z-index: 1.1;
-  object-position: center;
+.messagepic {
+    object-fit: cover;
+    /* Use max-width so it shrinks on small screens */
+    width: 100%; 
+    max-width: 500px; 
+    
+    aspect-ratio: 1 / 1; 
+    
+    border-radius: 50%;
+    z-index: 1.1;
+    object-position: center;
+}
 }
 .messagepic2{
   object-fit:cover;
@@ -2161,31 +2167,45 @@ z-index:0 !important;
   flex-direction:column;
 }
 .onmenu{
-  position: absolute;
-  bottom:0;
-  display:flex;
-  border:1px solid transparent;
-  border-bottom:1px solid rgb(204, 255, 0);
-  color:rgb(204, 255, 0);
-  padding:5px;
-  justify-content:space-between;
-  overflow:hidden;
-  backdrop-filter: blur(5rem);
-  -webkit-backdrop-filter: blur(5rem);
-  overflow-x:scroll;
-  height:40px;
-  width: 100%;
-  align-items:center;
-
+    position: absolute;
+    bottom: 0;
+    left: 0; /* Ensure it starts at the edge */
+    display: flex;
+    align-items: center;
+    
+    /* Remove space-between if you want it to scroll naturally */
+    justify-content: flex-start; 
+    
+    height: 40px;
+    width: 100%;
+    padding: 5px;
+    
+    /* Better scrolling for iOS */
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+    
+    /* Glassmorphism */
+    backdrop-filter: blur(5rem);
+    -webkit-backdrop-filter: blur(5rem);
+    border-bottom: 1px solid rgb(204, 255, 0);
 }
 
 .in{
-  position:relative;
-    display:flex;
-    cursor:pointer;
-    border:1px solid transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Stop the iPhone from squishing the items */
+    flex-shrink: 0; 
+    
+    /* Give it a consistent footprint */
+    padding: 0 15px; 
+    height: 80%; /* Fits nicely in a 40px parent */
+    
+    margin: 0 5px; /* Use horizontal margin for spacing */
     border-radius: 10px;
-    margin:5px;
+    cursor: pointer;
 }
 .in:hover .insp{
   background:black;
@@ -3135,6 +3155,7 @@ text-align: center;
 }
 .imgthumb{
   width:30px;
+  display: none;
   object-fit: contain;
   object-position: center;
   filter:invert(0.7);

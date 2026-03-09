@@ -126,6 +126,9 @@
     width:40px;
     max-width: 90px;
   }
+  .racoonbox{
+    display:none;
+  }
   .telegram{
     width:100%;
     border-left: 0px;
@@ -170,6 +173,9 @@
     .foot1{
         width: 100%;
     }
+    .ptext svg{
+      width:50%;
+    }
     .ptext{
         font-size: 50px;
     }
@@ -177,6 +183,16 @@
         font-size: 12px;
         width:100%;
         word-wrap:break-word;
+    }
+    .bga{
+          display: flex;
+    justify-content: center;
+    align-items: center;
+     height:50px;
+  width:50px;
+  border-radius: 10px;
+  background:linear-gradient(45deg,rgba(114, 114, 255, 0.51),rgba(140, 255, 255, 0.361));
+
     }
     .imgthumb{
         width:25px;
@@ -227,7 +243,13 @@
     width:80%;
     text-align:end;
     }
-    
+    .listcontent{
+      height:calc(93vh - 20px);
+      margin-top:5px;
+    }
+    .missing{
+      width:100%;
+    }
     .nbottomlist{
       position: relative;
       display: flex;
@@ -328,12 +350,14 @@
       height:50vh;
     }
     .tinylogo{
-      width:100px;
-      height:100px;
+      width:60px;
+      height:60px;
       right:unset;
       top:0;
       align-self: center;
       margin:auto;
+      margin-bottom: -50px;
+
     }
     .mlist{
         
