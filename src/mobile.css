@@ -188,8 +188,8 @@
           display: flex;
     justify-content: center;
     align-items: center;
-     height:50px;
-  width:50px;
+     height:30px;
+  width:30px;
   border-radius: 10px;
   background:linear-gradient(45deg,rgba(114, 114, 255, 0.51),rgba(140, 255, 255, 0.361));
 
