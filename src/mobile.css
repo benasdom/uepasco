@@ -198,6 +198,10 @@
         width:25px;
         margin-right: 5px;
     }
+    .messagepic{
+          max-width: 300px; 
+
+    }
   .toastmessage{
   width:100%;
   height:60px;
