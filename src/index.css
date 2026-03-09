@@ -1261,9 +1261,7 @@ padding:3px;
   
 }
   .messagepic{
-.messagepic {
     object-fit: cover;
-    /* Use max-width so it shrinks on small screens */
     width: 100%; 
     max-width: 500px; 
     
@@ -1272,7 +1270,6 @@ padding:3px;
     border-radius: 50%;
     z-index: 1.1;
     object-position: center;
-}
 }
 .messagepic2{
   object-fit:cover;
