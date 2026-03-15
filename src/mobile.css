@@ -119,12 +119,15 @@
   .toptex{
     display: flex;
     width:calc(100% - 4px);
+          height:calc(93vh - 72px);
+
     margin:auto;
 
   }
+  .solmenu{
+    width:calc(100% - 40px);
+  }
   .solnav{
-    width:40px;
-    max-width: 90px;
   }
   .racoonbox{
     display:none;
