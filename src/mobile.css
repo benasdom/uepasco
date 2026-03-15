@@ -250,6 +250,8 @@
     .listcontent{
       height:calc(93vh - 20px);
       margin-top:5px;
+      padding-right:0px;
+      padding-left:0px;
     }
     .missing{
       width:100%;

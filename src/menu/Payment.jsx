@@ -12,7 +12,8 @@ import stat4 from '/imgs/jude.jpg'
 import LoadComponent from "../Loadcomponent";
 
 const Payment = ({ setcredits }) => {
-  let urlPost = domain + '/api/v1/user/credits';
+  const udata = JSON.parse(localStorage.getItem("userInfo"));
+  const [credits, setCreditsDisplay] = useState(udata?.credits || 0);  let urlPost = domain + '/api/v1/user/credits';
   const [counter, setcounter] = useState("")
   const [paymentcode, setpaymentcode] = useState("") // This will store your Public Key
   const [loadme, setloadme] = useState(false)
@@ -80,7 +81,10 @@ const Payment = ({ setcredits }) => {
       setfetchError(true);
     }
   }
-
+const handleSetCredits = (val) => {
+  setCreditsDisplay(val);
+  setcredits && setcredits(val);
+};
   const handleFinalize = (tier, udata, reference) => {
     console.log(reference)
     let options = {
@@ -106,8 +110,9 @@ const Payment = ({ setcredits }) => {
           tier: tier.premiumType
         };
         localStorage.setItem("userInfo", JSON.stringify(updatedUserData));
-        setcredits && setcredits(updatedUserData.credits);
-        setErrorMessage(`🟢 Success! ${creditsAdded} credits added.`);
+      
+handleSetCredits(updatedUserData.credits);
+setErrorMessage(`🟢 Success! ${creditsAdded} credits added.`);
         setfetchError(true);
       })
       .catch((err) => {
@@ -124,8 +129,12 @@ const Payment = ({ setcredits }) => {
       <div className="pcontainer2">
         <h2 className="paytitle">Choose Your Plan</h2>
         <h2 className="endsin">
-          <p className="cdown">PROMO: 🎟️ {counter}</p>
-        </h2>
+  <p className="cdown">PROMO: 🎟️ {counter}</p>
+</h2>
+
+<p className="user-credits">
+  💳 Your Credits: <strong>{credits}</strong>
+</p>
         
         <div className="payopts">
           {tiers.map((tier, index) => (

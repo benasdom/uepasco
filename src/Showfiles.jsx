@@ -7,8 +7,20 @@ import {domain, fetchWithAuth,LocalApiPath } from './menu/authfetch';
 import racoon_learn from '/imgs/racoon_learn.jpg'
 import racoon_save from '/imgs/save.jpg'
 
+const MAX_RECENTS = 5;
+
+const saveToRecents = (courseName, extract) => {
+  const stored = JSON.parse(localStorage.getItem('recentSolutions') || '[]');
+  const filtered = stored.filter(x => x.course !== courseName);
+  const updated = [{ course: courseName, solution: extract, savedAt: Date.now() }, ...filtered].slice(0, MAX_RECENTS);
+  localStorage.setItem('recentSolutions', JSON.stringify(updated));
+};
+
+const getRecents = () => JSON.parse(localStorage.getItem('recentSolutions') || '[]');
 const Showfiles=({pdflink,courseName,selectedVal,setshowpdf,mainlogo,actualDlink,credits,extract,dataerror,raw})=>{
     const [solns, setsolns] = useState(false);
+    const [recentItems, setRecentItems] = useState(getRecents());
+    const [iframeLoaded, setIframeLoaded] = useState(false);
     const [storeme, setstoreme] = useState(false);
     const [rawView, setrawView] = useState(true);
     const [savedquery, setsavedquery] = useState(null); // ADDED THIS LINE
@@ -63,6 +75,13 @@ console.log("Hasty",founditems);
     useEffect(() => {
       findSaved();
     }, [])
+
+useEffect(() => {
+  if (extract && extract !== "loading..." && !dataerror.length) {
+    saveToRecents(courseName, extract);
+    setRecentItems(getRecents());
+  }
+}, [extract]);
     
     return (
         <div className="texttit" id="waiting" >
@@ -74,16 +93,34 @@ console.log("Hasty",founditems);
                     <div className="bbtn"><div className="ba"><CloseCircleOutlined/><span className='prem3'></span></div></div> 
                     </div>
                     <div className="pnleft">
-                <a target='_blank' href={LocalApiPath+actualDlink}  download className="bbtn">
-                    {<ArrowDownOutlined/>} 
-    <div className="prem3"></div></a>
-                <div className="download" onClick={()=>{setsolns(true)}} style={{marginBottom:5,fontSize:13}}>
-                    {<StarTwoTone style={{marginRight:"5px",fontWeight:900}}/>}Solution 
-    <div className="prem3"></div></div>
+                {iframeLoaded ? (
+  <>
+    <a target='_blank' href={LocalApiPath+actualDlink} download className="bbtn">
+      {<ArrowDownOutlined/>} 
+      <div className="prem3"></div>
+    </a>
+    <div className="download" onClick={()=>{setsolns(true)}} style={{marginBottom:5,fontSize:13}}>
+      {<StarTwoTone style={{marginRight:"5px",fontWeight:900}}/>}Solution 
+      <div className="prem3"></div>
+    </div>
+  </>
+) : (
+  <>
+    <div className="download refloader"></div>
+    <div className="download refloader"></div>
+  </>
+)}
     <img className="logopdf" src={mainlogo} width="150" alt=""/></div></div>
 
     </div>
-    <iframe src={LocalApiPath+pdflink} className="loadpdf" id="loadtext" data-text="Loading...."> Loading....</iframe>
+<iframe 
+  src={LocalApiPath+pdflink} 
+  className="loadpdf" 
+  id="loadtext" 
+  data-text="Loading...."
+onLoad={() => setTimeout(() => setIframeLoaded(true), 4000)}
+> Loading....
+</iframe>
     {solns?
     <div  className="soln">
     <div  className="solntop">
@@ -127,11 +164,15 @@ console.log("Hasty",founditems);
          <br></br>
          <div className="midsection">
             {extract!="loading..."?<div className="tabs">
+               <div className="history-data">
+
             <div className="rlearn" >
                 <img src={racoon_learn} alt="" className="racoon" style={{margin:10}}/>
             </div>
             <div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div>
-<div className="sidebarbtns">
+
+          <div class="history-data-block">
+            <div className="sidebarbtns">
             <div className='sideopts' onClick={()=>{setstoreme(true)}}><span className="prem2"></span>
                 <div className="tabbtn"><SaveOutlined size={10}/></div>
                 <div className="tabbtn" >save</div>
@@ -147,27 +188,64 @@ console.log("Hasty",founditems);
 
                 </div>
                 </div>
-                <div className="history">
-                <div className="tabbtn" style={{widt:"100%"}}><SolutionOutlined size={10}/><span style={{paddingLeft:10}}> Saved queries</span></div>
-                </div>
-        <div className="history-data">
-            {
-                founditems?.solutions?.length > 0?
-                founditems.solutions
-                .map((x,y)=>{return (
-        <div className="history-data-item" onClick={()=>{setsavedquery(x);setrawView(true)}} key={y+""} style={{ 
+                    <input type="search" name="" placeholder='🔍find saved query' id="searchsolved" />
+
+             <div className="tabbtn" style={{ width: "100%", marginTop: 10,padding:5, opacity: 0.6 }}>
+<span style={{margin:"auto",fontSize:11}}>
+<SolutionOutlined size={3}/><span style={{paddingLeft:6}}> Saved queries</span>   
+
+</span>
+   </div>
+        <div className="history-data-box">
+         
+  {founditems?.solutions?.length > 0
+    ? founditems.solutions.map((x, y) => (
+        <div
+          className="history-data-item"
+          onClick={() => { setsavedquery(x); setrawView(true); }}
+          key={y + ""}
+          style={{
             background: savedquery?.id === x.id ? '#e6f7ff14' : 'transparent',
             borderLeft: savedquery?.id === x.id ? '4px solid #00ff11ff' : 'none'
-        }}>
-                
-                <div className="hdi-text">
-{x.course}
-                </div><div className="hdi-opts">...</div></div>)})
-                :(
-        <div className="history-data-item">
-                <div className="hdi-text">No saved queries</div>
-                </div>)}
+          }}
+        >
+          <div className="hdi-text">{x.course}</div>
+          <div className="hdi-opts">...</div>
         </div>
+      ))
+    : (
+      <div className="history-data-item">
+        <div className="hdi-text">No saved queries</div>
+      </div>
+    )
+  }</div>
+          </div>
+
+
+  {recentItems.length > 0 && (
+    <>
+      <div className="tabbtn" style={{ width: "100%", marginTop: 10, opacity: 0.6 }}>
+<span style={{margin:"auto",fontSize:11}}>
+        🕓 <span style={{ paddingLeft: 3 }}>Recents</span>
+
+</span>      </div>
+      {recentItems.map((x, y) => (
+        <div
+          className="history-data-item"
+          onClick={() => { setsavedquery(x); setrawView(true); }}
+          key={"recent-" + y}
+          style={{
+            background: savedquery?.course === x.course ? '#e6f7ff14' : 'transparent',
+            borderLeft: savedquery?.course === x.course ? '4px solid orange' : 'none'
+          }}
+        >
+          <div className="hdi-text">{x.course}</div>
+          <div className="hdi-opts">~</div>
+        </div>
+      ))}
+    </>
+  )}
+</div>
                          </div>:<div className="tabs ">
                             <div className="tabloads refloader"></div>
                             <div className="tabloads2 refloader"></div>
@@ -176,7 +254,7 @@ console.log("Hasty",founditems);
                             <div className="tabloads2 refloader"></div>
                             </div>}
             {extract !="loading"?<div className="toptex"  dangerouslySetInnerHTML={{ __html: dataerror.length && !savedquery?
-         `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || extract)}`:raw.replace(/(university.?of.?ghana)|(all.?rights.?reserved)/gim,"")
+         `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || extract)}`:raw.replace(/(university.?of.?ghana)|(all.?rights.?reserved)/gim,"")??""
 )}}>
     </div>:<div className="toptex refloader2"></div>} </div>
                      
