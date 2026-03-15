@@ -114,8 +114,8 @@ useEffect(() => {
 
     </div>
 <iframe 
-  src={LocalApiPath+pdflink} 
-  className="loadpdf" 
+src={`${LocalApiPath}${pdflink}#view=FitH`}
+className="loadpdf" 
   id="loadtext" 
   data-text="Loading...."
 onLoad={() => setTimeout(() => setIframeLoaded(true), 4000)}
