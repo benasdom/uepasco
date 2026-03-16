@@ -114,9 +114,8 @@ useEffect(() => {
 
     </div>
 <iframe 
-src={`${LocalApiPath}${pdflink}`}
+src={`https://docs.google.com/viewer?url=${LocalApiPath}${pdflink}&embedded=true`}
 className="loadpdf" 
-  id="loadtext" 
   data-text="Loading...."
 onLoad={() => setTimeout(() => setIframeLoaded(true), 4000)}
 > Loading....
