@@ -11,6 +11,8 @@
       font-weight:400;
   color:white;
   scroll-behavior: smooth;
+    overscroll-behavior: contain;
+
   outline:1px solid transparent;
   box-sizing: border-box;
 }
@@ -1760,6 +1762,7 @@ text-decoration: none;
   top:0;
   flex-direction: column;
    z-index: 20;
+  overscroll-behavior: contain;
   background:rgb(9, 10, 12);
   transition: all .5s ease-in-out;
 }
