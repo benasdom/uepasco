@@ -11,8 +11,6 @@
       font-weight:400;
   color:white;
   scroll-behavior: smooth;
-    overscroll-behavior: contain;
-
   outline:1px solid transparent;
   box-sizing: border-box;
 }
@@ -3224,11 +3222,12 @@ text-align: center;
   padding:20px;
    background:rgba(175, 177, 207, 0.141);
   border-radius: 10px;
-  margin-bottom: 5px;
+  margin:5px;
   align-items: center;
 }
 .mn4{
   height: calc(85vh - 20px);
+  padding:0px;
 }
 .err4{
   padding:20px;

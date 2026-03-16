@@ -182,7 +182,7 @@ const leave=()=>{
                         <div className="titles">{(a.description).replace(/o/gi,["🧿","⭕"][b%2])}</div><div className="describe">{a.createdOn}</div>
                         </div><div href={(/payment/i.test(a.downloadLink))?"":a.downloadLink} onClick={(ev) => fix(a.downloadLink,a.description)} className="download">{<ExportOutlined style={{marginRight:"5px"}}/>} open<span className='prema'></span></div></div> })
                     :new Array(1).fill("").map((a,b)=>{
-                    return a=<div key={b+""} className="filtered mn4" data-ptext="title..." data-texts="details..."><div className="desc err4">
+                    return a=<div key={b+""} style={{margin:0, width:"100%"}} className="filtered mn4" data-ptext="title..." data-texts="details..."><div className="desc err4">
                         <img className="reglate" src={mainlogo} style={{marginRight:10}} alt=""/>{NetworkError}</div></div>
                     })}
             </div>

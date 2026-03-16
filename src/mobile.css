@@ -318,6 +318,8 @@
     }
     .mn4{
    height:92vh;
+  padding:0px;
+
 }
 .pcontainer2,.pcontainer{
   display:flex;

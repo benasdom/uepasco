@@ -170,7 +170,7 @@ onLoad={() => setTimeout(() => setIframeLoaded(true), 4000)}
             </div>
             <div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div>
 
-          <div class="history-data-block">
+          <div className="history-data-block">
             <div className="sidebarbtns">
             <div className='sideopts' onClick={()=>{setstoreme(true)}}><span className="prem2"></span>
                 <div className="tabbtn"><SaveOutlined size={10}/></div>
