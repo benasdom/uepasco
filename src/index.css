@@ -3227,7 +3227,9 @@ text-align: center;
   padding:20px;
    background:rgba(175, 177, 207, 0.141);
   border-radius: 10px;
-  margin:5px;
+  margin-right:3px;
+  margin-left:3px;
+  margin-bottom: 5px;
   align-items: center;
 }
 .mn4{

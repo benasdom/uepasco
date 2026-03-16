@@ -125,7 +125,7 @@
 
   }
   .solmenu{
-    width:calc(100% - 40px);
+    width:calc(100% - 35px);
   }
   .solnav{
     width:unset;
