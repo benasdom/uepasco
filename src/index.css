@@ -787,6 +787,8 @@ position:absolute;
    border:1px solid transparent;
    background:rgba(203, 213, 222, 0.1);
    backdrop-filter: blur(5rem);
+  overscroll-behavior: contain;
+
    -webkit-backdrop-filter: blur(5rem);
 }
 .toptex *{
@@ -1844,9 +1846,12 @@ z-index:10000;
   padding-right:10px;
   overflow:hidden;
   width:100%;
+
   margin:auto;
   height: calc(85vh - 20px);
   overflow-y:scroll;
+  overscroll-behavior: contain;
+
   transition:all 1s linear;
 
 }
