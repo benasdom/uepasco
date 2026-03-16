@@ -3184,7 +3184,6 @@ text-align: center;
 }
 .imgthumb{
   width:30px;
-  display: none;
   object-fit: contain;
   object-position: center;
   filter:invert(0.7);

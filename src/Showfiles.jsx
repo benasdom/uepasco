@@ -114,7 +114,7 @@ useEffect(() => {
 
     </div>
 <iframe 
-src={`${LocalApiPath}${pdflink}#view=FitH`}
+src={`${LocalApiPath}${pdflink}`}
 className="loadpdf" 
   id="loadtext" 
   data-text="Loading...."

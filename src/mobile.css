@@ -130,6 +130,13 @@
   .solnav{
     width:unset;
   }
+  .loadpdf {
+  width: 1px;
+  min-width: 100%;
+  border: none;
+  /* This helps iOS specifically calculate height/width */
+  overflow: hidden; 
+}
   .racoonbox{
     display:none;
   }
@@ -319,6 +326,10 @@
 
 
 }
+.mcontainer{
+  width:calc(100% - 40px);
+}
+
     .mcontent,.menucomp{
         width: 100%;
         padding-top: 0px;
