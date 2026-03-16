@@ -397,6 +397,84 @@
     .page{
         overflow: hidden;
     }
+
+  /* Payment container */
+  .pcontainer {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: scroll;
+    padding-bottom: 40px;
+  }
+
+  /* Payment options: stack cards vertically */
+  .payopts {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    overflow-y: visible;
+    overflow-x: hidden;
+  }
+
+  /* Cards: remove fixed height, let content breathe */
+  .pt {
+    width: 90%;
+    height: auto !important;
+    min-height: unset;
+    margin-bottom: 20px;
+    overflow: visible !important;
+  }
+
+  /* Stop the image from flying out */
+  .paypic {
+    position: relative !important;
+    transform: none !important;
+    width: 80px;
+    border: 3px double gold;
+    align-self: flex-end;
+    margin: 10px 10px 0 0;
+  }
+
+  /* Tier label */
+  .tier {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  /* Price */
+  .oprice, .nprice {
+    font-size: 12px;
+  }
+
+  /* Features list */
+  .payfeatures {
+    min-height: unset;
+    padding: 8px;
+  }
+
+  /* Countdown timer */
+  .cdown {
+    min-width: unset;
+    width: 90%;
+    font-size: 12px;
+  }
+
+  /* Ends-in block */
+  .endsin {
+    width: 80%;
+    justify-content: space-between;
+  }
+
+  /* Promo banner */
+  .paytitle {
+    min-width: unset;
+    width: 90%;
+    font-size: 13px;
+  }
+.watch{
+  display:flex;
+  align-self:center;
+}
     .rightmenu{
         display:flex;
         visibility: visible;
