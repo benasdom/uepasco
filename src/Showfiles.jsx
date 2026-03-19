@@ -93,7 +93,7 @@ useEffect(() => {
                     <div className="bbtn"><div className="ba"><CloseCircleOutlined/><span className='prem3'></span></div></div> 
                     </div>
                     <div className="pnleft">
-                {iframeLoaded ? (
+                {iframeLoaded || raw ? (
   <>
     {/download/gi.test(actualDlink)?<a target='_blank' href={LocalApiPath+actualDlink} download className="bbtn">
       {<ArrowDownOutlined/>} 
@@ -111,7 +111,6 @@ useEffect(() => {
   </>
 )}
     <img className="logopdf" src={mainlogo} width="150" alt=""/></div></div>
-
     </div>
 <iframe 
 src={`https://docs.google.com/viewer?url=${LocalApiPath}${pdflink}&embedded=true`}

@@ -23,7 +23,6 @@ const SearchList=({
     setRefreshing,pdf,NetworkError,setshowpdf,
     setdataerror,setcredits,setextract,setraw,
     setpdflink,setactualDlink})=>{
-   
     const [spin, setspin] = useState(false)
     const [fetchError, setfetchError] = useState(false)
     const [currentView, setcurrentView] = useState("")
@@ -98,8 +97,17 @@ const getpayload=async (res)=>{
         }
         setactualDlink(solutionData.directDownload)
         console.log(solutionData.directDownload)
-        
-        setextract(solutionData.extractedText || "");
+        const solved = solutionData.extractedText;
+        const processAIResponse = (response) => {
+  // Check if the response is an error object or contains the error string
+  if (!response.includes("h3") || response.includes('div class="aierror"') || response.toLowerCase().includes("error")) {
+    console.log("Message for dev:AI response indicates an error:", response);
+    return "<div class='aierror'>There was an error processing your request.</div><div class='aierror'>This is due to limits and not a network error. You can reclaim your lost credits and choose and choose a different model, or try again later.</div><button>reclaim credits</button>";
+  }
+  return response; // If it's clean, return the real content
+};
+const cleanedResponse = processAIResponse(solved);
+        setextract(cleanedResponse || "");
         
         if (solutionData.error) {
             setdataerror(solutionData.error);
