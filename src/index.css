@@ -2922,10 +2922,18 @@ border-radius:10px  !important;
 
 }
 
-@keyframes fadesin{
-  
-  100%{
-    display:none;
+@keyframes fadesin {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  90% {
+    opacity: 1; /* Stay solid for most of the 5 seconds */
+    visibility: visible;
+  }
+  100% {
+    opacity: 0; 
+    visibility: hidden; /* This is the 'display: none' equivalent for animations */
   }
 }
 .select{
