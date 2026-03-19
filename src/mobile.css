@@ -440,6 +440,8 @@
   .tier {
     padding: 8px;
     font-size: 13px;
+        box-shadow:  0px 15px 5px black;
+
   }
 
   /* Price */
