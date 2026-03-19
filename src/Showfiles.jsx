@@ -95,10 +95,10 @@ useEffect(() => {
                     <div className="pnleft">
                 {iframeLoaded ? (
   <>
-    <a target='_blank' href={LocalApiPath+actualDlink} download className="bbtn">
+    {/download/gi.test(actualDlink)?<a target='_blank' href={LocalApiPath+actualDlink} download className="bbtn">
       {<ArrowDownOutlined/>} 
       <div className="prem3"></div>
-    </a>
+    </a>:<></>}
     <div className="download" onClick={()=>{setsolns(true)}} style={{marginBottom:5,fontSize:13}}>
       {<StarTwoTone style={{marginRight:"5px",fontWeight:900}}/>}Solution 
       <div className="prem3"></div>

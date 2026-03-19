@@ -32,6 +32,7 @@ const SearchList=({
     const [selecttrue, setselecttrue] = useState(false)
 
     const fix=(res, courseName)=>{
+        console.log(res,courseName )
         setcourseName(courseName);
         !selectModel?setselectModel(true):false;
         selecttrue?getpayload(res):false;
@@ -95,6 +96,8 @@ const getpayload=async (res)=>{
         } catch (e) {
             solutionData = solutionResponse;
         }
+        setactualDlink(solutionData.directDownload)
+        console.log(solutionData.directDownload)
         
         setextract(solutionData.extractedText || "");
         
