@@ -288,13 +288,28 @@
       justify-content: space-around;
     }
 
+
       .navb .nt{
         font-size: 10px;
         color:rgb(161, 161, 161);
         text-align: center;
         margin-top:3px;
       }
-  
+  .refbadge{
+  right:0;
+  z-index: 10;
+  top:0;
+  margin-right:-20px;
+  width:100px;
+
+  }
+  .coinstack{
+    width:50px;
+  }
+  .rgoldmedal{
+    height:calc(80vh - 210px);
+    border-radius:10px;
+  }
         .navb{
         position: relative;
         display: flex;

@@ -153,11 +153,9 @@ const Dashboard=()=>{
                     <div className="litem">
                         <div className="hint"> <div className="mtext">Rookie level</div></div>
                         <div className="hint"><div className="pic"> 🥈</div></div>
-
                     </div>
-
                 </div>
-              <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"70%"}}>
+              <div className="scrollx" >
                   <div className="levelitem2 dboard">
                     <div className="streak">⚡STREAK⚡</div>
                     <div className="streaka">
@@ -167,7 +165,6 @@ const Dashboard=()=>{
                     <div className="streaks">
                         <div className="hint streaknumbs">{userscore !=null?userscore:1}</div>
                         <div className="hint streaknumbs">{maxscore?maxscore:1}</div>
-
                     </div>
                     <div className="streak">{"⭐".repeat(10)}</div>
                 </div>
@@ -176,7 +173,6 @@ const Dashboard=()=>{
                     Earned
                   </div>
                   <img src={coins} className="backdrop"/>
-
                    <div className="earnval">GHS: {(earning!=0 && !earning)?"_____":earning}
                   </div>
                 </div>

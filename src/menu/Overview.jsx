@@ -26,6 +26,9 @@ export default function Overview({currentView,setcurrentView}) {
           }
           </div>
             <div className="onmenu">
+                                <div onClick={()=>{setcurrentView("dashboard")}} className="in">
+                     <div className="insp"><div className="prem4"></div>Dashboard</div></div>
+
                 <div onClick={()=>{setcurrentView("referal")}} className="in">
                      <div className="insp"><div className="prem4"></div>Referal</div></div>
                 <div onClick={()=>{setcurrentView("earn")}} className="in">
@@ -52,12 +55,14 @@ const MissingComp=()=>{
                 <div className="missingtext">
                     
                    <InfoCircleOutlined className="micon"/> 
-    This page is currently under construction
-                </div>
+                   To go back, click the search box
+                                   </div>
                 <div className="construction">
-            🚧
+            ♒
 
                 </div>
+            <div className="missingtext">Use the links below to navigate through this space</div>
+
             </div>
         </div>
     )

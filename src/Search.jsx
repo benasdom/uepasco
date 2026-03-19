@@ -16,7 +16,7 @@ const Search=({setsearching,setfind,bar,eprop,handleMenu})=>{
                     <div className="search" onClick={handleSearch}><i className="fa fa-search"></i></div>
                     
                     <div className="input" onClick={handleSearch}><input type="text" style={{pointerEvents:eprop}} ref={bar} onChange={(e)=>{return setfind(e.target.value.trim(""))}}  className="find" placeholder="Search a course code..."/></div>
-                    <div className="slash" onClick={handleMenu}>{"/"}</div>
+                    <div className="slash" onClick={handleMenu}>{eprop!="all"?"/":"♒"}</div>
 
      </div>
     )

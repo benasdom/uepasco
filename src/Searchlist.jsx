@@ -31,7 +31,6 @@ const SearchList=({
     const [selecttrue, setselecttrue] = useState(false)
 
     const fix=(res, courseName)=>{
-        console.log(res,courseName )
         setcourseName(courseName);
         !selectModel?setselectModel(true):false;
         selecttrue?getpayload(res):false;
@@ -96,7 +95,6 @@ const getpayload=async (res)=>{
             solutionData = solutionResponse;
         }
         setactualDlink(solutionData.directDownload)
-        console.log(solutionData.directDownload)
         const solved = solutionData.extractedText;
         const processAIResponse = (response) => {
   // Check if the response is an error object or contains the error string

@@ -808,6 +808,29 @@ position:absolute;
 font-weight:600;
 font-size:20px;
 }
+.scrollx {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  /* Use 'initial' or 'flex-start' so users can actually 
+     scroll to the first items when they overflow */
+  justify-content: flex-start; 
+  
+  height: 70%;
+  width: 100%; /* Ensure it spans the container */
+  
+  /* Enables horizontal scrolling */
+  overflow-x: auto; 
+  
+  /* Smooth scrolling for touch devices */
+  -webkit-overflow-scrolling: touch; 
+}
+
+.scrollx > * {
+  flex-shrink: 0; /* Prevents children from squishing */
+  margin: 0 10px; /* Optional spacing between items */
+}
 .storesolnbody>p,
 .storesolnbody>div{
   text-align:justify;
