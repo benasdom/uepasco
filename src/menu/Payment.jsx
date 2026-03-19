@@ -193,8 +193,8 @@ const tiers = [
   {
     name: "Credit Pack",
     premiumType: "credits",
-    priceDisplay: "GHS 20",
-    amountInGhs: 20,
+    priceDisplay: "GHS 25",
+    amountInGhs: 25,
     creditReward: 200,
     icon: <WalletFilled style={{color: "#FFD700"}}/>,
     image:stat2,
