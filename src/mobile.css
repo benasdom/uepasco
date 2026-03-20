@@ -379,7 +379,7 @@
     }
     .regbutton{
       width:max-content;
-      margin-top:4px;
+      margin:4px;
       margin:auto;
     }
     .half:first-child{
@@ -387,10 +387,15 @@
     }
     .regbox{
       position:relative;
-      left:0;
-      width:90%;
+      margin:auto;
+      width:98%;
       padding-top: 100px;
-      padding-bottom: 10px;
+      padding-bottom: 100px;
+    }
+    .regform{
+      position:absolute;
+      width:100%;
+      left:0;
     }
     .register{
       top:0;
