@@ -373,6 +373,7 @@
         display: none;
     }
     .regpic{
+      height:100vh;
       -webkit-filter:blur(2rem);
       filter:blur(2rem)
     }
