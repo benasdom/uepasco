@@ -149,7 +149,9 @@
     height:unset;
     padding:30px;
   }
- 
+ .noted{
+  margin-bottom:4px;
+ }
     .footer{
         display: flex;
         flex-direction: column;
