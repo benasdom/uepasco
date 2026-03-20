@@ -372,10 +372,21 @@
     .reglate{
         display: none;
     }
+    .regpic{
+      -webkit-filter:blur(2rem);
+      filter:blur(2rem)
+    }
+    .regbutton{
+      width:max-content;
+      margin-top:4px;
+      margin:auto;
+    }
     .half:first-child{
       display:none;
     }
     .regbox{
+      position:relative;
+      left:0;
       width:90%;
       padding-top: 100px;
       padding-bottom: 10px;
