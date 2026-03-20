@@ -206,7 +206,7 @@ useEffect(() => {
 
   return (
     <>
-    <div className="page" style={{position:shows || searching?"fixed":"unset"}}>
+    <div className="page" style={{overflow:shows || searching?"hidden":"unset"}}>
 <div className="promo" style={{position:"relative",fontWeight:600}}>
   <span className="inv-ico"></span> Promotion ends in: <p className="ticket">{`${ticket} ${counter}`}</p></div>
           <div className="landingpage">
