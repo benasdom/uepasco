@@ -206,7 +206,7 @@ useEffect(() => {
 
   return (
     <>
-    <div className="page">
+    <div className="page" style={{position:shows || searching?"fixed":"unset"}}>
 <div className="promo" style={{position:"relative",fontWeight:600}}>
   <span className="inv-ico"></span> Promotion ends in: <p className="ticket">{`${ticket} ${counter}`}</p></div>
           <div className="landingpage">
@@ -383,7 +383,7 @@ selectedVal={selectedVal}
 
      
         </div>
-        {shows?<Register setshows={setshows}/>:<></>}
+        {shows ?<Register setshows={setshows}/>:<></>}
     </div>
     <div className="navbottom">
 <div className="nbottomlist">
