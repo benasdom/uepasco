@@ -13,6 +13,9 @@
         box-shadow: inset 0px 0px 0px rgba(0, 128, 0, 0);
         flex: 1;
     }
+    .rlevel{
+      justify-content: flex-start;
+    }
         .closesearch{
       width:50px;
     }
@@ -152,6 +155,11 @@
  .noted{
   margin-bottom:4px;
  }
+ .onmenu{
+  padding:15px;
+  height:60px;
+ }
+ 
     .footer{
         display: flex;
         flex-direction: column;
@@ -371,6 +379,9 @@
       width:calc(100% - 15px);
       flex-wrap: wrap;
     }
+    .rgoldmedal{
+      display:none;
+    }
     .reglate{
         display: none;
     }
@@ -383,6 +394,9 @@
       width:max-content;
       margin:4px;
       margin:auto;
+    }
+    .hint{
+      font-size:10px;
     }
     .half:first-child{
       display:none;

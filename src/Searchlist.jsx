@@ -172,7 +172,7 @@ const leave=()=>{
     <div className="menuitems" onClick={()=>{setcurrentView("nss")}}><div className="inmenu"><SolutionOutlined className='micon'/>NSS Guide</div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("job")}}><div className="inmenu"><TeamOutlined className='micon'/>Job Application Guide</div></div>
                 </div>
-    <div className="menuitems logout" onClick={leave}><div className="inmenu"><LogoutOutlined className='micon'/>Logout</div></div>
+    <div className="menuitems logout"style={{padding:20}} onClick={leave}><div className="inmenu"><LogoutOutlined className='micon'/>Logout</div></div>
                 
                 </div>
             </div>

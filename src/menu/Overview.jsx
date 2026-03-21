@@ -10,7 +10,14 @@ import Solve from "./Solve"
 import Advert from "./Advert"
 export default function Overview({currentView,setcurrentView}) {
     const views="dashboard-nss-referal-solve-earn-leaderboard-advert-job".split("-")
+const leave=()=>{
+    if(confirm("Do you wish to logout"))
+    {
+        localStorage.removeItem("userInfo");
+        location.reload();
 
+    }
+    }
   
     return (
         <div className="profile">
@@ -26,6 +33,9 @@ export default function Overview({currentView,setcurrentView}) {
           }
           </div>
             <div className="onmenu">
+               
+                                <div onClick={leave} className="in">
+                     <div className="insp"><div className="prem4"></div>Logout</div></div>
                                 <div onClick={()=>{setcurrentView("dashboard")}} className="in">
                      <div className="insp"><div className="prem4"></div>Dashboard</div></div>
 
