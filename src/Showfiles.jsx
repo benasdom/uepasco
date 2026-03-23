@@ -130,7 +130,10 @@ onLoad={() => setTimeout(() => setIframeLoaded(true), 4000)}
         {extract !="loading..."?
         <div className="solmenu">
             <div className="solnav" style={{color:"golenrod"}} ><span className="goldtop">⚡</span>{credits??"0"}</div>
-                <Link to="/uelearn/Payment">
+                <Link to="/uelearn/Payment"
+                target="_blank"
+                 rel="noopener noreferrer"
+                >
             
             <div className="solnav clickable" >
             <span className="goldtop">

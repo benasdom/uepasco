@@ -159,7 +159,11 @@ const leave=()=>{
 <div className="firstitem">
     <div className="abs">
     </div>
-    <Link to="/uelearn/Payment">
+    <Link 
+    to="/uelearn/Payment"
+target="_blank"
+ rel="noopener noreferrer" 
+    >
     <div className="paid">✨Go premium ✨</div></Link>
 </div>
                 <div className="mymenu">

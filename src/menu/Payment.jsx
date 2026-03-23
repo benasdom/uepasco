@@ -171,7 +171,7 @@ setErrorMessage(`🟢 Success! ${creditsAdded} credits added.`);
             </div>
           ))}
         </div>
-        <Link to="/uelearn/" className='return' style={{ position: "fixed", margin: "auto", bottom: 0, marginBottom: 10 }}><ArrowLeftOutlined /> </Link>
+        <Link to={-1} className='return' style={{ position: "fixed",display:"none", margin: "auto", bottom: 0, marginBottom: 10 }}><ArrowLeftOutlined /> </Link>
       </div>
       {loadme ? <LoadComponent opacity={1} indexed={100} mainlogo={mainlogo} /> : <LoadComponent opacity={0} indexed={-100} />}
     </div>
