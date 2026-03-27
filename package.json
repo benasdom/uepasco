@@ -22,6 +22,7 @@
     "convertapi-js": "~1.1",
     "dotenv": "^16.5.0",
     "marked": "^16.1.2",
+    "pdfjs-dist": "^5.5.207",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-flying-objects": "^1.0.7",

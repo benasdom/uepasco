@@ -8,7 +8,7 @@ const LoadComponent=({opacity,indexed,mainlogo})=>{
             <div className="rbackdrop"></div>
             <img src={racoonread} className="racoonload" alt="" />
             <div className="loading">
-                <div className="logo"><img src={mainlogo} width="150" alt=""/></div>
+                <div className="logo"><img src={mainlogo} width="120" alt=""/></div>
     <div className="loadtext" id="loadtext" data-text="Loading...."> Loading....</div>
             </div>
 <span style={{color:"rgba(205,205,245,.3)"}}>

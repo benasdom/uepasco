@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import {domain, fetchWithAuth,LocalApiPath } from './menu/authfetch';
 import racoon_learn from '/imgs/racoon_learn.jpg'
 import racoon_save from '/imgs/save.jpg'
+import PdfViewer from './menu/PdfViewer';
 
 const MAX_RECENTS = 5;
 
@@ -23,6 +24,7 @@ const Showfiles=({pdflink,courseName,selectedVal,setshowpdf,mainlogo,actualDlink
     const [iframeLoaded, setIframeLoaded] = useState(false);
     const [storeme, setstoreme] = useState(false);
     const [rawView, setrawView] = useState(true);
+    const [sideTabs, setSideTabs] = useState(false);
     const [savedquery, setsavedquery] = useState(null); // ADDED THIS LINE
     const [founditems, setfounditems] = useState([]);
 
@@ -112,13 +114,19 @@ useEffect(() => {
 )}
     <img className="logopdf" src={mainlogo} width="150" alt=""/></div></div>
     </div>
-<iframe 
-src={`https://docs.google.com/viewer?url=${LocalApiPath}${pdflink}&embedded=true`}
+{/* <iframe 
+// src={`https://docs.google.com/viewer?url=${LocalApiPath}${pdflink}&embedded=true`}
+src={`${LocalApiPath}${pdflink}&embedded=true`}
 className="loadpdf" 
   data-text="Loading...."
 onLoad={() => setTimeout(() => setIframeLoaded(true), 4000)}
 > Loading....
-</iframe>
+</iframe> */}
+
+{<PdfViewer 
+url={`${LocalApiPath}${pdflink}&embedded=true`} 
+setIframeLoaded={setIframeLoaded}
+/>}
     {solns?
     <div  className="soln">
     <div  className="solntop">
@@ -156,16 +164,23 @@ onLoad={() => setTimeout(() => setIframeLoaded(true), 4000)}
         {extract=="loading..."?<div  className="responses ">
             <div className="download refloader" ></div>
             <div className="download refloader" ></div>
-            <div className="download refloader" ></div></div>
+            <div className="download refloader" ></div>
+            <div className='download soltoggle' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}>♒</div>
+
+            </div>
         :<div className="responses"><div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div><div className="download" onClick={()=>{setrawView(false)}}><span>Raw</span><span className="prem4"></span></div>
         <div className="download" onClick={()=>{setrawView(true)}}><span>
             Solved</span><span className="prem4"></span></div><div className='download' onClick={enableEdit}><span>Edit Response</span><span className="prem4"></span></div>
         {savedquery && <div className='download today' onClick={()=>{setsavedquery(null);setrawView(true)}} style={{background: 'rgb(115, 191, 2)'}}><span>☀️ TODAYS QUERY</span><span className="prem4"></span></div>}
+        {<div className='download' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}>♒</div>}
         </div>}
          <br></br>
          <div className="midsection">
-            {extract!="loading..."?<div className="tabs">
+            {extract=="loading" || sideTabs?<div className="tabs" >
                <div className="history-data">
+                            <div className=' soltoggle' onClick={()=>setSideTabs(!sideTabs)} 
+                            style={{position:'absolute',width:40,aspectRatio:"1/1",right:0,margin:10}}>♒</div>
+
 
             <div className="rlearn" >
                 <img src={racoon_learn} alt="" className="racoon" style={{margin:10}}/>
@@ -247,15 +262,9 @@ onLoad={() => setTimeout(() => setIframeLoaded(true), 4000)}
     </>
   )}
 </div>
-                         </div>:<div className="tabs ">
-                            <div className="tabloads refloader"></div>
-                            <div className="tabloads2 refloader"></div>
-                            <div className="tabloads2 refloader"></div>
-                            <div className="tabloads2 refloader"></div>
-                            <div className="tabloads2 refloader"></div>
-                            </div>}
+                         </div>:<></>}
             {extract !="loading"?<div className="toptex"  dangerouslySetInnerHTML={{ __html: dataerror.length && !savedquery?
-         `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || extract)}`:raw.replace(/(university.?of.?ghana)|(all.?rights.?reserved)/gim,"")??""
+         `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || extract)}`:raw?.replace(/(university.?of.?ghana)|(all.?rights.?reserved)/gim,"")??""
 )}}>
     </div>:<div className="toptex refloader2"></div>} </div>
                      

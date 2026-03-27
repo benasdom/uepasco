@@ -162,7 +162,9 @@
   padding:15px;
   height:70px;
  }
- 
+.soltoggle{
+ display:flex !important;
+ }
     .footer{
         display: flex;
         flex-direction: column;
@@ -173,7 +175,13 @@
       display:flex;
     }
     .tabs{
-      display:none;
+      position:absolute;
+      top:0;
+      margin:auto;
+      z-index:1;
+      width:100%;
+      height:100%;
+      border-radius:0px;
     }
 
     .searchnav .twwo{
