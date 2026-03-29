@@ -2155,6 +2155,42 @@ z-index:0 !important;
   border: 0px solid rgba(163, 166, 167, 0.4);
 
 }
+.pgcontent h2{
+  padding:20px;
+  max-width:90%;
+  margin-bottom: 30px;
+}
+#ol{
+  color:rgb(109, 116, 142);
+  font-size: 190px;
+  opacity:.2;
+}
+.pgcontent{
+  background:rgba(255, 255, 255, 0.1);
+  margin-top:20px;
+  width:100%;
+  display: flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top: 50px;;
+  padding-bottom: 100px;
+
+}
+.pgmessage{
+  display: block;
+  padding:30px;
+  text-align: justify;
+  line-height:30px;
+  margin-top:20px;
+  font-size:20px;
+  max-width: 600px;
+
+}
+
+.pgmessage::first-letter{
+  font-size: 30px;
+  font-weight: 700;
+}
 .slidebtn{
   margin:10px;
   padding:7px;

@@ -102,12 +102,13 @@
     flex-direction: column;
   }
   .midmessage{
-    width:85%;
+    width:100%;
     border-radius:20px;
   }
   .midleft{
     width:100%;
     margin-left: -10px;
+    aspect-ratio: 1/1;
     padding-left:10px;
   }
   .difficon{
@@ -183,6 +184,9 @@
       height:100%;
       border-radius:0px;
     }
+    #whats{
+      font-size: 40px;
+    }
 
     .searchnav .twwo{
         width:calc(100% - 65px);
@@ -233,7 +237,7 @@
         margin-right: 5px;
     }
     .messagepic{
-          max-width: 300px; 
+          max-width: 300px;
 
     }
   .toastmessage{

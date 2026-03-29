@@ -303,6 +303,7 @@ useEffect(() => {
 <div className="welcmessage">
 Practice makes perfect. Keep your self busy with the resources we provide.
 </div>
+
 {/* <>Download Now !</> */}
 <PWAInstallButton />
   </div>
@@ -310,7 +311,51 @@ Practice makes perfect. Keep your self busy with the resources we provide.
   <div className="midleft">
   <img className="messagepic" src={racoon} alt=""/>
   </div>
+
       </div>
+      <div className="pgcontent">
+        <h2 className="welcome" id="whats">What we help you solve?</h2>
+        <h2 className="welcome" id="ol">1. </h2>
+
+        <p className="pgmessage"> Modern psychological research suggests that the best way to learn and retain
+           information is through active learning techniques that require the brain to work to remember information. 
+          These techniques include:</p>
+
+<p className='pgmessage'>Repeated retrieval practice: This involves remembering information more than once, 
+  which enhances accessibility in the future. 
+</p>
+        <h2 className="welcome" id="ol">2. </h2>
+
+<p className="pgmessage">
+Testing: Attempting questions or explaining concepts to others helps reinforce learning and identify gaps. 
+</p>
+        <h2 className="welcome" id="ol">3. </h2>
+
+<p className="pgmessage">
+Spaced repetition: Reviewing material over time helps reinforce it,
+ making it easier for the brain to access stored information. 
+</p>
+        <h2 className="welcome" id="ol">4. </h2>
+
+<p className="pgmessage">
+Dual coding: Engaging both verbal and visual information through different channels 
+increases the chances of recalling the information later. 
+</p>
+        <h2 className="welcome" id="ol">5. </h2>
+
+<p className="pgmessage">
+Personal connections: Learning through material that feels relevant to personal
+ experiences enhances the probability of recall. 
+</p>
+        <h2 className="welcome" id="ol">6. </h2>
+
+<p className="pgmessage">
+These strategies are grounded in decades of research and are designed 
+to maximize the cognitive benefits of study time. By incorporating these
+ techniques into your study routine, you can improve your ability to learn 
+ and retain information effectively.
+</p>
+</div>
 <div className="tel">
   <div className="telegram">
     <span className="itext">Join</span>our telegram community 
