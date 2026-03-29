@@ -93,13 +93,25 @@
   }
 
   .welcome{
-    font-size: 12px;
+    font-size:15px;
+    text-align: left;
+    padding:10px;
+    line-height: 35px;
+    margin-top:10px;
+    height:80px;
   }
   .bothsides{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+  #ol{
+    line-height: unset;
+    text-align:center;
+    width:100%;
+    height: 50px;
+
   }
   .midmessage{
     width:100%;
