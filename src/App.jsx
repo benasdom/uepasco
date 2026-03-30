@@ -292,14 +292,14 @@ useEffect(() => {
 </div>
 <div className="midmessage">
   <div className="midleft">
-<div className="welcome"><i className="bga">🤗</i> SUP <span className="welcome" style={{textTransform:"uppercase"}}>{username || ""}</span> !
+<div className="welcome"><i className="bga">🤗</i><span className="welcome" style={{textTransform:"uppercase"}}>{`HI !`}</span>
 {/* <span className="prem4 difficon">
   👋🏾
 </span> */}
 </div>
   <div className="rbackdrop2"></div>
 
-<div className="welcmessage">
+<div className="welcmessage" id="welcid">
 Practice makes perfect. Keep your self busy with the resources we provide.
 </div>
 
