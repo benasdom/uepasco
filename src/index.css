@@ -759,6 +759,9 @@ box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   align-items:center;
   margin-right:10px;
 }
+.fa-dark{
+  color:rgba(205, 214, 235, 0.348);
+}
 .soln{
 
 position:absolute;

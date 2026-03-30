@@ -24,7 +24,7 @@ const Search=({setsearching,setfind,bar,eprop,handleMenu})=>{
                         ref={bar} onChange={(e)=>{return setfind(e.target.value.trim(""))}}
                         className="find"
                         placeholder="Search a course code..."/></div>
-                    <div className="slash" onClick={handleMenu}>{eprop!="all"?"/":"♒"}</div>
+                    <div className="slash" onClick={handleMenu}>{eprop!="all"?"/":<i className='fa fa-hamburger fa-dark'></i>}</div>
 
      </div>
     )
