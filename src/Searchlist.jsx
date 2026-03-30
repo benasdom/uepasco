@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import Search from './Search'
+import Showfiles from './Showfiles'
 import pdfpic from '/imgs/pdf.png'
-import { CloseCircleOutlined,ExportOutlined,InfoCircleOutlined,
-    ArrowLeftOutlined,FileProtectOutlined, DashboardOutlined,AppstoreOutlined,UserOutlined,
-PieChartFilled,  HomeOutlined,GoldFilled,DollarOutlined,SolutionOutlined,ScheduleOutlined,
+import { ExportOutlined,
+    ArrowLeftOutlined,FileProtectOutlined, AppstoreOutlined,GoldFilled,DollarOutlined,SolutionOutlined,ScheduleOutlined,
 LogoutOutlined,
 MoneyCollectFilled,TeamOutlined,
-StarFilled,
 } from '@ant-design/icons'
 import spinner from '/imgs/loader.svg'
 import { Link } from 'react-router-dom'
@@ -20,20 +19,26 @@ import { domain, fetchWithAuth, LocalApiPath,userState } from './menu/authfetch'
 const SearchList=({
     setsearching,selectedVal,setselectedVal,
     payload,find,setcourseName,setfind,bar,
-    setRefreshing,pdf,NetworkError,setshowpdf,
-    setdataerror,setcredits,setextract,setraw,
+    setRefreshing,pdf,NetworkError,
+    setdataerror,setcredits,
+    pdflink,courseName,
+    actualDlink,credits,dataerror,
     setpdflink,setactualDlink})=>{
     const [spin, setspin] = useState(false)
     const [fetchError, setfetchError] = useState(false)
     const [currentView, setcurrentView] = useState("")
     const [errorMessage, seterrorMessage] = useState("")
     const [selectModel, setselectModel] = useState(false)
-    const [selecttrue, setselecttrue] = useState(false)
+    const [selectlink, setselectlink] = useState("")
+    const [showpdf, setshowpdf] = useState(false)
+     const [extract, setextract] = useState("loading...")
+     const [extractedtext, setextractedtext] = useState("")
+     const [raw, setraw] = useState("")
 
     const fix=(res, courseName)=>{
         setcourseName(courseName);
-        !selectModel?setselectModel(true):false;
-        selecttrue?getpayload(res):false;
+        setselectModel(true);
+        setselectlink(res);
 }
 
 const getpayload=async (res)=>{
@@ -121,7 +126,6 @@ const cleanedResponse = processAIResponse(solved);
         setextract(String(err));
     } finally {
         setspin(false);
-        setselecttrue(false);
     }
 }
 const leave=()=>{
@@ -140,7 +144,21 @@ const leave=()=>{
             document.querySelector(".listcontent").style.cssText="clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);pointer-events:none;";
         }
     return(
-        <div className="searchlist">       
+        <div className="searchlist">  
+         {showpdf?
+<Showfiles 
+actualDlink={actualDlink}
+raw={raw} pdflink={pdflink} 
+mainlogo={mainlogo}
+setshowpdf={setshowpdf}
+dataerror={dataerror}
+credits={credits}
+courseName={courseName}
+extract={extract}
+selectedVal={selectedVal}
+       />
+:    
+<div> 
             <div className="searchnav" > 
             <div className="closesearch" onClick={()=>{setsearching(false);bar.current.value=""}}>
             <div className="bbtn"><div className="ba"><ArrowLeftOutlined/><span className='prem3'></span></div></div>
@@ -183,7 +201,15 @@ target="_blank"
 <div className="mcontent">
          <Menucompt currentView={currentView} setcurrentView={setcurrentView} />
               <div className="listcontent">
-                {selectModel?<ModelComponent setselecttrue={setselecttrue} setselectedVal={setselectedVal} selectedVal={selectedVal} setselectModel={setselectModel}/>:false}
+                {selectModel?
+                <ModelComponent 
+                setselectedVal={setselectedVal} 
+                selectedVal={selectedVal} 
+                setselectModel={setselectModel}
+                    getpayload={getpayload}
+                    selectlink={selectlink}
+                />:false}
+               
             {      find!="" && payload.length>1?payload
                    .filter((a,b,c)=>c.indexOf(a)==b)
                    .filter((a,b,c)=>a.description.toLowerCase().includes(find.toLowerCase()))
@@ -201,10 +227,12 @@ target="_blank"
             </div>
             </div>
           </div>
+          </div>}
           {fetchError && <Toaster setfetchError={setfetchError} errorMessage={errorMessage} />}
           
 {spin?<LoadComponent opacity={1} indexed={100} mainlogo={mainlogo}/>:<LoadComponent opacity={0} indexed={-100}/>}
         </div>
+        
     )
 }
 const Toaster=({errorMessage,setfetchError})=>{
@@ -221,6 +249,8 @@ return (
 <div className="menuhead">
 <Overview currentView={currentView} setcurrentView={setcurrentView}/>
 </div>
+
+  
 </div>
 )
 }

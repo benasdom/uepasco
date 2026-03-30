@@ -92,7 +92,7 @@ useEffect(() => {
                 <div className='pdfnav'>
                     <div className="pdfnavcontainer">
                     <div className='closesearch' onClick={()=>setshowpdf(false)}>
-                    <div className="bbtn"><div className="ba"><CloseCircleOutlined/><span className='prem3'></span></div></div> 
+                    <div className="bbtn"><div className="ba"><i className='fa fa-close'></i><span className='prem3'></span></div></div> 
                     </div>
                     <div className="pnleft">
                 {iframeLoaded || raw ? (
@@ -263,7 +263,7 @@ setIframeLoaded={setIframeLoaded}
   )}
 </div>
                          </div>:<></>}
-            {extract !="loading"?<div className="toptex"  dangerouslySetInnerHTML={{ __html: dataerror.length && !savedquery?
+            {extract !="loading"?<div className={sideTabs?"toptex":" toptex toptex2"}  dangerouslySetInnerHTML={{ __html: dataerror.length && !savedquery?
          `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || extract)}`:raw?.replace(/(university.?of.?ghana)|(all.?rights.?reserved)/gim,"")??""
 )}}>
     </div>:<div className="toptex refloader2"></div>} </div>

@@ -791,6 +791,9 @@ position:absolute;
 
    -webkit-backdrop-filter: blur(5rem);
 }
+.toptex2{
+  width:100%;
+}
 .toptex *{
   margin-bottom:10px;
   letter-spacing:1.5px;
@@ -1595,6 +1598,7 @@ height:150px;
  width: 100%;
  flex-direction: column;
  align-items: center;
+ top:0;
  justify-content: center;
  opacity: 1;
  transition: all 1s ease-in-out;
@@ -1716,6 +1720,24 @@ height:150px;
   width:80%;
   align-items: center;
   flex-direction:column;
+}
+.closeme:hover{
+    background:rgb(24, 27, 29);
+
+}
+.closeme{
+  position:absolute;
+  top:0;
+  display: flex;
+  color:white;
+  margin:10px;
+  background:rgba(24, 27, 29, 0.301);
+  height:40px;
+  width:40px;
+  justify-content: center;
+  right:0;
+  border-radius: 10px;
+  align-items: center;
 }
 .imgclose{
   display: flex;

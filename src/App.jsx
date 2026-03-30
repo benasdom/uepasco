@@ -28,22 +28,20 @@ function App() {
  const [NetworkError, setNetworkError] = useState("Type the course c⚾de in the search bar above ...🔎. ☝🏼")
  const [Refreshing, setRefreshing] = useState(false)
  const [payload, setpayload] = useState([{createdOn:"",description:"",downloadLink:""}])
- const [showpdf, setshowpdf] = useState(false)
- const [extract, setextract] = useState("loading...")
- const [credits, setcredits] = useState("")
+     const [dated, setdated] = useState("")
+     const [maxscore, setmaxscore] = useState(0)
+     const [Files, setFiles] = useState([{name:"",previewLink:"",fileType:"",viewLink:"",directDownload:""}])
+
+  const [credits, setcredits] = useState("")
  const [dataerror, setdataerror] = useState("")
  const [shows, setshows] = useState(false)
- const [extractedtext, setextractedtext] = useState("")
  const [spin, setspin] = useState(false)
  const bar = useRef(null)
  const [pdflink, setpdflink] = useState("https://notfound.com")
- const [Files, setFiles] = useState([{name:"",previewLink:"",fileType:"",viewLink:"",directDownload:""}])
  const [actualDlink, setactualDlink] = useState("https://notfound.com")
- const [raw, setraw] = useState("")
  const [username, setusername] = useState("")
  const [courseName, setcourseName] = useState("")
- const [maxscore, setmaxscore] = useState(0)
- const [dated, setdated] = useState("")
+
  const [selectedVal, setselectedVal] = useState("");
  
                 const [counter,setcounter]=useState("")
@@ -206,6 +204,7 @@ useEffect(() => {
 
   return (
     <>
+    {!searching?<div>
     <div className="page">
 <div className="promo" style={{position:"relative",fontWeight:600}}>
   <span className="inv-ico"></span> Promotion ends in: <p className="ticket">{`${ticket} ${counter}`}</p></div>
@@ -368,19 +367,6 @@ to maximize the cognitive benefits of study time. By incorporating these
     <LoadComponent opacity={1} indexed={100} mainlogo={mainlogo}/>
      :<LoadComponent opacity={0} indexed={-100}/>
    }
-  {showpdf?
-<Showfiles 
-actualDlink={actualDlink}
-raw={raw} pdflink={pdflink} 
-mainlogo={mainlogo}
-setshowpdf={setshowpdf}
-dataerror={dataerror}
-credits={credits}
-courseName={courseName}
-extract={extract}
-selectedVal={selectedVal}
-       />
-:false}
          <div className="scrldn"><div className="scrd">
 
         {/* <!-- <div className="started">get started</div> --> */}
@@ -389,24 +375,6 @@ selectedVal={selectedVal}
     </div> 
 
        </div>
-  {searching?<SearchList 
-   mainlogo={mainlogo}
-   setdataerror={setdataerror}
-   setcourseName={setcourseName} 
-   setcredits={setcredits} 
-   setraw={setraw}
-   setextractedtext={extractedtext}
-   extractedtext={extractedtext}
-   setpdflink={setpdflink}
-   pdflink={pdflink}
-   setshowpdf={setshowpdf}
-   setextract={setextract} 
-   extract={extract}  showpdf={showpdf}
-    setsearching={setsearching} find={find}
-   NetworkError={NetworkError} payload={payload}
-   bar={bar} setfind={setfind} setactualDlink={setactualDlink}
-   selectedVal={selectedVal}
-   setselectedVal={setselectedVal}/>:""}
        <div className="footer">
         <div className="foot1">
             <img className="brands" title='uelearn' src={mainlogo} alt="" />
@@ -441,6 +409,25 @@ selectedVal={selectedVal}
 
 
  </div>
+ </div>
+ :
+ <SearchList 
+   setdataerror={setdataerror}
+   setcourseName={setcourseName} 
+   setcredits={setcredits} 
+   setpdflink={setpdflink}
+   pdflink={pdflink}
+    setsearching={setsearching} find={find}
+   NetworkError={NetworkError} payload={payload}
+   bar={bar} setfind={setfind}
+   setactualDlink={setactualDlink}
+   actualDlink={actualDlink}
+   dataerror={dataerror}
+   credits={credits}
+   courseName={courseName}
+   selectedVal={selectedVal}
+   setselectedVal={setselectedVal}/>
+ }
 
  
 
