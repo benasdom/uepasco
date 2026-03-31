@@ -182,19 +182,28 @@ selectedVal={selectedVal}
 target="_blank"
  rel="noopener noreferrer" 
     >
-    <div className="paid">✨Go premium ✨</div></Link>
+    <div className="paid"><div className='fnav'>✨</div>Go premium <div className='fnav'>✨</div></div></Link>
 </div>
                 <div className="mymenu">
-    <div className="menuitems" onClick={()=>{setcurrentView("dashboard")}}><div className="inmenu">< AppstoreOutlined className='micon'/>General </div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("solve")}}><div className="inmenu"><FileProtectOutlined className='micon'/>Our Products <div className="prem3">✨</div></div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("leaderboard")}}><div className="inmenu"><GoldFilled className='micon'/>Leaderboard</div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("referal")}}><div className="inmenu"><MoneyCollectFilled className='micon'/>Referal Details</div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("earn")}}><div className="inmenu"><DollarOutlined className='micon'/>Earn <div className="prem3">💰</div></div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("advert")}}><div className="inmenu"><ScheduleOutlined className='micon'/>Advertise your business <div className="prem3">📢</div></div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("nss")}}><div className="inmenu"><SolutionOutlined className='micon'/>NSS Guide</div></div>
-    <div className="menuitems" onClick={()=>{setcurrentView("job")}}><div className="inmenu"><TeamOutlined className='micon'/>Job Application Guide</div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("dashboard")}}><div className="inmenu">
+    < AppstoreOutlined className='micon'/>General </div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("solve")}}><div className="inmenu">
+    <FileProtectOutlined className='micon'/>Our Products <div className="fnav">✨</div></div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("leaderboard")}}><div className="inmenu">
+    <GoldFilled className='micon'/>Leaderboard</div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("referal")}}><div className="inmenu">
+    <MoneyCollectFilled className='micon'/>Referal Details</div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("earn")}}><div className="inmenu">
+    <DollarOutlined className='micon'/>Earn <div className="fnav">💰</div></div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("advert")}}><div className="inmenu">
+    <ScheduleOutlined className='micon'/>Advertise your business <div className="fnav">📢</div></div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("nss")}}><div className="inmenu">
+    <SolutionOutlined className='micon'/>NSS Guide</div></div>
+    <div className="menuitems" onClick={()=>{setcurrentView("job")}}><div className="inmenu">
+    <TeamOutlined className='micon'/>Job Application Guide</div></div>
                 </div>
-    <div className="menuitems logout"style={{padding:20}} onClick={leave}><div className="inmenu"><LogoutOutlined className='micon'/>Logout</div></div>
+    <div className="menuitems logout"style={{padding:20}} onClick={leave}><div className="inmenu">
+    <LogoutOutlined className='micon'/>Logout</div></div>
                 
                 </div>
             </div>
@@ -222,7 +231,9 @@ target="_blank"
                         </div><div href={(/payment/i.test(a.downloadLink))?"":a.downloadLink} onClick={(ev) => fix(a.downloadLink,a.description)} className="download">{<ExportOutlined style={{marginRight:"5px"}}/>} open<span className='prema'></span></div></div> })
                     :new Array(1).fill("").map((a,b)=>{
                     return a=<div key={b+""} style={{margin:0, width:"100%"}} className="filtered mn4" data-ptext="title..." data-texts="details..."><div className="desc err4">
-                        <img className="reglate" src={mainlogo} style={{marginRight:10}} alt=""/>{NetworkError}</div></div>
+<div className="fnav2" style={{padding:2}}>                        <img className="reglate" src={mainlogo} alt=""/>
+</div>
+                        <span className='nerror'>{NetworkError}</span></div></div>
                     })}
             </div>
             </div>

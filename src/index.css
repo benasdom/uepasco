@@ -107,6 +107,7 @@ justify-content: center;
 }
 .impbox::placeholder{
   color:rgba(245, 245, 245, 0.6);
+  font-size: 15px;
 
 }
 .impbox{
@@ -574,10 +575,10 @@ height: 70%;
   height: 100%;
   }
   .brands{
-    height:80px;
-    width:80px;
+    height:30px;
+    width:30px;
     object-fit: cover;
-    background: rgba(115, 191, 2, 0.123);
+  background:rgba(54, 75, 107, 0.37);
     border:2px solid rgba(115, 191, 2, 0.058);
     border-radius:20px;
     margin:10px;
@@ -900,6 +901,7 @@ width:100%;
 .savetext::placeholder{
   font-weight:600;
   color:rgba(130,140,150);
+  font-size: 15px;
 }
 .savetext{
   background:none;
@@ -1064,7 +1066,7 @@ line-height:25px;
   justify-content: center;
   color: white;
   height: 100%;
-  width: 75%;
+  width: calc(100% - 80px);
   border: 1px solid transparent;
   }
 .page:hover .phuge{
@@ -1241,14 +1243,10 @@ inset 5000px 0px 0px rgba(55, 55, 55, 0.784);
   
   }
  .reglate{
-  height: 70px;
-  background-color: #000;
-  width:70px;
+  height: 50px;
+  align-self: center;
+  width:50px;
   object-fit: contain;
-  border:5px double rgba(57, 57, 57, 0.647);
-  filter:drop-shadow(
-    0px 0px 5px rgb(44, 0, 0)
-    );
 
  }
 
@@ -1380,15 +1378,42 @@ padding-bottom: 20px;
 font-size:20px;
 }
 .bga{
-  display:inline-block;
+  display:inline-flex;
   align-items:center;
   text-align:center;
-  height:50px;
-  width:50px;
+  height:45px;
+  margin:5px;
+  padding:10px;
+  width:45px;
   border-radius: 10px;
-  background:linear-gradient(45deg,rgba(114, 114, 255, 0.51),rgba(140, 255, 255, 0.361));
+  background:rgba(0, 0, 0, 0.37);
 }
+.fnav{
+  display: inline-flex;
+    align-items:center;
+  text-align:center;
+  justify-content: center;
+  margin:5px;
+  height:30px;
+  width:30px;
+  border-radius: 10px;
+  background:rgba(54, 75, 107, 0.47);
 
+
+}
+.fnav2{
+    display: inline-flex;
+    align-items:center;
+  text-align:center;
+  justify-content: center;
+  margin:10px;
+  border-radius: 10px;
+  background:rgba(117, 124, 133, 0.3);
+}
+.nerror{
+  font-size: 16px;
+  color:#b9bec1;
+}
 .tel{
   display: flex;
   justify-content: center;
@@ -1543,7 +1568,7 @@ height:150px;
   display: flex;
   flex-direction: column;
   align-self: center;
-  font-size: 40px;
+  font-size: 42px;
   height: 100%;
   width:70%;
   align-items: center;
@@ -1668,8 +1693,11 @@ height:150px;
   }
   .foot2{
     padding:20px;
+    color:rgb(135, 144, 156);
     border:1px solid rgba(57, 57, 57, 0.757);
-    width:300px;
+    font-size: 12px;
+    margin:5px;
+    width:350px;
   }
  
 .foot1{
@@ -1681,18 +1709,31 @@ height:150px;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-end;
-  height:200px;
+  height:250px;
   justify-content: center;
   text-align: center;
 }
 .logo{
   display: flex;
   flex-direction: column;
-  filter:drop-shadow(0px -7px 0px rgb(255, 255, 255)) grayscale(.5);
   letter-spacing: 2px;
+  background:rgba(248, 253, 255, 0.143);
+  padding:5px;
+  justify-content: center;
+  align-self:center;
+  align-items: center;
+  border-radius: 10px;
+  height:fit-content;
+
+}
+.logo img{
+  width:50px;
+  filter:drop-shadow(0px -7px 0px rgb(255, 255, 255)) grayscale(.5);
+
   animation: loads 3s infinite linear;
 
 }
+
 .logopdf{
   display: flex;
   object-fit: contain;
@@ -1766,6 +1807,7 @@ align-items:center;
 .pdfnav{
   display:flex;
   width:100%;
+  
 
 }
 .notfound-text{
@@ -2063,9 +2105,16 @@ align-items:center;
        height:100%;
        border-radius: 10px;
        display: flex;
+       font-size: 13px;
        align-items: center;
 }
-
+.chistory{
+  height:40px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:calc( 100% - 50px);
+}
 .inmenu span{
   border-right:2px solid rgba(255, 255, 255, 0.07);
   padding-right:15px;
@@ -2145,9 +2194,22 @@ z-index:0 !important;
   width:50%;
   height:50px;
   font-size: 12px;
-  color:#3a3f42;
+}
+.slideb1 p{
+    color:#b1b3b3;
 
 }
+ .reglate2{
+  height: 70px;
+  background-color: #000;
+  width:70px;
+  object-fit: contain;
+  border:5px double rgba(57, 57, 57, 0.647);
+  filter:drop-shadow(
+    0px 0px 5px rgb(44, 0, 0)
+    );
+
+ }
 .slideb2{
   height:unset;
   margin-top: -40px;
@@ -2241,7 +2303,7 @@ z-index:0 !important;
 
   .abs{
     height:60px;
-    width:50px;
+    width:40px;
   position:relative;
   display: block;
   top:0;
@@ -2336,6 +2398,10 @@ z-index:0 !important;
   justify-content:center;
   align-items:center;
   flex-direction:column;
+}
+.missingtext::first-letter{
+  font-size: 20px;
+  font-weight: 700;
 }
 .missingtext{
   font-size:14px;
@@ -2572,7 +2638,7 @@ width:98% !important;
 .userlevel{
   position:relative;
   display:flex;
-  justify-content:left;
+  justify-content:center;
   width:100%;
   height:calc(100% - 50px);
   padding:10px;
@@ -2903,6 +2969,8 @@ gap:5px;
 border-top: 3px solid rgba(255, 217, 0, 0.648);
 cursor:pointer;
 align-items:center;
+font-size: 25px;
+filter: contrast(2);
 }
 
 .tabs{
@@ -3071,6 +3139,7 @@ background:red;
 }
 #searchsolved::placeholder{
   color:rgba(255, 255, 255, 0.456);
+  
 }
 #searchsolved{
   display: flex;
@@ -3099,12 +3168,15 @@ background:red;
 .hdi-text{
 display:flex;
 width:calc(100% - 35px);
-color:rgba(255,255,255,.9);
 font-size:10px;
+color:white;
 padding-left:5px;
 overflow:hidden;
 white-space:nowrap;
 
+}
+.solstar{
+  filter:hue-rotate(30deg) brightness(2);
 }
 .hdi-opts{
   height:30px;
@@ -3113,7 +3185,7 @@ white-space:nowrap;
   display:flex;
   justify-content:center;
 box-shadow:
--15px 0px 15px rgba(34, 35, 40, 0.868);
+-15px 0px 15px rgba(0, 0, 0, 0.868);
 border-radius:10px;
 
   align-items:center;
@@ -3210,7 +3282,7 @@ text-align:center;
   display: flex;
   justify-content: center;
   font-family:"righteous";
-  font-size: 20px;
+  font-size: 15px;
   align-items: center;
   text-align: center;
 }

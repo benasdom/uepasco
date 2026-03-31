@@ -102,7 +102,7 @@ useEffect(() => {
       <div className="prem3"></div>
     </a>:<></>}
     <div className="download" onClick={()=>{setsolns(true)}} style={{marginBottom:5,fontSize:13}}>
-      {<StarTwoTone style={{marginRight:"5px",fontWeight:900}}/>}Solution 
+      <div className="fnav"><i className='solstar'>✨</i></div> Solution 
       <div className="prem3"></div>
     </div>
   </>
@@ -165,21 +165,21 @@ setIframeLoaded={setIframeLoaded}
             <div className="download refloader" ></div>
             <div className="download refloader" ></div>
             <div className="download refloader" ></div>
-            <div className='download soltoggle' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}>♒</div>
+            <div className='download soltoggle' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}><span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>
 
             </div>
-        :<div className="responses"><div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div><div className="download" onClick={()=>{setrawView(false)}}><span>Raw</span><span className="prem4"></span></div>
+        :<div className="responses"><div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div><div className="download" onClick={()=>{setrawView(false)}}><span><div className="fnav"><i className='fa fa-box'></i></div> Raw</span><span className="prem4"></span></div>
         <div className="download" onClick={()=>{setrawView(true)}}><span>
-            Solved</span><span className="prem4"></span></div><div className='download' onClick={enableEdit}><span>Edit Response</span><span className="prem4"></span></div>
+          <div className="fnav"><i className='fa fa-check'></i></div>  Solved</span><span className="prem4"></span></div><div className='download' onClick={enableEdit}><span><div className="fnav"><i className='fa fa-pen'></i></div>Edit Response</span><span className="prem4"></span></div>
         {savedquery && <div className='download today' onClick={()=>{setsavedquery(null);setrawView(true)}} style={{background: 'rgb(115, 191, 2)'}}><span>☀️ TODAYS QUERY</span><span className="prem4"></span></div>}
-        {<div className='download' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}>♒</div>}
+        {<div className='download' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}><span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>}
         </div>}
          <br></br>
          <div className="midsection">
             {extract=="loading" || sideTabs?<div className="tabs" >
                <div className="history-data">
                             <div className=' soltoggle' onClick={()=>setSideTabs(!sideTabs)} 
-                            style={{position:'absolute',width:40,aspectRatio:"1/1",right:0,margin:10}}>♒</div>
+                            style={{position:'absolute',width:40,aspectRatio:"1/1",right:0,margin:10}}><div className="fnav"><i className='fa fa-hamburger'></i></div></div>
 
 
             <div className="rlearn" >
@@ -225,7 +225,7 @@ setIframeLoaded={setIframeLoaded}
             borderLeft: savedquery?.id === x.id ? '4px solid #00ff11ff' : 'none'
           }}
         >
-          <div className="hdi-text">{x.course}</div>
+          <div className="hdi-text"><span className="fnav">📜</span><span className='chistory'>{x.course}</span></div>
           <div className="hdi-opts">...</div>
         </div>
       ))
@@ -255,7 +255,7 @@ setIframeLoaded={setIframeLoaded}
             borderLeft: savedquery?.course === x.course ? '4px solid orange' : 'none'
           }}
         >
-          <div className="hdi-text">{x.course}</div>
+          <div className="hdi-text"><span className="fnav">📜</span><span className='chistory'>{x.course}</span></div>
           <div className="hdi-opts">~</div>
         </div>
       ))}

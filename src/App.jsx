@@ -213,7 +213,7 @@ useEffect(() => {
 
                 <div className="space"></div>
 
-                <img className="reglate" src={mainlogo} alt=""/>
+                <img className="reglate2" src={mainlogo} alt=""/>
                <Link to="/uelearn/about"> <li>ABOUT</li></Link>
                <Link to="/uelearn/contact"> <li>CONTACT</li></Link>
 <div className="rightmenu">
@@ -252,7 +252,7 @@ useEffect(() => {
 <div className="slideme">
   <div className="slideitem">
     <div className="slideitemhead">
-      Questions
+      <div className="fnav">❔</div>Questions
     </div>
     <div className="slideitembody">
       <div className="slideb1">
@@ -265,7 +265,7 @@ useEffect(() => {
   </div>
   <div className="slideitem">
     <div className="slideitemhead">
-      Strategy
+      <div className="fnav">♟️</div>Strategy
     </div>
     <div className="slideitembody">
       <div className="slideb1">
@@ -278,7 +278,7 @@ useEffect(() => {
   </div>
   <div className="slideitem">
     <div className="slideitemhead">
-      Revision
+      <div className="fnav">📖</div>Revision
     </div>
     <div className="slideitembody">
       <div className="slideb1">
@@ -313,7 +313,7 @@ Practice makes perfect. Keep your self busy with the resources we provide.
 
       </div>
       <div className="pgcontent">
-        <h2 className="welcome" id="whats">What we help you solve?</h2>
+        <h2 className="welcome" id="whats"><div className="fnav">⚙️</div>What we help you solve?</h2>
         <h2 className="welcome" id="ol">1. </h2>
 
         <p className="pgmessage"> Modern psychological research suggests that the best way to learn and retain
@@ -382,12 +382,13 @@ to maximize the cognitive benefits of study time. By incorporating these
             <img className="brands" title='myfolder.space' src={spacelogo} alt="" />
         </div>
         <div className="foot1"> 
-        <div className="foot2">Developed by Unity Elites</div>
-        <div className="foot2">resourced by Myfolder.space</div>
+        <div className="foot2"><div className="fnav">⚙️</div> Developed by Unity Elites</div>
+        <div className="foot2"><div className="fnav">💦</div> resource by Myfolder.space</div>
         </div>
         <div className="foot1">
         <div className="twwo" title="make a suggestion">
-                    <div className="search">{spin?<img src={spinner} className="spinner" width={200}/>:<MessageOutlined/>}</div>
+                    <div className="search">{spin?<img src={spinner} className="spinner" width={200}/>:
+                    <span className='fnav' style={{width:30,margin:5,height:30}}><i className='fa fa-cloud' style={{fontSize:10,color:"whitesmoke"}}></i></span>}</div>
                     
                     <div className="input"><input type="text"  id='suggested' className="find" placeholder="Make a suggestion"/></div>
                     <div className="slash" onClick={sender}>
