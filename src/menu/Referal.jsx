@@ -120,14 +120,14 @@ let storeddata;
                   
                     <div className="refer">
                     
-                        <div className="hint">Referal Code</div>
+                        <div className="hint"><div className="fnav"><i className='fa fa-person'></i></div>Referal Code</div>
                         <input value={reflink.length?reflink:"***"} type={"text"} readOnly className="ref" />
-                        <div className="copy" onClick={handleCopy}>📄{seen?" Copy":"Copied !"}<div className="prem4"></div></div>
+                        <div className="copy" onClick={handleCopy}><div className="fnav"><i className="fa fa-copy fa-dark"></i></div>{seen?" Copy":"Copied !"}<div className="prem4"></div></div>
                     </div>
                   
                     <div className="streak"></div>
                 </div>
-                <div className='yourrefs'>You have ({((refered?.length ?? 0) > 0)?refered.length:0}) referals</div>
+                <div className='yourrefs'><div className="fnav"><i className="fa fa-users fa-dark"></i></div>You have ({((refered?.length ?? 0) > 0)?refered.length:0}) referals</div>
                 <div className="reflist">
      {(refered?.length ?? 0) > 0 ?refered.map((a,b)=>{return (
                     <div className='refblock' key={""+b}>

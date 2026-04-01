@@ -18,7 +18,7 @@ const Advert=()=>{
                     </div>
               <div className="watch">
                         <div className="sp">
-                        Watch me 👀
+                       <div className="fnav"><i className="fa fa-play"></i></div> Watch me 👀
                         <div className="prem2"></div>
 
                         </div>

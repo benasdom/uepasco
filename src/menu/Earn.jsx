@@ -21,7 +21,7 @@ const Earn=()=>{
                   {/* <div className="iconlarge">💰</div> */}
                   <img src={racoonearn} className="racoon"/>
                     <div className="wish">
-                       <span style={{fontWeight:600}}> What is this about?</span> ( 💸GHS 1,500+ Salary )
+                       <span style={{fontWeight:600}}> What is this about?</span> ( <div className="fnav">💸</div>GHS 1,500+ Salary )
                     </div>
                     <div className="tovid">
                         Watch this short video for a precise walk through?
@@ -29,7 +29,7 @@ const Earn=()=>{
                     
                     <div className="watch">
                         <div className="sp">
-                        Watch me 👀
+                       <div className="fnav"><i className="fa fa-play"></i></div> Watch me 👀
                         <div className="prem2"></div>
 
                         </div>

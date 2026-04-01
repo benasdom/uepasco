@@ -1717,13 +1717,14 @@ height:150px;
   display: flex;
   flex-direction: column;
   letter-spacing: 2px;
-  background:rgba(248, 253, 255, 0.143);
+  background:rgba(0, 0, 0, 0.73);
   padding:5px;
   justify-content: center;
   align-self:center;
   align-items: center;
   border-radius: 10px;
-  height:fit-content;
+  height:75px;
+  aspect-ratio: 1/1;
 
 }
 .logo img{
@@ -2325,22 +2326,23 @@ z-index:0 !important;
     left: 0; /* Ensure it starts at the edge */
     display: flex;
     align-items: center;
-    
-    /* Remove space-between if you want it to scroll naturally */
     justify-content: flex-start; 
-    
     height: 40px;
     width: 100%;
     padding: 5px;
-    
-    /* Better scrolling for iOS */
     overflow-x: auto; 
     -webkit-overflow-scrolling: touch; 
-    
-    /* Glassmorphism */
+    background:rgb(34, 40, 42);
     backdrop-filter: blur(5rem);
     -webkit-backdrop-filter: blur(5rem);
     border-bottom: 1px solid rgb(204, 255, 0);
+}
+.recent-box{
+  display:flex;
+  flex-direction:column;
+  max-height:100px;
+  overflow-y: scroll;
+  margin-top:10px;
 }
 
 .in{
@@ -2363,31 +2365,27 @@ z-index:0 !important;
 .in:hover .insp{
   background:black;
 }
-.in:hover{
-   background:rgb(204, 255, 0);
-  background-size: 300px 300px;
-  background-position:center,center;
-
-    border:1px double transparent;
+.insp .fnav{
+  transform:scale(.8);
 }
+
 .insp{    
-    padding-bottom:5px;
     height:30px;
     transition: background 1s ease-in-out;
     border-radius:10px;
   position:relative;
       min-width:max-content;
+      font-size: 12px;
     word-wrap:nowrap;
-    padding-left:10px;
     padding-right:20px;
 
       text-transform: capitalize;
       display:flex;
     justify-content:center;
-    align-items: flex-end;
+    align-items: center;
 
   color:rgb(204, 255, 0);
-        background:rgba(50, 62, 9, 0.877);
+        background:rgba(195, 208, 227, 0.077);
         backdrop-filter: blur(6rem);
         -webkit-backdrop-filter: blur(6rem);
 
@@ -2411,16 +2409,19 @@ z-index:0 !important;
   font-size:80px;
 }
 .ref{
-background:none;
 border:1px solid transparent;
+background:none;
 outline:none;
   color:rgb(117, 165, 139);
 align-items:center;
-padding-top:10px;
 border-left: 1px solid rgba(255, 255, 255, 0.26);
 padding-left: 20px;
 width:140px;
 text-align: left;
+height:100%;
+font-size:12px;
+display: flex;
+align-items: center;
 }
 
 
@@ -2778,6 +2779,7 @@ padding:10px;
   margin:auto;
   align-items:center;
     color:rgb(204, 255, 0);
+    font-size:12px;
 
 }
 .refer{
@@ -2788,7 +2790,6 @@ padding:10px;
 justify-content:flex-start;
 align-items: center;
 padding-right:0px;
-margin-top:50px;
 border-radius: 10px;
 
 }
@@ -2858,6 +2859,7 @@ border-radius: 10px;
   justify-content:center;
   align-items:center;
   color:white;
+  font-size:12px;
   text-transform:uppercase;
   width:130px;
  
@@ -3128,8 +3130,22 @@ fill:red;
 color:red;
 background:red;
 }
+.history-data-block input{
+  width:calc(100% - 45px);
+  height:27px;
+}
+.history-data-blocka{
+  width:100%;
+  display:flex;
+  align-items:center;
+  background:rgba(255, 255, 255, 0.1);
+ border-radius:10px;
+  height:fit-content;
+  margin-top:10px;
+}
 .history-data-block{
   width:100%;
+ 
 }
 .history-data-box{
   width:100%;
@@ -3137,16 +3153,12 @@ background:red;
   overflow-y: scroll;
 
 }
-#searchsolved::placeholder{
-  color:rgba(255, 255, 255, 0.456);
-  
-}
+
 #searchsolved{
   display: flex;
   margin:auto;
   background:none;
   border:4px solid transparent;
-  background:rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4rem);
   -webkit-backdrop-filter: blur(4rem);
   border-radius: 5px;
@@ -3170,6 +3182,16 @@ display:flex;
 width:calc(100% - 35px);
 font-size:10px;
 color:white;
+padding-left:5px;
+overflow:hidden;
+white-space:nowrap;
+
+}
+#searchsolved::placeholder{
+display:flex;
+width:calc(100% - 35px);
+font-size:10px;
+color:rgba(255, 255, 255, 0.7);
 padding-left:5px;
 overflow:hidden;
 white-space:nowrap;

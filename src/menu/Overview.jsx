@@ -35,24 +35,24 @@ const leave=()=>{
             <div className="onmenu">
                
                                 <div onClick={leave} className="in">
-                     <div className="insp"><div className="prem4"></div>Logout</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav">🚪</span>Logout</div></div>
                                 <div onClick={()=>{setcurrentView("dashboard")}} className="in">
-                     <div className="insp"><div className="prem4"></div>Dashboard</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-user fa-dark'></i></span>Profile</div></div>
 
                 <div onClick={()=>{setcurrentView("referal")}} className="in">
-                     <div className="insp"><div className="prem4"></div>Referal</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-users fa-dark'></i></span>Referal</div></div>
                 <div onClick={()=>{setcurrentView("earn")}} className="in">
-                     <div className="insp"><div className="prem4"></div>Earn</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-dollar fa-dark'></i></span>Earn</div></div>
                 <div onClick={()=>{setcurrentView("nss")}} className="in">
-                     <div className="insp"><div className="prem4"></div>NSS guide</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-briefcase fa-dark'></i></span>NSS guide</div></div>
                 <div onClick={()=>{setcurrentView("solve")}} className="in">
-                     <div className="insp"><div className="prem4"></div>Solve with AI</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-star fa-dark'></i></span>Solve with AI</div></div>
                 <div onClick={()=>{setcurrentView("advert")}} className="in">
-                     <div className="insp"><div className="prem4"></div>Advertise</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-shop fa-dark'></i></span>Advertise</div></div>
                 <div onClick={()=>{setcurrentView("job")}} className="in">
-                     <div className="insp"><div className="prem4"></div>Job guide</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-certificate fa-dark'></i></span>Job guide</div></div>
                 <div onClick={()=>{setcurrentView("leaderboard")}} className="in">
-                     <div className="insp"><div className="prem4"></div>leaderboard</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-medal fa-dark'></i></span>leaderboard</div></div>
             </div>
 
     </div>

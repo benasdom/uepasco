@@ -188,24 +188,10 @@ setIframeLoaded={setIframeLoaded}
             <div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div>
 
           <div className="history-data-block">
-            <div className="sidebarbtns">
-            <div className='sideopts' onClick={()=>{setstoreme(true)}}><span className="prem2"></span>
-                <div className="tabbtn"><SaveOutlined size={10}/></div>
-                <div className="tabbtn" >save</div>
-                
-                </div>
-            <div className='sideopts'  onClick={()=>{setrawView(false)}}><span className="prem2"></span>
-                <div className="tabbtn"><SolutionOutlined size={10}/></div>
-                <div className="tabbtn">raw</div>
-                </div>
-            <div className='sideopts'  onClick={()=>{setrawView(true)}}><span className="prem2"></span>
-                <div className="tabbtn"><FileProtectOutlined size={10}/></div>
-                <div className="tabbtn">solved</div>
-
-                </div>
-                </div>
-                    <input type="search" name="" placeholder='🔍find saved query' id="searchsolved" />
-
+           <div className="history-data-blocka">
+            <div className="fnav">🔎</div>
+                    <input type="search" name="" placeholder='Find saved query' id="searchsolved" />
+</div>
              <div className="tabbtn" style={{ width: "100%", marginTop: 10,padding:5, opacity: 0.6 }}>
 <span style={{margin:"auto",fontSize:11}}>
 <SolutionOutlined size={3}/><span style={{paddingLeft:6}}> Saved queries</span>   
@@ -245,7 +231,8 @@ setIframeLoaded={setIframeLoaded}
         🕓 <span style={{ paddingLeft: 3 }}>Recents</span>
 
 </span>      </div>
-      {recentItems.map((x, y) => (
+     <div className="recent-box">
+         {recentItems.map((x, y) => (
         <div
           className="history-data-item"
           onClick={() => { setsavedquery(x); setrawView(true); }}
@@ -259,6 +246,7 @@ setIframeLoaded={setIframeLoaded}
           <div className="hdi-opts">~</div>
         </div>
       ))}
+     </div>
     </>
   )}
 </div>
