@@ -62,6 +62,7 @@ return (
         <img src={racoonread} className="racoonload" style={{borderRadius:0,height:150}} alt="" />
         <div className="closeme" onClick={unmountme}><i className='fa fa-close'></i></div>
 <div className="mchoice">
+    <div className='fnav'><i className='fa fa-star fa-dark'></i></div><br></br>
     <span className="mchoice" style={{fontSize:20,fontWeight:700}}>Choose AI Model</span>
 </div>
 <div className="mchoice2">

@@ -179,13 +179,13 @@ setIframeLoaded={setIframeLoaded}
             {extract=="loading" || sideTabs?<div className="tabs" >
                <div className="history-data">
                             <div className=' soltoggle' onClick={()=>setSideTabs(!sideTabs)} 
-                            style={{position:'absolute',width:40,aspectRatio:"1/1",right:0,margin:10}}><div className="fnav"><i className='fa fa-hamburger'></i></div></div>
+                            style={{position:'absolute',width:50,aspectRatio:"1/1",right:0, marginRight:10}}><div className="fnav"><i style={{fontSize:15}} className='fa fa-hamburger'></i></div></div>
 
 
             <div className="rlearn" >
                 <img src={racoon_learn} alt="" className="racoon" style={{margin:10}}/>
             </div>
-            <div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div>
+            <div className="rbackdrop" style={{zIndex:0,opacity:0.2,bottom:0,position:"absolute"}}></div>
 
           <div className="history-data-block">
            <div className="history-data-blocka">
@@ -228,7 +228,7 @@ setIframeLoaded={setIframeLoaded}
     <>
       <div className="tabbtn" style={{ width: "100%", marginTop: 10, opacity: 0.6 }}>
 <span style={{margin:"auto",fontSize:11}}>
-        🕓 <span style={{ paddingLeft: 3 }}>Recents</span>
+    <span className='fnav'>🕓</span><span style={{ paddingLeft: 3 }}>Recents</span>
 
 </span>      </div>
      <div className="recent-box">

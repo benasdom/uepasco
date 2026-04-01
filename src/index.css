@@ -2987,6 +2987,8 @@ filter: contrast(2);
   width:200px;
   margin-right:10px;
   overflow:hidden;
+  overflow-y:scroll;
+  height:440px;
 }
 .tabloads{
   height:170px !important;
@@ -3120,7 +3122,7 @@ border-radius:10px;
   width:100%;
   overflow:clip;
   overflow-y:scroll;
-  background:black;
+  background:rgb(11, 12, 12);
   border:5px solid transparent;
 
 }
@@ -3341,6 +3343,9 @@ text-align:center;
     opacity:.6;
     transform:scale(.8);
     border-radius:10px;
+  }
+  .download .fnav{
+    transform: scale(.8);
   }
   .download{
     position:relative;

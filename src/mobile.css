@@ -196,6 +196,16 @@
       height:100%;
       border-radius:0px;
     }
+    .tabs div{
+      font-size:15px;
+    }
+    .history-data-block input{
+  height:50px;
+  font-size:15px;
+}
+.history-data-item{
+height:50px;}
+
     #whats{
       font-size: 40px;
     }
