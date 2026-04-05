@@ -277,6 +277,8 @@ height:50px;}
   border:none;
 }
     .download{
+        padding-left: 0px;;
+        padding-right: 0px;
         padding: 5px;
         height: 27px;
         border-radius: 5px;
