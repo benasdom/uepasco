@@ -277,13 +277,11 @@ height:50px;}
   border:none;
 }
     .download{
-        padding-left: 0px;
-        padding-right: 15px;
         padding: 5px;
         height: 27px;
         border-radius: 5px;
         font-size: 10px;
-        min-width:fit-content;
+        min-width:70px;
     }
     .homepic{
       width:30px;
