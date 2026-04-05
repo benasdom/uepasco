@@ -3360,6 +3360,25 @@ font-size: 12px;
 justify-content: center;
 text-align: center;
 }
+.nbtn{
+      position:relative;
+   background:rgba(175, 177, 207, 0.141);
+border-radius: 10px;
+height:40px;
+flex-shrink: 0;
+min-width: 120px;
+cursor:pointer;
+display: flex;
+margin:5px;
+font-weight: 100;
+padding-right:10px;
+padding-left:10px;
+align-items: center;
+font-size: 12px;
+justify-content: left;
+text-align: left;
+
+}
 
 .describe{
   border-radius: 5px;

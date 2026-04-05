@@ -101,15 +101,15 @@ useEffect(() => {
       {<ArrowDownOutlined/>} 
       <div className="prem3"></div>
     </a>:<></>}
-    <div className="download" onClick={()=>{setsolns(true)}} style={{marginBottom:5,fontSize:13}}>
+    <div className="nbtn" onClick={()=>{setsolns(true)}} style={{marginBottom:5,fontSize:13}}>
       <div className="fnav"><i className='solstar'>✨</i></div> Solution 
       <div className="prem3"></div>
     </div>
   </>
 ) : (
   <>
-    <div className="download refloader"></div>
-    <div className="download refloader"></div>
+    <div className="nbtn refloader"></div>
+    <div className="nbtn refloader"></div>
   </>
 )}
     <img className="logopdf" src={mainlogo} width="150" alt=""/></div></div>
@@ -162,17 +162,17 @@ setIframeLoaded={setIframeLoaded}
         :(extract !="loading..."?<div className='aisuccess'>Extraction successfull <span>✔️✔️✔️</span></div>
         :false)}
         {extract=="loading..."?<div  className="responses ">
-            <div className="download refloader" ></div>
-            <div className="download refloader" ></div>
-            <div className="download refloader" ></div>
-            <div className='download soltoggle' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}><span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>
+            <div className="nbtn refloader" ></div>
+            <div className="nbtn refloader" ></div>
+            <div className="nbtn refloader" ></div>
+            <div className='nbtn soltoggle' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}><span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>
 
             </div>
-        :<div className="responses"><div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div><div className="download" onClick={()=>{setrawView(false)}}><span><div className="fnav"><i className='fa fa-box'></i></div> Raw</span><span className="prem4"></span></div>
-        <div className="download" onClick={()=>{setrawView(true)}}><span>
-          <div className="fnav"><i className='fa fa-check'></i></div>  Solved</span><span className="prem4"></span></div><div className='download' onClick={enableEdit}><span><div className="fnav"><i className='fa fa-pen'></i></div>Edit Response</span><span className="prem4"></span></div>
-        {savedquery && <div className='download today' onClick={()=>{setsavedquery(null);setrawView(true)}} style={{background: 'rgb(115, 191, 2)'}}><span>☀️ TODAYS QUERY</span><span className="prem4"></span></div>}
-        {<div className='download' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}><span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>}
+        :<div className="responses"><div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div><div className="nbtn" onClick={()=>{setrawView(false)}}><span><div className="fnav"><i className='fa fa-box'></i></div> Raw</span><span className="prem4"></span></div>
+        <div className="nbtn" onClick={()=>{setrawView(true)}}><span>
+          <div className="fnav"><i className='fa fa-check'></i></div>  Solved</span><span className="prem4"></span></div><div className='nbtn' onClick={enableEdit}><span><div className="fnav"><i className='fa fa-pen'></i></div>Edit Response</span><span className="prem4"></span></div>
+        {savedquery && <div className='nbtn today' onClick={()=>{setsavedquery(null);setrawView(true)}} style={{background: 'rgb(115, 191, 2)'}}><span>☀️ TODAYS QUERY</span><span className="prem4"></span></div>}
+        {<div className='nbtn' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}><span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>}
         </div>}
          <br></br>
          <div className="midsection">
