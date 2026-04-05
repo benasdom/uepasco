@@ -23,7 +23,6 @@ const Leaderboard=()=>{
                        </div>
                        <div className='yourrefs'>You have (0) referals</div>
                        <div className="reflist">
-                           <img src={racoonrun} className="rgoldmedal" alt="" srcSet="" />
 
             {Array(10).fill("").map((a,b)=>
                            <div className='refblock' key={""+b}>

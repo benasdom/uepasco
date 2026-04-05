@@ -62,11 +62,11 @@ return (
         <img src={racoonread} className="racoonload" style={{borderRadius:0,height:150}} alt="" />
         <div className="closeme" onClick={unmountme}><i className='fa fa-close'></i></div>
 <div className="mchoice">
-    <div className='fnav'><i className='fa fa-star fa-dark'></i></div><br></br>
+    <span className='fnav'><span className=".solstar bga">💫</span></span><br/>
     <span className="mchoice" style={{fontSize:20,fontWeight:700}}>Choose AI Model</span>
 </div>
 <div className="mchoice2">
-    Proceed with your prefered AI model:</div>
+     <div className='fnav'><i className='fa fa-box fa-dark'></i></div>Proceed with your prefered AI model:</div>
     <span className="mchoice3">{" "+selectedVal}</span>
        {error ? (
             <div className="mtop">
@@ -85,7 +85,10 @@ return (
                 <div className="list" style={{height:60,display:"flex",alignItems:"center",justifyContent:"center"}}>{loaded ? "No models available" : "Loading models..."}</div>
             </div>
         )}
-        <button className="mbottom download" style={{color:"white"}} onClick={selectlink && selectedVal?progressed:notfound}>continue<span className="prem4"></span></button>
+        <button className="mbottom download" style={{color:"white"}} onClick={selectlink && selectedVal?progressed:notfound}>
+    <span className='fnav'><i className="fa fa-arrow-right"></i></span>
+            
+            continue<span className="prem4"></span></button>
         
 
         </div>

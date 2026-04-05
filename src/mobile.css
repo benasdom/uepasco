@@ -104,6 +104,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+    gap:unset;
     flex-direction: column;
   }
   #ol{
@@ -344,6 +347,10 @@ height:50px;}
         text-align: center;
         margin-top:3px;
       }
+      .refer{
+        transform: scale(.8);
+      }
+  
   .refbadge{
   right:0;
   z-index: 10;

@@ -1924,10 +1924,10 @@ z-index:10000;
   padding-right:10px;
   overflow:hidden;
   border-radius: 20px;
-  width: 75%;
+  width: 77%;
   margin:auto;
   height: calc(85vh - 20px);
-  background:linear-gradient(340deg,black,rgba(46, 39, 74, 0.141));
+  background:linear-gradient(340deg,rgb(0, 0, 0),rgba(46, 39, 74, 0.141));
   overflow-y:scroll;
 }
 .listcontent{
@@ -1936,13 +1936,10 @@ z-index:10000;
   right:0;
   display: flex;
   flex-direction: column;
-  padding-left:10px;
-  padding-right:10px;
   overflow:hidden;
   width:100%;
-
   margin:auto;
-  height: calc(85vh - 20px);
+  height: calc(85vh - 25px);
   overflow-y:scroll;
   overscroll-behavior: contain;
 
@@ -1985,13 +1982,15 @@ clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
 .bothsides{
   position:relative;
   display:flex;
+  padding-right:10px;
+  padding-left:10px;
+  gap:10px;
   flex-direction:row;
 }
 
 .sidemenubar{
-  width:25%;
-  padding-left:15px;
-  padding-bottom:15px;
+  width:23%;
+  padding-bottom:5px;
   display:flex;
   justify-content: center;
   align-items:center;
@@ -2785,11 +2784,9 @@ padding:10px;
 .refer{
 background:black;
 display:flex;
-width:425px;
-padding:10px;
+padding:5px;
 justify-content:flex-start;
 align-items: center;
-padding-right:0px;
 border-radius: 10px;
 
 }
@@ -2856,7 +2853,6 @@ border-radius: 10px;
 }
 .hint{
   display:flex;
-  justify-content:center;
   align-items:center;
   color:white;
   font-size:12px;
@@ -3264,14 +3260,13 @@ option{
 }
 .mchoice{
 font-family:"michroma";
-padding-bottom: 30px;
+padding-bottom: 5px;
 padding-top:10px;
 text-align:center;
 
 }
 .mchoice2{
 font-family:"righteous";
-padding-bottom: 10px;
 text-align:center;
        color:rgba(234, 246, 255, 0.7);
 
@@ -3293,7 +3288,7 @@ text-align:center;
   display:flex;
   flex-direction: column;
   justify-content: center;
-  width:calc(75% - 10px);
+  width:calc(77% - 10px);
   background:rgb(0,1,20);
   align-items:center;
   overflow:hidden;
