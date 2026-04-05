@@ -120,7 +120,7 @@ let storeddata;
                   
                     <div className="refer">
                     
-                        <div className="hint"><div className="fnav"><i className='fa fa-person'></i></div>Referal Code</div>
+                        <div className="hint"><div className="fnav"><i className='fa fa-code fa-dark'></i></div>Referal Code</div>
                         <input value={reflink.length?reflink:"***"} type={"text"} readOnly className="ref" />
                         <div className="copy" onClick={handleCopy}><div className="fnav"><i className="fa fa-copy fa-dark"></i></div>{seen?" Copy":"Copied !"}<div className="prem4"></div></div>
                     </div>

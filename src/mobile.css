@@ -281,7 +281,7 @@ height:50px;}
         height: 27px;
         border-radius: 5px;
         font-size: 10px;
-        width:70px;
+        min-width:70px;
     }
     .homepic{
       width:30px;
