@@ -166,6 +166,7 @@ selectedVal={selectedVal}
 
             <Search handleMenu={handleMenu} eprop={"all"} setsearching={setsearching} bar={bar} find={find} setRefreshing={setRefreshing} setfind={setfind}/>
 
+
 </div>
                         {/* <div className="solnav" style={{color:"golenrod"}} >⚡{userState.credits??"0"}</div> */}
 

@@ -32,7 +32,9 @@ const Leaderboard=()=>{
                                <div className="refblockcenterdivone">Benjamin</div>
                                <div className="refblockcenterdiv"> {new Date().toISOString().slice(0,10)}</div>
                            </div>
-                                               <div className='refblockend'><ThunderboltFilled className='micon'/>{b+1}</div>
+                                               <div className='refblockend'><div className="fnav">
+                                                <div className="fa fa-zap"></div>
+                                                </div><div className="fnav">{b+1}</div></div>
        
                            </div>
                        )}
