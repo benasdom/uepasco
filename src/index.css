@@ -809,6 +809,8 @@ position:absolute;
   padding:10px;
   margin:auto;
   background:rgba(255, 255, 255, 0.1);
+  color:lime;
+  text-transform: capitalize;
   border-radius:10px;
 }
 .toptex div::first-letter{
@@ -973,11 +975,24 @@ border:15px solid rgba(0,0,0,0.2);
 border-radius:50%;
 }
 .toptex li{
+  display: block;
   font-size:13px;
   color:rgb(149, 255, 0);
+  background:rgb(159, 159, 159);
+  color:black;
+  padding:10px;
+  margin-bottom: 20px;
    font-family:michroma;
 
   text-align:justify;
+}
+.toptex li::first-letter{
+  font-weight: 900;
+  background:black;
+  color:white;
+}
+.toptex li *{
+color:black;
 }
 .payfeatures li{
 font-size:13px;
