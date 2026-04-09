@@ -150,6 +150,8 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
   return (
    
      showprofile? <div className="userlevel flex-col">
+      <div className="rbackdrop2" style={{opacity:.2}}></div>
+
               <div className="profilehead" >
           <span className='profilebtn' setshowprofile onClick={()=>{setshowprofile(false)}}>
             <div className="fnav"><i className="fa fa-user "></i></div> <div className="profiletxt">View profile details</div></span></div>
@@ -190,7 +192,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
           <span className='profilebtn' setshowprofile onClick={()=>{setshowprofile(true)}}>
             <div className="fnav"><i className="fa fa-user "></i></div> <div className="profiletxt">User Wallet and streak</div></span></div>
 
-      <div className="rbackdrop2" style={{opacity:.3}}></div>
+      <div className="rbackdrop2" style={{opacity:.4}}></div>
 
       <div className="profilebox">
         <div className="profileleft">
@@ -204,7 +206,15 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
                   </div>
                       <div className="labelbox">
                   <div className="fstlabel">User Status: </div>
-                  <div className="fstname">{storedval?.isVerified?"OTP Verified":"Not Verified"??""}</div>
+                  <div className="fstname">{storedval?.isVerified?
+                  <div className="otpsuccess">
+                    OTP Verified
+                  </div>
+                  :
+                   <div className="otpfailed">
+                    Not Verified
+                  </div>
+                  ??""}</div>
                  </div>
                 </div>
         
@@ -299,12 +309,19 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
             </div>
                <div className="pinfobox1">
             <div className="pinfoboxitem">
-             <div className="pinfoboxitemsecond">
-              <div className="fnav">
-              <i className="fa fa-zap "></i>
+               <div className="pinfoboxitemsecond">
+                <div className="pitop">
+                  <div className="labelicon">
+                <div className="iconb"><i className="fa fa-zap "></i></div>
+
+                  </div>
+                      <div className="labelbox">
+                  <div className="fstlabel">Remaining Credits: </div>
+                  <div className="fstname">{storedval?.credits??0}</div>
+                 </div>
+                </div>
+        
               </div>
-             <span class="fstlabel"> Remaining Credits:</span><div className="fstname">{`${storedval?.credits??0}`}</div>
-             </div>
             </div>
             </div>
               <div className="pinfohead">
