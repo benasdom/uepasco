@@ -17,6 +17,10 @@
       justify-content: flex-start;
       padding-bottom: 40px;
     }
+    .rlevel .racoonlboard{
+      width:70px;
+      height:70px;
+    }
         .closesearch{
       width:50px;
     }

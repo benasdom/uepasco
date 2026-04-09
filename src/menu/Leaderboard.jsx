@@ -12,7 +12,7 @@ const Leaderboard=()=>{
            <div className="rlevel">
             
                            <img src={racoonleaderboard} className="racoonlboard" alt="" srcSet="" />
-                       <div className="levelitem2 leaderb">
+                       <div className="leaderb">
                            <img src={rbadge} className="refbadge" alt="" srcSet="" />
                         
                              <div className="refpage" style={{fontSize:30,width:200}}>🏁 Leaderboard</div>

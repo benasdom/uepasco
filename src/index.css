@@ -2772,23 +2772,25 @@ clip-path:none !important;
 width:98% !important;
  }
 .leaderb{
-  border-radius:0px 20px 20px 20px !important;
-  background:
-  linear-gradient(45deg,#ffd900, #DB00FF 100%) no-repeat,
-  linear-gradient(90deg,rgba(0, 23, 39, 0.867), #00000095 100%) no-repeat,
-  linear-gradient(90deg,rgba(0, 23, 39, 0.9), #dd00ff00 100%) no-repeat,
-  linear-gradient(107.68deg, #ff008c 2.26%, #48c2ff 93.75%) !important;
+    width:400px;
+  background:rgba(175, 177, 207, 0.1);
+  border-radius: 10px;
+  backdrop-filter:blur(10rem);
+  -webkit-backdrop-filter:blur(10rem);
   display:flex;
-  background-size:15% 35%,calc(15% + 3px) calc(35% + 8px),cover,cover !important;
-  justify-content: center !important;
-  clip-path: polygon(15% 0, 100% 0, 100% 60%, 100% 100%, 0 100%, 0 14%, 0 35%) !important;
-
+  height:100px;
+  min-height: max-content;
+  justify-content:center;
+  flex-direction:column;
+  align-items:center;
+  border-radius:0px 20px 20px 20px ;
+  display:flex;
+  justify-content: center ;
   flex-direction: column;
-  height:350px !important;
   padding:20px;
   margin-top:-50px;
   
-width:98% !important;
+width:98%;
  }
  .racoonlboard{
  margin:auto;
@@ -2993,6 +2995,7 @@ border-radius: 10px;
   -webkit-backdrop-filter:blur(10rem);
   display:flex;
   height:200px;
+  min-height: max-content;
   justify-content:center;
   flex-direction:column;
   align-items:center;
