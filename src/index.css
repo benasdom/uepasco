@@ -851,7 +851,7 @@ font-size:20px;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  border:2px solid rgba(255, 255, 255, 0.207);
+  background:rgba(121, 114, 188, 0.084);
   font-size: 14px;
   margin:5px;
 
@@ -871,12 +871,12 @@ font-size:20px;
   gap:10px;
 }
 .profileleft{
-  border: 2px solid #585b6018;
+  border: 5px solid #0e15218f;
   width:300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 20px;
   overflow-y: scroll;
   padding-bottom: 20px;
   max-height: min-content;
@@ -885,8 +885,8 @@ font-size:20px;
   background:linear-gradient(45deg,black,rgba(0, 0, 0, 0.277),black);
 }
 fieldset{
-  border-width: 10px;
-  border-color: rgba(122, 133, 146, 0.312);
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.1);
 }
 fieldset div{
   border-radius: 5px;
@@ -901,14 +901,32 @@ legend{
   height: 50px;
   margin:5px;
 }
+.profileright::-webkit-scrollbar {
+  width: 4px;
+}
+
+.profileright::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+}
+
+.profileright::-webkit-scrollbar-thumb {
+  background: rgba(173, 154, 207, 0.2);
+  border-radius: 10px;
+}
+
+.profileright::-webkit-scrollbar-thumb:hover {
+  background: rgba(171, 204, 230, 0.8);
+}
 .profileright{
   width:calc(100% - 310px);
-  border: 2px solid #979a9f35;
+  border: 5px solid #0e15218f;
   backdrop-filter: blur(10rem);
   -webkit-backdrop-filter: blur(10rem);
   background:linear-gradient(45deg,black,rgba(0, 0, 0, 0.277),black);
-  border-radius: 5px;
   display: flex;
+  border-radius: 20px;
+  overflow: clip;
   flex-direction: column;
   max-height: max-content;
   overflow-y: scroll;
@@ -2092,7 +2110,6 @@ z-index:10000;
   width: 77%;
   margin:auto;
   height: calc(85vh - 20px);
-  background:linear-gradient(340deg,rgb(0, 0, 0),rgba(46, 39, 74, 0.141));
   overflow-y:scroll;
 }
 .listcontent{

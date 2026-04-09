@@ -157,6 +157,7 @@
   flex-shrink: 0;
   overflow: visible;
   border:2px solid transparent;
+  border-radius: 0px;
   padding:10px;
   background:black;
 }
