@@ -140,6 +140,7 @@
   flex-direction: column-reverse;
   display: flex;
   height: calc(80vh - 20px);
+  background:black;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   width: 100%;
@@ -155,6 +156,9 @@
   width: 100%;
   flex-shrink: 0;
   overflow: visible;
+  border:2px solid transparent;
+  padding:10px;
+  background:black;
 }
 
 .profileright {
@@ -170,12 +174,9 @@
   height: max-content;
   max-height: unset;
   overflow: visible;
-  margin-bottom: 50dvh;
+  margin-bottom: 55dvh;
 }
-    .pinfoboxitem{
-      display: flex;
-      flex-direction: column;
-    }
+ 
   .toptex{
     display: flex;
     width:calc(100% - 4px);
@@ -185,6 +186,25 @@
     margin:auto;
 
   }
+  fieldset {
+  width: 100%;
+  min-width: 0;
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pinfoboxitem {
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.pinfoboxitemfirst {
+  width: calc(100% - 10px);
+  min-width: 0;
+  box-sizing: border-box;
+}
   .solmenu{
     width:calc(100% - 40px);
     margin-left:0px;

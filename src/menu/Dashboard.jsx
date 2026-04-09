@@ -152,7 +152,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
      showprofile? <div className="userlevel flex-col">
               <div className="profilehead" >
           <span className='profilebtn' setshowprofile onClick={()=>{setshowprofile(false)}}>
-            <div className="fnav"><i className="fa fa-user fa-dark"></i></div> <div className="profiletxt">View profile details</div></span></div>
+            <div className="fnav"><i className="fa fa-user "></i></div> <div className="profiletxt">View profile details</div></span></div>
 
       <div className="levelitem">
         <div className="litem">
@@ -188,18 +188,18 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
     <div className="userlevel flex-col">
               <div className="profilehead" >
           <span className='profilebtn' setshowprofile onClick={()=>{setshowprofile(true)}}>
-            <div className="fnav"><i className="fa fa-user fa-dark"></i></div> <div className="profiletxt">User Wallet and streak</div></span></div>
+            <div className="fnav"><i className="fa fa-user "></i></div> <div className="profiletxt">User Wallet and streak</div></span></div>
 
       <div className="rbackdrop2" style={{opacity:.3}}></div>
 
       <div className="profilebox">
         <div className="profileleft">
           <fieldset>
-          <legend><div className="ptitleinfo"><div className="fnav"><i className="fa fa-plus fa-dark"></i></div>Extras</div></legend>
+          <legend><div className="ptitleinfo"><div className="iconb"><i className="fa fa-plus "></i></div>Extras</div></legend>
               <div className="pinfoboxitemfirst">
                 <div className="pitop">
                   <div className="labelicon">
-                <div className="iconb"><i className="fa fa-check fa-dark"></i></div>
+                <div className="iconb"><i className="fa fa-check "></i></div>
 
                   </div>
                       <div className="labelbox">
@@ -212,7 +212,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
                    <div className="pinfoboxitemfirst">
                 <div className="pitop">
                   <div className="labelicon">
-                <div className="iconb"><i className="fa fa-calendar-check fa-dark"></i></div>
+                <div className="iconb"><i className="fa fa-calendar-check "></i></div>
 
                   </div>
                       <div className="labelbox">
@@ -225,7 +225,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
                    <div className="pinfoboxitemfirst">
                 <div className="pitop">
                   <div className="labelicon">
-                <div className="iconb"><i className="fa fa-calendar fa-dark"></i></div>
+                <div className="iconb"><i className="fa fa-calendar "></i></div>
 
                   </div>
                       <div className="labelbox">
@@ -243,7 +243,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
           <div className="pinfohead">
             <div className="pinfotop">
             <div className="iconb">
-              <i className="fa fa-user fa-dark"></i>
+              <i className="fa fa-user "></i>
               </div>
                <div className="ptitleinfo">Profile details</div></div>
 
@@ -253,7 +253,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
               <div className="pinfoboxitemfirst">
                 <div className="pitop">
                   <div className="labelicon">
-                <div className="iconb"><i className="fa fa-person fa-dark"></i></div>
+                <div className="iconb"><i className="fa fa-person "></i></div>
 
                   </div>
                 <div className="labelbox">
@@ -266,7 +266,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
               <div className="pinfoboxitemfirst">
                 <div className="pitop">
                   <div className="labelicon">
-                <div className="iconb"><i className="fa fa-person fa-dark"></i></div>
+                <div className="iconb"><i className="fa fa-person "></i></div>
 
                   </div>
                       <div className="labelbox">
@@ -291,7 +291,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
    <div className="pinfohead">
             <div className="pinfotop">
             <div className="iconb">
-              <i className="fa fa-zap fa-dark"></i>
+              <i className="fa fa-zap "></i>
               </div>
                <div className="ptitleinfo">User Credits</div>
                </div>
@@ -301,7 +301,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
             <div className="pinfoboxitem">
              <div className="pinfoboxitemsecond">
               <div className="fnav">
-              <i className="fa fa-zap fa-dark"></i>
+              <i className="fa fa-zap "></i>
               </div>
              <span class="fstlabel"> Remaining Credits:</span><div className="fstname">{`${storedval?.credits??0}`}</div>
              </div>
@@ -310,7 +310,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
               <div className="pinfohead">
             <div className="pinfotop">
             <div className="iconb">
-              <i className="fa fa-phone fa-dark"></i>
+              <i className="fa fa-phone "></i>
               </div>
                <div className="ptitleinfo">Phone</div>
                </div>
@@ -321,7 +321,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
          <div className="pinfoboxitemsecond">
                 <div className="pitop">
                   <div className="labelicon">
-                <div className="iconb"><i className="fa fa-phone fa-dark"></i></div>
+                <div className="iconb"><i className="fa fa-phone "></i></div>
 
                   </div>
                       <div className="labelbox">

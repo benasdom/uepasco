@@ -854,7 +854,6 @@ font-size:20px;
   border:2px solid rgba(255, 255, 255, 0.207);
   font-size: 14px;
   margin:5px;
-  background:black;
 
 }
 .profiletxt{
@@ -872,20 +871,26 @@ font-size:20px;
   gap:10px;
 }
 .profileleft{
-  border: 2px solid #585b6097;
-  width:250px;
+  border: 2px solid #585b6018;
+  width:300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
   overflow-y: scroll;
+  padding-bottom: 20px;
   max-height: min-content;
   backdrop-filter: blur(10rem);
   -webkit-backdrop-filter: blur(10rem);
   background:linear-gradient(45deg,black,rgba(0, 0, 0, 0.277),black);
 }
 fieldset{
-  border-color: rgba(102, 114, 116, 0.636);
+  border-width: 10px;
+  border-color: rgba(122, 133, 146, 0.312);
+}
+fieldset div{
+  border-radius: 5px;
+  margin:1px;
 }
 legend{
   display: flex;
@@ -898,7 +903,7 @@ legend{
 }
 .profileright{
   width:calc(100% - 310px);
-  border: 2px solid #585b6097;
+  border: 2px solid #979a9f35;
   backdrop-filter: blur(10rem);
   -webkit-backdrop-filter: blur(10rem);
   background:linear-gradient(45deg,black,rgba(0, 0, 0, 0.277),black);
@@ -922,7 +927,7 @@ legend{
 .pinfohead{
   display: flex;
   width:100%;
-  border-bottom: 2px solid #585b6097;
+  border-bottom: 2px solid #585b6018;
 }
 .pinfotop{
   display: flex;
@@ -983,7 +988,7 @@ padding:10px;
   align-items: center;
   flex-direction: row;
   padding:5px;
-  border: 2px solid #585b6097;
+  border: 2px solid #585b6018;
 }
 
 .labelicon{
@@ -1007,7 +1012,7 @@ padding:10px;
   border-radius: 5px;
   align-items: center;
   padding:5px;
-  border: 2px solid #585b6097;
+  border: 2px solid #585b6018;
 }
 .ptitleinfo{
   font-family: michroma;
