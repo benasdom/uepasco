@@ -2696,7 +2696,19 @@ border-radius:30px;
     }
 
 }
-.board{
+.advertboard{
+    width:400px;
+  background:rgba(175, 177, 207, 0.1);
+  border-radius: 10px;
+  backdrop-filter:blur(10rem);
+  -webkit-backdrop-filter:blur(10rem);
+  display:flex;
+  height:max-content;
+  justify-content:center;
+  flex-direction:column;
+  align-items:center;
+  clip-path: polygon(0 0, 97% 0, 91% 13%, 94% 14%, 90% 24%, 99% 10%, 96% 8%, 100% 0, 100% 0%, 100% 100%, 0 100%);
+  padding:10px;
 width:98% !important;
 clip-path:none !important;
 
@@ -2953,6 +2965,7 @@ font-size: 12px;
   align-items: center;
   background: rgba(255,255,255,.1);
   backdrop-filter: blur(5rem);
+  flex-shrink: 0;
   -webkit-backdrop-filter: blur(5rem);
   margin:auto;
   border-radius: 15px;
@@ -2995,7 +3008,6 @@ border-radius: 10px;
   -webkit-backdrop-filter:blur(10rem);
   display:flex;
   height:200px;
-  min-height: max-content;
   justify-content:center;
   flex-direction:column;
   align-items:center;

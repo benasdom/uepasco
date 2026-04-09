@@ -5,7 +5,7 @@ const Advert=()=>{
              
           <div className="userlevel">
            
-                <div className="levelitem2 board" >
+                <div className=" advertboard" >
                     <div className="streak">Run your Adds here</div>
                   <div className="iconlarge">
                     🎪

@@ -21,6 +21,10 @@
       width:70px;
       height:70px;
     }
+    .advertboard{
+  height:fit-content;
+
+    }
         .closesearch{
       width:50px;
     }
