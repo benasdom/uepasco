@@ -35,9 +35,9 @@ const leave=()=>{
             <div className="onmenu">
                
                                 <div onClick={leave} className="in">
-                     <div className="insp"><div className="prem4"></div><span className="fnav">🚪</span>Logout</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className="fa fa-power-off fa-dark"></i></span>Logout</div></div>
                                 <div onClick={()=>{setcurrentView("dashboard")}} className="in">
-                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-user fa-dark'></i></span>Profile</div></div>
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-windows fa-dark'></i></span>General</div></div>
 
                 <div onClick={()=>{setcurrentView("referal")}} className="in">
                      <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-users fa-dark'></i></span>Referal</div></div>
