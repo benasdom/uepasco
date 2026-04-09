@@ -136,6 +136,31 @@
     box-shadow: inset 5px 200px 1px black;
     filter:drop-shadow(0px -10px 50px rgb(255, 255, 255));
     }
+    .profilebox{
+      flex-direction: column-reverse;
+            height:calc(80vh - 20px);
+            overflow-y:scroll;
+            width:100%;
+            justify-content: start;
+            top:0;
+            padding:0;
+
+    }
+    .profileright{
+      margin: 0px;
+      top:0;
+    }
+    .profileleft,.profileright{
+      width:unset
+    }
+    .pinfoboxitemfirst,.pinfoboxitemsecond{
+      width:unset;
+    }
+
+    .pinfoboxitem{
+      display: flex;
+      flex-direction: column;
+    }
   .toptex{
     display: flex;
     width:calc(100% - 4px);
@@ -148,6 +173,9 @@
   .solmenu{
     width:calc(100% - 40px);
     margin-left:0px;
+  }
+  .scrollx{
+    padding-left:0px;
   }
   .solnav{
     width:unset;

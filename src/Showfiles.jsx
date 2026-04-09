@@ -14,7 +14,9 @@ const saveToRecents = (courseName, extract) => {
   const stored = JSON.parse(localStorage.getItem('recentSolutions') || '[]');
   const filtered = stored.filter(x => x.course !== courseName);
   const updated = [{ course: courseName, solution: extract, savedAt: Date.now() }, ...filtered].slice(0, MAX_RECENTS);
-  localStorage.setItem('recentSolutions', JSON.stringify(updated));
+  const temp=updated.filter(x => !/aierror/gim.test(x.solution) || (x.solution.length > 15)); // Ensure no empty entries
+  const processedupdate = temp.sort((a, b) => b.savedAt - a.savedAt); // Sort by most recent
+  localStorage.setItem('recentSolutions', JSON.stringify(processedupdate));
 };
 
 const getRecents = () => JSON.parse(localStorage.getItem('recentSolutions') || '[]');
@@ -28,10 +30,7 @@ const Showfiles=({pdflink,courseName,selectedVal,setshowpdf,mainlogo,actualDlink
     const [savedquery, setsavedquery] = useState(null); // ADDED THIS LINE
     const [founditems, setfounditems] = useState([]);
 
-    const enableEdit=()=>{
-        document.querySelector(".toptex").setAttribute("contenteditable","true");
-        document.querySelector(".toptex").focus();
-    }    
+    
   
     //  https://pasco-lovat.vercel.app/api/files/
     // https://ue-past-questions-back.vercel.app/
@@ -170,8 +169,13 @@ setIframeLoaded={setIframeLoaded}
             </div>
         :<div className="responses"><div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div><div className="nbtn" onClick={()=>{setrawView(false)}}><span><div className="fnav"><i className='fa fa-box'></i></div> Raw</span><span className="prem4"></span></div>
         <div className="nbtn" onClick={()=>{setrawView(true)}}><span>
-          <div className="fnav"><i className='fa fa-check'></i></div>  Solved</span><span className="prem4"></span></div><div className='nbtn' onClick={enableEdit}><span><div className="fnav"><i className='fa fa-pen'></i></div>Edit Response</span><span className="prem4"></span></div>
-        {savedquery && <div className='nbtn today' onClick={()=>{setsavedquery(null);setrawView(true)}} style={{background: 'rgb(115, 191, 2)'}}><span>☀️ TODAYS QUERY</span><span className="prem4"></span></div>}
+          <div className="fnav"><i className='fa fa-check'></i></div>  Solved</span><span className="prem4"></span></div>
+        {savedquery && 
+        <div className='nbtn today' onClick={()=>{setsavedquery(null);setrawView(true)}} style={{background: 'rgb(115, 191, 2)'}}><span>☀️ TODAYS QUERY</span><span className="prem4"></span>
+        </div>
+        }
+        {<div className='nbtn' onClick={()=>setstoreme(true)} ><span><div className="fnav"><i className="fa fa-save"></i></div> Save</span><span className="prem4"></span></div>}
+
         {<div className='nbtn' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}><span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>}
         </div>}
          <br></br>

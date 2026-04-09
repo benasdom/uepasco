@@ -792,11 +792,13 @@ position:absolute;
    background:rgba(203, 213, 222, 0.1);
    backdrop-filter: blur(5rem);
   overscroll-behavior: contain;
-
+ transition: all .5s ease-in-out;
    -webkit-backdrop-filter: blur(5rem);
 }
 .toptex2{
-  width:100%;
+  width:calc(100%);
+ transition: all .5s ease-in-out;
+
 }
 .toptex *{
   margin-bottom:10px;
@@ -804,12 +806,12 @@ position:absolute;
 }
 .toptex h3{
   font-weight:600;
-  text-align:center;
+  text-align:left;
   width:100%;
   padding:10px;
   margin:auto;
-  background:rgba(255, 255, 255, 0.1);
-  color:lime;
+  background:rgba(255, 255, 255, 0.07);
+  color:rgb(0, 255, 0);
   text-transform: capitalize;
   border-radius:10px;
 }
@@ -821,24 +823,97 @@ font-size:20px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  
-  /* Use 'initial' or 'flex-start' so users can actually 
-     scroll to the first items when they overflow */
   justify-content: flex-start; 
-  
   height: 70%;
-  width: 100%; /* Ensure it spans the container */
-  
-  /* Enables horizontal scrolling */
+  width: 100%;
   overflow-x: auto; 
-  
-  /* Smooth scrolling for touch devices */
+  padding-left: 100px;
   -webkit-overflow-scrolling: touch; 
 }
+
 
 .scrollx > * {
   flex-shrink: 0; /* Prevents children from squishing */
   margin: 0 10px; /* Optional spacing between items */
+}
+.profilehead{
+  display:flex;
+  width:100%;
+  justify-content: flex-end;
+}
+.profilebtn:hover{
+  opacity:.8;
+  cursor: pointer;
+}
+.profilebtn{
+  top:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border:2px solid rgba(255, 255, 255, 0.207);
+  font-size: 14px;
+  margin:5px;
+    background:rgba(54, 75, 107, 0.47);
+
+}
+.profiletxt{
+  padding-right:10px;
+    color:#d1d6dd;
+
+}
+.profilebox{
+  width:calc(100% - 10px);
+  max-height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  gap:10px;
+}
+.profileleft{
+  border: 2px solid #585b6097;
+  width:250px;
+  border-radius: 5px;
+  overflow-y: scroll;
+  backdrop-filter: blur(10rem);
+  -webkit-backdrop-filter: blur(10rem);
+  background:linear-gradient(45deg,black,rgba(0, 0, 0, 0.277),black);
+}
+.profileright{
+  width:calc(100% - 310px);
+  border: 2px solid #585b6097;
+  backdrop-filter: blur(10rem);
+  -webkit-backdrop-filter: blur(10rem);
+  background:linear-gradient(45deg,black,rgba(0, 0, 0, 0.277),black);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  max-height: max-content;
+  overflow-y: scroll;
+}
+.iconb{
+   display: inline-flex;
+    align-items:center;
+  text-align:center;
+  justify-content: center;
+  margin:5px;
+  height:40px;
+  width:40px;
+  border-radius: 10px;
+  background:black;
+}
+.pinfohead{
+  display: flex;
+  width:100%;
+  border-bottom: 2px solid #585b6097;
+}
+.pinfotop{
+  display: flex;
+  align-items: center;
+  width: calc( 100% - 100px);
+  text-align: left;
+  padding:10px;
 }
 .storesolnbody>p,
 .storesolnbody>div{
@@ -877,7 +952,53 @@ border:20px solid rgba(171, 217, 240, 0.08);
 filter:drop-shadow(10px 10px 50px rgba(171, 217, 240));
 object-fit:cover;
 }
+.pinfoboxitem{
+display: flex;
+flex-direction: row;
+justify-content: center;
+gap:10px;
+padding:10px;
+}
+.pinfoboxitemfirst{
+  display: flex;
+  width:calc(250px - 10px);
+  border-radius: 5px;
+  margin:5px;
+  align-items: center;
+  flex-direction: row;
+  padding:5px;
+  border: 2px solid #585b6097;
+}
+.labelicon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.fstname{
+  padding:3px;
+  font-size:15px;
+}
+.fstlabel{
+  font-size: 12px;
+  color:#c1c6ca;
+  padding:3px;
+}
+.pinfoboxitemsecond{
+  display: flex;
+  width:500px;
+  border-radius: 5px;
+  align-items: center;
+  padding:5px;
+  border: 2px solid #585b6097;
+}
+.ptitleinfo{
+  font-family: michroma;
+}
+.pitop{
+ display: flex;
+ flex-direction: row;
+}
 .notemessage{
   color:lime;
   background:rgba(0, 255, 0, 0.06);
@@ -1192,15 +1313,26 @@ margin-left:-60px;
   animation-delay:2s;
 }
 @keyframes textA {
-  0%{
+  0% {
     stroke-dashoffset: 350;
-    
+    /* Start with pure Red */
+    stroke: color-mix(in hsl shorter hue, red 100%, rgb(233, 240, 255) 0%);
   }
-  85%{
-    fill:transparent
+  
+  80% {
+    /* Transition toward Blue/Purple mid-animation */
+    stroke: color-mix(in hsl shorter hue, red 20%, rgb(206, 206, 255) 80%);
   }
-  100%{
-    fill:#fff;
+
+  85% {
+    /* Fade to transparent as requested */
+    fill: transparent;
+  }
+
+  100% {
+    /* Snap to final solid color */
+    stroke: #fff;
+    fill: #fff;
     stroke-dashoffset: 0;
   }
 }
@@ -2028,7 +2160,7 @@ clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
 .flex-col{
 display:flex !important;
 flex-direction:column !important;
-background:repeating-radial-gradient(rgba(0, 255, 0, 0.0),rgba(184, 215, 255, 0.136) 10%)!important;
+background:repeating-radial-gradient(rgba(0, 255, 0, 0.0),rgba(184, 215, 255, 0.1) 10%)!important;
 background-size:2000px 2000px !important;
 background-position: left !important;
 }
@@ -2162,7 +2294,6 @@ transition:all 1s ease-in-out;
   width:100%;
   filter:blur(10rem);
   -webkit-filter:blur(10rem);
-
   pointer-events:none;
   z-index:-1;
   height:120px;
@@ -2803,8 +2934,8 @@ border-radius: 10px;
   width:400px;
   background:rgba(175, 177, 207, 0.1);
   border-radius: 10px;
-  backdrop-filter:blur(5rem);
-  -webkit-backdrop-filter:blur(5rem);
+  backdrop-filter:blur(10rem);
+  -webkit-backdrop-filter:blur(10rem);
   display:flex;
   height:200px;
   justify-content:center;
@@ -2866,6 +2997,32 @@ border-radius: 10px;
   color:white;
   font-size:12px;
   text-transform:uppercase;
+  width:130px;
+ 
+  text-align:center;
+}
+.hintitems{
+  display:flex;
+  align-items:center;
+  color:white;
+  font-size:12px;
+  text-transform:uppercase;
+  width:130px;
+  justify-content: center;
+  text-align:center;
+}
+.hint-top{
+  display:flex;
+  align-items:center;
+  color:white;
+  font-size:12px;
+  text-align: center;
+  text-transform:uppercase;
+  background:black;
+  margin:2px;
+  border:1px solid rgb(99, 99, 99);
+  padding:1px;
+  justify-content: center;
   width:130px;
  
   text-align:center;
@@ -3028,6 +3185,7 @@ flex-direction:center;}
   width:100%;
 display:flex;
 flex-direction:row;
+justify-content: center;
 }
 .toptex:focus{
   border:5px solid rgb(72, 0, 255);
