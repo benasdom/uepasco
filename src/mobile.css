@@ -136,27 +136,42 @@
     box-shadow: inset 5px 200px 1px black;
     filter:drop-shadow(0px -10px 50px rgb(255, 255, 255));
     }
-    .profilebox{
-      flex-direction: column-reverse;
-            height:calc(80vh - 20px);
-            overflow-y:scroll;
-            width:100%;
-            justify-content: start;
-            top:0;
-            padding:0;
-
-    }
-    .profileright{
-      margin: 0px;
-      top:0;
-    }
-    .profileleft,.profileright{
-      width:unset
-    }
+ .profilebox{
+  flex-direction: column-reverse;
+  display: flex;
+  height: calc(80vh - 20px);
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  top: 0;
+  padding: 0;
+  padding-bottom: 150px;
+  overscroll-behavior: contain;
+}
     .pinfoboxitemfirst,.pinfoboxitemsecond{
       width:unset;
     }
+.profileleft, .profileright {
+  width: 100%;
+  flex-shrink: 0;
+  overflow: visible;
+}
 
+.profileright {
+  margin: 0px;
+  min-height: max-content;
+  max-height: unset;
+  height: unset;
+  top: 0;
+  overflow: visible;
+}
+
+.profileleft {
+  height: max-content;
+  max-height: unset;
+  overflow: visible;
+  margin-bottom: 50dvh;
+}
     .pinfoboxitem{
       display: flex;
       flex-direction: column;

@@ -193,7 +193,52 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
       <div className="rbackdrop2" style={{opacity:.3}}></div>
 
       <div className="profilebox">
-        <div className="profileleft"></div>
+        <div className="profileleft">
+          <fieldset>
+          <legend><div className="ptitleinfo"><div className="fnav"><i className="fa fa-plus fa-dark"></i></div>Extras</div></legend>
+              <div className="pinfoboxitemfirst">
+                <div className="pitop">
+                  <div className="labelicon">
+                <div className="iconb"><i className="fa fa-check fa-dark"></i></div>
+
+                  </div>
+                      <div className="labelbox">
+                  <div className="fstlabel">User Status: </div>
+                  <div className="fstname">{storedval?.isVerified?"OTP Verified":"Not Verified"??""}</div>
+                 </div>
+                </div>
+        
+              </div>
+                   <div className="pinfoboxitemfirst">
+                <div className="pitop">
+                  <div className="labelicon">
+                <div className="iconb"><i className="fa fa-calendar-check fa-dark"></i></div>
+
+                  </div>
+                      <div className="labelbox">
+                  <div className="fstlabel">Last Active Status: </div>
+                  <div className="fstname">{new Date(storedval?.lastActiveDate).toLocaleDateString()??""}</div>
+                 </div>
+                </div>
+        
+              </div>
+                   <div className="pinfoboxitemfirst">
+                <div className="pitop">
+                  <div className="labelicon">
+                <div className="iconb"><i className="fa fa-calendar fa-dark"></i></div>
+
+                  </div>
+                      <div className="labelbox">
+                  <div className="fstlabel">Date Created: </div>
+                  <div className="fstname">{new Date(storedval?.dateCreated).toLocaleDateString()??""}</div>
+                 </div>
+                </div>
+        
+              </div>
+          </fieldset>
+      
+         
+        </div>
         <div className="profileright">
           <div className="pinfohead">
             <div className="pinfotop">
@@ -262,6 +307,33 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
              </div>
             </div>
             </div>
+              <div className="pinfohead">
+            <div className="pinfotop">
+            <div className="iconb">
+              <i className="fa fa-phone fa-dark"></i>
+              </div>
+               <div className="ptitleinfo">Phone</div>
+               </div>
+  
+            </div>
+               <div className="pinfobox1">
+            <div className="pinfoboxitem">
+         <div className="pinfoboxitemsecond">
+                <div className="pitop">
+                  <div className="labelicon">
+                <div className="iconb"><i className="fa fa-phone fa-dark"></i></div>
+
+                  </div>
+                      <div className="labelbox">
+                  <div className="fstlabel">Contact Number: </div>
+                  <div className="fstname">{storedval?.msisdn??""}</div>
+                 </div>
+                </div>
+        
+              </div>
+            </div>
+            </div>
+
         </div>
 
       </div>

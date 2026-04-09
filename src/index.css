@@ -874,11 +874,27 @@ font-size:20px;
 .profileleft{
   border: 2px solid #585b6097;
   width:250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 5px;
   overflow-y: scroll;
+  max-height: min-content;
   backdrop-filter: blur(10rem);
   -webkit-backdrop-filter: blur(10rem);
   background:linear-gradient(45deg,black,rgba(0, 0, 0, 0.277),black);
+}
+fieldset{
+  border-color: rgba(102, 114, 116, 0.636);
+}
+legend{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  padding:3px;
+  height: 50px;
+  margin:5px;
 }
 .profileright{
   width:calc(100% - 310px);
@@ -961,7 +977,7 @@ padding:10px;
 }
 .pinfoboxitemfirst{
   display: flex;
-  width:calc(250px - 10px);
+  width:calc(230px - 10px);
   border-radius: 5px;
   margin:5px;
   align-items: center;
@@ -969,6 +985,7 @@ padding:10px;
   padding:5px;
   border: 2px solid #585b6097;
 }
+
 .labelicon{
   display: flex;
   justify-content: center;
@@ -986,7 +1003,7 @@ padding:10px;
 }
 .pinfoboxitemsecond{
   display: flex;
-  width:500px;
+  width:460px;
   border-radius: 5px;
   align-items: center;
   padding:5px;
@@ -2196,6 +2213,9 @@ background-position: left !important;
   font-weight:700px;
   font-family:"michroma";
 
+}
+.reclaim{
+  font-family: righteous;
 }
 .earntext{
 display:flex;
