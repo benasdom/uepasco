@@ -178,7 +178,7 @@ let newdate = new Date((streaks.date.split(/T/gim)[0]));
           <div className="streak">{"⭐".repeat(10)}</div>
         </div>
         <div className="earndiv">
-          <div className="earntext">Earned</div>
+          <div className="earntext"><div className="fnav">💰</div>Earned</div>
           <img src={coins} className="backdrop"/>
           <div className="earnval">GHS: {(earning != 0 && !earning) ? "_____" : earning}</div>
         </div>
