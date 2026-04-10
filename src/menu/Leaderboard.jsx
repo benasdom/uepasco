@@ -21,7 +21,7 @@ const Leaderboard=()=>{
                      
                            <div className="streak"></div>
                        </div>
-                       <div className='yourrefs'>You have (0) referals</div>
+                       <div className='yourrefs'>You came {position?position > 3?"th":(position>2?"rd":(position>1?"nd":"st")):""}</div>
                        <div className="reflist">
 
             {Array(10).fill("").map((a,b)=>

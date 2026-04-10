@@ -89,7 +89,7 @@ startcounter();
 
     try{
         fetch(domain+"/api/v1/send/sms/otp",options)
-        .then((res)=>{res.status==200?seterrors("Sent successfully"):false})
+        .then((res)=>{res.status==200?seterrors("Sent successfully"):seterrors("Failed to send OTP, try again")})
         .catch(()=>{ seterrors("There was a promblem please retry");setindics(false);})
         .finally(()=>{setbools(false)})
     }
@@ -150,13 +150,14 @@ const otpRequestCheck=(vals)=>{
         body:JSON.stringify({path:"msisdn",otp:vals}),
      };
     try{
+        let errmess="Verification failed, you can go login and try again later"
         fetch(domain+"/api/v1/verification",options)
         .then((res)=>{ console.log(res);res.status==200?activateuser():servererrors(res)})
         .catch((err)=>{err?seterrors("There was a problem please retry"):false;})
         .finally(()=>{setbools(false)})
     }
     catch(err){
-        seterrors(err)
+        seterrors("Verification failed, you can go login and try again later")
         setbools(false)
 
     }
@@ -446,7 +447,7 @@ activateuser()
                                 <input onChange={(e) => setotp(e.currentTarget.value)} type="number" placeholder='OTP CODE HERE (6 DIGIT)' className="impbox"/>
                             </div>
                             <div className="regbutton" onClick={()=>{ValidateSignup("verify")}}>
-                                {indics?"...":"Proceed"}
+                                {indics && bools?"...":"Proceed"}
 
                             </div>
                          

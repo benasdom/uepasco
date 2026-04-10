@@ -22,7 +22,7 @@ const leave=()=>{
     return (
         <div className="profile">
           <div className="wrap">
-            {currentView==views[0]?<Dashboard/>
+          {currentView==views[0]?<Dashboard/>
           :(currentView==views[1]?<Nss/>
           :(currentView==views[2]?<Referal/>
           :(currentView==views[3]?<Solve/>

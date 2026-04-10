@@ -171,7 +171,7 @@ setIframeLoaded={setIframeLoaded}
         <div className="nbtn" onClick={()=>{setrawView(true)}}><span>
           <div className="fnav"><i className='fa fa-check'></i></div>  Solved</span><span className="prem4"></span></div>
         {savedquery && 
-        <div className='nbtn today' onClick={()=>{setsavedquery(null);setrawView(true)}} style={{background: 'rgb(115, 191, 2)'}}><span>☀️ TODAYS QUERY</span><span className="prem4"></span>
+        <div className='nbtn today' onClick={()=>{setsavedquery(null);setrawView(true)}} style={{background: 'rgb(115, 191, 2)'}}><span>☀️ RECENT QUERY</span><span className="prem4"></span>
         </div>
         }
         {<div className='nbtn' onClick={()=>setstoreme(true)} ><span><div className="fnav"><i className="fa fa-save"></i></div> Save</span><span className="prem4"></span></div>}

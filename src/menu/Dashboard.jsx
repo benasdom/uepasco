@@ -191,7 +191,7 @@ const Dashboard = () => {
               <div className="profiletxt">User Wallet and streak</div>
             </span>
           </div>
-          <div className="rbackdrop2" style={{ opacity: .4 }}></div>
+          <div className="rbackdrop2" style={{ opacity: .3 }}></div>
           <div className="profilebox">
 
             <div className="profileleft">

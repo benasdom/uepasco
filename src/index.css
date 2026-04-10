@@ -1006,7 +1006,7 @@ padding:10px;
   align-items: center;
   flex-direction: row;
   padding:5px;
-  border: 2px solid #585b6018;
+  border: 2px solid #585b6075;
 }
 
 .labelicon{
@@ -1030,7 +1030,7 @@ padding:10px;
   border-radius: 5px;
   align-items: center;
   padding:5px;
-  border: 2px solid #585b6018;
+  border: 2px solid #585b6075;
 }
 .ptitleinfo{
   font-family: michroma;
