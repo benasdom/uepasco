@@ -176,11 +176,12 @@ setIframeLoaded={setIframeLoaded}
         }
         {<div className='nbtn' onClick={()=>setstoreme(true)} ><span><div className="fnav"><i className="fa fa-save"></i></div> Save</span><span className="prem4"></span></div>}
 
-        {<div className='nbtn' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}><span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>}
+        {<div className='nbtn' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}>
+            <span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>}
         </div>}
          <br></br>
          <div className="midsection">
-            {extract=="loading" || sideTabs?<div className="tabs" >
+            {<div className={extract=="loading" || sideTabs?"tabs":"tabs2"} >
                <div className="history-data">
                             <div className=' soltoggle' onClick={()=>setSideTabs(!sideTabs)} 
                             style={{position:'absolute',width:50,aspectRatio:"1/1",right:0, marginRight:10}}><div className="fnav"><i style={{fontSize:15}} className='fa fa-hamburger'></i></div></div>
@@ -254,9 +255,9 @@ setIframeLoaded={setIframeLoaded}
     </>
   )}
 </div>
-                         </div>:<></>}
+                         </div>}
             {extract !="loading"?<div className={sideTabs?"toptex":" toptex toptex2"}  dangerouslySetInnerHTML={{ __html: dataerror.length && !savedquery?
-         `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || extract)}`:raw?.replace(/(university.?of.?ghana)|(all.?rights.?reserved)/gim,"")??""
+         `<div class='aierror'>${dataerror}</div>`:(rawView?`${marked(savedquery?.solution || (extract??dataerror))}`:raw?.replace(/(university.?of.?ghana)|(all.?rights.?reserved)/gim,"")??""
 )}}>
     </div>:<div className="toptex refloader2"></div>} </div>
                      

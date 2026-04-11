@@ -122,7 +122,10 @@ setErrorMessage(`🟢 Success! ${creditsAdded} credits added.`);
       })
       .finally(() => setloadme(false));
   }
-
+const closeme=()=>{
+window.open('', '_self', '');
+  window.close();
+}
   return (
     <div className="pcontainer">
       {fetchError && <Toaster setfetchError={setfetchError} errorMessage={errorMessage} />}
@@ -171,7 +174,7 @@ setErrorMessage(`🟢 Success! ${creditsAdded} credits added.`);
             </div>
           ))}
         </div>
-        <Link to={-1} className='return' style={{ position: "fixed",display:"none", margin: "auto", bottom: 0, marginBottom: 10 }}><ArrowLeftOutlined /> </Link>
+        <div className="return" onClick={closeme}><ArrowLeftOutlined /> </div>
       </div>
       {loadme ? <LoadComponent opacity={1} indexed={100} mainlogo={mainlogo} /> : <LoadComponent opacity={0} indexed={-100} />}
     </div>

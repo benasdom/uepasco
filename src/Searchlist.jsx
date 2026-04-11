@@ -103,9 +103,10 @@ const getpayload=async (res)=>{
         const solved = solutionData.extractedText;
         const processAIResponse = (response) => {
   // Check if the response is an error object or contains the error string
-  if (!response.includes("h3") || response.includes('div class="aierror"') || response.toLowerCase().includes("error")) {
+  if (!response.includes("h3")) {
     console.log("Message for dev:AI response indicates an error:", response);
-    return "<div class='aierror'>There was an error processing your request.</div><div class='aierror'>This is due to limits and not a network error. You can reclaim your lost credits and choose and choose a different model, or try again later.</div><button className='reclaim'>reclaim credits</button>";
+    setdataerror(response);
+    return "";
   }
   return response; // If it's clean, return the real content
 };
