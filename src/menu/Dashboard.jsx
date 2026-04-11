@@ -261,7 +261,7 @@ const Dashboard = () => {
                   <div className="pinfoboxitemfirst">
                     <div className="pitop">
                       <div className="labelicon">
-                        <div className="iconb"><i className="fa fa-person"></i></div>
+                        <div className="fnav"><i className="fa fa-person"></i></div>
                       </div>
                       <div className="labelbox">
                         <div className="fstlabel">First Name</div>
@@ -272,7 +272,7 @@ const Dashboard = () => {
                   <div className="pinfoboxitemfirst">
                     <div className="pitop">
                       <div className="labelicon">
-                        <div className="iconb"><i className="fa fa-person"></i></div>
+                        <div className="fnav"><i className="fa fa-person"></i></div>
                       </div>
                       <div className="labelbox">
                         <div className="fstlabel">Last Name</div>
@@ -283,7 +283,7 @@ const Dashboard = () => {
                 </div>
                 <div className="pinfoboxitem">
                   <div className="pinfoboxitemsecond">
-                    <div className="iconb"><i className="fa fa-envelope"></i></div>
+                    <div className="fnav"><i className="fa fa-envelope"></i></div>
                     <div className="labelbox">
                       <div className="fstlabel">Email:</div>
                       <div className="fstname">{storedval?.email ?? ""}</div>
@@ -294,7 +294,7 @@ const Dashboard = () => {
 
               <div className="pinfohead">
                 <div className="pinfotop">
-                  <div className="iconb"><i className="fa fa-zap"></i></div>
+                  <div className="fnav"><i className="fa fa-zap"></i></div>
                   <div className="ptitleinfo">User Credits</div>
                 </div>
               </div>
@@ -303,7 +303,7 @@ const Dashboard = () => {
                   <div className="pinfoboxitemsecond">
                     <div className="pitop">
                       <div className="labelicon">
-                        <div className="iconb"><i className="fa fa-zap"></i></div>
+                        <div className="fnav"><i className="fa fa-zap"></i></div>
                       </div>
                       <div className="labelbox">
                         <div className="fstlabel">Remaining Credits:</div>
@@ -316,7 +316,7 @@ const Dashboard = () => {
 
               <div className="pinfohead">
                 <div className="pinfotop">
-                  <div className="iconb"><i className="fa fa-phone"></i></div>
+                  <div className="fnav"><i className="fa fa-phone"></i></div>
                   <div className="ptitleinfo">Phone</div>
                 </div>
               </div>
@@ -325,7 +325,7 @@ const Dashboard = () => {
                   <div className="pinfoboxitemsecond">
                     <div className="pitop">
                       <div className="labelicon">
-                        <div className="iconb"><i className="fa fa-phone"></i></div>
+                        <div className="fnav"><i className="fa fa-phone"></i></div>
                       </div>
                       <div className="labelbox">
                         <div className="fstlabel">Contact Number:</div>

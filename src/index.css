@@ -1218,7 +1218,7 @@ line-height:25px;
     justify-content: center;
     text-align: center;
   }
-  .fa-search,.fa-envelope{
+  .fa-search{
     color: rgb(69, 70, 73);
     text-align: right;
   }
@@ -2135,8 +2135,6 @@ position:absolute;
   display: flex;
   flex-direction: column;
   overflow:hidden;
-    padding-left:10px;
-  padding-right:10px;
   border-radius: 20px;
   width:100%;
 z-index: 1000;

@@ -1,120 +1,46 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Document, Page, pdfjs } from "react-pdf";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
+// CSS styles to support "all at once" scrolling
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
 
 export default function PdfViewer({ url, setIframeLoaded }) {
-  const [isMobile, setIsMobile] = useState(false);
-  const fullUrl = `${url}`;
+  const [numPages, setNumPages] = useState(null);
+  const [togpdf, settogpdf] = useState(true);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-
-    setIsMobile(mediaQuery.matches);
-
-    // 3. Listen for screen size changes
-    const handler = (e) => setIsMobile(e.matches);
-    mediaQuery.addEventListener("change", handler);
-
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, []);
-
-  // 4. Use if/else logic to return different iframes
-  if (isMobile) {
-    return (
-      <iframe
-        className="loadpdf"
-        src={`https://docs.google.com/viewer?url=${fullUrl}`}
-        title="Mobile View"
-        style={{ width: "100%", height: "100vh", border: "none" }}
-onLoad={() => setTimeout(() => setIframeLoaded(true), 4000)}
-
-      />
-    );
-  } else {
-    return (
-      <iframe
-        className="loadpdf"
-        src={fullUrl}
-        title="Laptop View"
-        style={{ width: "100%", height: "100vh", border: "none" }}
-onLoad={() => setTimeout(() => setIframeLoaded(true), 4000)}
-
-      />
-    );
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+    // Short timeout ensures the first few pages have started rendering
+    setTimeout(() => setIframeLoaded(true), 1000);
   }
+const handleRemount=()=>{
+  settogpdf(false)
+  setTimeout(() => settogpdf(true), 100);
 }
 
-
-// import { useEffect, useRef, useState } from "react";
-// import * as pdfjsLib from "pdfjs-dist";
-
-// pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-//   "pdfjs-dist/build/pdf.worker.mjs",
-//   import.meta.url
-// ).href;
-
-// // Helper component for each individual page
-// function PdfPage({ pdfDoc, pageNumber }) {
-//   const canvasRef = useRef(null);
-
-//   useEffect(() => {
-//     let renderTask = null;
-
-//     const render = async () => {
-//       try {
-//         const page = await pdfDoc.getPage(pageNumber);
-//         const canvas = canvasRef.current;
-//         const ctx = canvas.getContext("2d");
-
-//         // Calculate scale to fit 100% width of the parent container
-//         const containerWidth = canvas.parentElement.clientWidth;
-//         const unscaledViewport = page.getViewport({ scale: 1 });
-//         const scale = containerWidth / unscaledViewport.width;
-//         const viewport = page.getViewport({ scale });
-
-//         canvas.height = viewport.height;
-//         canvas.width = viewport.width;
-
-//         renderTask = page.render({ canvasContext: ctx, viewport });
-//         await renderTask.promise;
-//       } catch (err) {
-//         if (err.name !== "RenderingCancelledException") console.error(err);
-//       }
-//     };
-
-//     render();
-//     return () => renderTask?.cancel();
-//   }, [pdfDoc, pageNumber]);
-
-//   return <canvas ref={canvasRef} style={{ display: "block", marginBottom: "10px", width: "100%" }} />;
-// }
-
-// export default function SmoothPdfViewer({ url }) {
-//   const [pdfDoc, setPdfDoc] = useState(null);
-//   const containerRef = useRef(null);
-
-//   useEffect(() => {
-//     if (!url) return;
-//     const loadingTask = pdfjsLib.getDocument(url);
-//     loadingTask.promise.then(setPdfDoc).catch(console.error);
-//     return () => loadingTask.destroy();
-//   }, [url]);
-
-//   if (!pdfDoc) return <div style={{ padding: "20px" }}>Loading PDF...</div>;
-
-//   return (
-//     <div 
-//       ref={containerRef} 
-//       style={{ 
-//         overflowY: "auto", 
-//         backgroundColor: "#525659", // Classic PDF viewer dark background
-//         padding: "20px 0" 
-//       }}
-//       className="loadpdf"
-//     >
-//       <div style={{ maxWidth: "900px", margin: "0 auto", width: "60%" }}>
-//         {Array.from({ length: pdfDoc.numPages }, (_, i) => (
-//           <PdfPage key={i + 1} pdfDoc={pdfDoc} pageNumber={i + 1} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
+  return (
+    <div className="pdf-container" style={{ width: '100%', height: '100vh', overflowY: 'auto', background: '#160d1f' }}>
+     {togpdf && <Document
+        file={url}
+        onLoadSuccess={onDocumentLoadSuccess}
+        loading={<div className="" style={{margin:"auto"}}><div className="nbtn refloader" style={{width:"fit-content",margin:"auto",padding:10}}>...Loading</div></div>}
+        error={<div className="nbtn" onLoad={handleRemount}>Failed to load PDF. Please try again.</div>}
+      >
+        {/* This loop renders all pages in a vertical stack "at a go" */}
+        {Array.from(new Array(numPages), (el, index) => (
+          <div key={`page_container_${index + 1}`} style={{ marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>
+            <Page
+              pageNumber={index + 1}
+              // Automatically fits to the width of the screen
+              width={window.innerWidth > 800 ? 800 : window.innerWidth - 20}
+              renderTextLayer={true}
+              renderAnnotationLayer={true}
+            />
+          </div>
+        ))}
+      </Document>}
+    </div>
+  );
+}
