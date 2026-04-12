@@ -88,7 +88,7 @@ background-position:bottom,100% -100%,center;
   background-position: fixed,fixed,fixed,fixed,fixed;
   transition: all .6s ease-in-out; 
   background-repeat: no-repeat,repeat,repeat;
-  background-size:cover,200em 1em,3050px 400px;
+  background-size:0px 1000px,700em 1em,3050px 400px;
   animation: halfmove 50s linear infinite;
   background-position:bottom,100% -100%,center;
   box-shadow: inset 0px 0px 0px rgba(0, 128, 0, 0);
@@ -356,6 +356,7 @@ z-index:20000;
 @keyframes halfmove {
   
 100%{
+  background-size:1200px 1000px,700em 1em,3050px 400px;
 
   background-position:center,-100% 100%,center;
 
@@ -1538,9 +1539,8 @@ font-family: michroma;
   font-weight: 600;
   padding:20px;
   margin-left:-100px;
-     backdrop-filter:blur(5rem);
-     -webkit-backdrop-filter:blur(5rem);
-
+  backdrop-filter:blur(5rem);
+  -webkit-backdrop-filter:blur(5rem);
   background:linear-gradient(90deg,rgba(65, 2, 255, 0),rgba(0, 132, 255, 0.242),rgba(174, 0, 101, 0.43),transparent);
 
 }
@@ -2322,8 +2322,7 @@ align-items:center;
 
 }
 .firstitem:hover,.menuitems:hover{
-clip-path: polygon(24% 0, 0 0, 0 53%, 0 100%, 50% 100%, 100% 100%, 100% 0%, 100% 0, 100% 0%, 100% 0);
-    box-shadow:
+clip-path: polygon(78% 0%, 85% 0%, 93% 0%, 93% 0%, 89% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 65% 0%, 70% 0%);    box-shadow:
      inset 0px -100px 0px rgba(0, 0, 0, 0.645),
      -200px 0px 0px rgba(0, 0, 0, 0),
      50px 0px 0px rgba(0, 0, 0, 0);
@@ -2337,8 +2336,8 @@ clip-path: polygon(24% 0, 0 0, 0 53%, 0 100%, 50% 100%, 100% 100%, 100% 0%, 100%
   backdrop-filter:blur(5rem);
   -webkit-backdrop-filter:blur(5rem);
   margin-top:-30px;
-clip-path: polygon(24% 0, 0 0, 0 53%, 0 100%, 50% 95%, 99% 100%, 94% 23%, 100% 0, 69% 28%, 73% 0);
-transition:all 1s ease-in-out;
+clip-path: polygon(85% 0%, 75% 27%, 95% 0%, 90% 34%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 65% 0%, 79% 0%, 67% 9%);
+;transition:all 1s ease-in-out;
 }
 
 .rbackdrop{

@@ -3,7 +3,7 @@ import Search from './Search'
 import Showfiles from './Showfiles'
 import pdfpic from '/imgs/pdf.png'
 import { ExportOutlined,
-    ArrowLeftOutlined,FileProtectOutlined, AppstoreOutlined,GoldFilled,DollarOutlined,SolutionOutlined,ScheduleOutlined,
+    ArrowLeftOutlined,FileProtectOutlined,MoneyCollectOutlined, AppstoreOutlined,GoldFilled,DollarOutlined,SolutionOutlined,ScheduleOutlined,
 LogoutOutlined,
 MoneyCollectFilled,TeamOutlined,
 } from '@ant-design/icons'
@@ -184,7 +184,7 @@ selectedVal={selectedVal}
 target="_blank"
  rel="noopener noreferrer" 
     >
-    <div className="paid"><div className='fnav'>✨</div>Go premium <div className='fnav'>✨</div></div></Link>
+    <div className="paid"><div className='fnav'>✨</div><MoneyCollectOutlined style={{marginRight:4}}/>{"Upgrade"}<div className='fnav'>✨</div></div></Link>
 </div>
                 <div className="mymenu">
     <div className="menuitems" onClick={()=>{setcurrentView("dashboard")}}><div className="inmenu">
@@ -194,7 +194,7 @@ target="_blank"
     <div className="menuitems" onClick={()=>{setcurrentView("leaderboard")}}><div className="inmenu">
     <GoldFilled className='micon'/>Leaderboard</div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("referal")}}><div className="inmenu">
-    <MoneyCollectFilled className='micon'/>Referal Details</div></div>
+    <div className="micon"><i style={{fontSize:10}} className="fa fa-users"></i></div> Referal Details</div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("earn")}}><div className="inmenu">
     <DollarOutlined className='micon'/>Earn <div className="fnav">💰</div></div></div>
     <div className="menuitems" onClick={()=>{setcurrentView("advert")}}><div className="inmenu">

@@ -3,7 +3,6 @@ import jessy from '../../public/imgs/jessy.jpg';
 import brown from '../../public/imgs/brown.jpg';
 import guylogs from '../../public/imgs/guylogs.png';
 import rbadge from '../../public/imgs/reff.png'
-import {MoneyCollectOutlined,ThunderboltFilled } from '@ant-design/icons'
 import { useState,useEffect } from 'react'
 import {domain, fetchWithAuth } from './authfetch'
 
@@ -115,7 +114,7 @@ let storeddata;
                 {showing && <div className="successmessage" style={{position:"absolute",display:"flex",margin:"auto"}} ></div>}
 
                 <div className="levelitem2 reffirstboxtop">
-                      <div className="refpage" style={{fontSize:40,width:200}}><MoneyCollectOutlined className='micon'/>Referals</div>
+                      <div className="refpage" style={{fontSize:40,width:200}}><div className="iconb"><i style={{fontSize:20}} className="fa fa-users fa-dark"></i></div>Referals</div>
         
                   
                     <div className="refer">

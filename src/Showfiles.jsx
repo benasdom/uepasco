@@ -1,4 +1,4 @@
-import { CloseCircleOutlined,FileProtectOutlined,ArrowDownOutlined,SolutionOutlined,ArrowLeftOutlined,StarTwoTone,SaveOutlined } from '@ant-design/icons'
+import { CloseCircleOutlined,MoneyCollectOutlined,ArrowDownOutlined,SolutionOutlined,ArrowLeftOutlined,StarTwoTone,SaveOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from 'react'
 import spinner from '/imgs/loader.svg'
 import { marked } from "marked";
@@ -144,7 +144,7 @@ setIframeLoaded={setIframeLoaded}
             
             <div className="solnav clickable" >
             <span className="goldtop">
-            💸</span> Top up</div>
+                <MoneyCollectOutlined/></span> Top up</div>
             </Link>
             <div className="imgsmall">
              <img className="logopdf" src={mainlogo} width="200" alt=""/></div>
