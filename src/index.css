@@ -88,7 +88,7 @@ background-position:bottom,100% -100%,center;
   background-position: fixed,fixed,fixed,fixed,fixed;
   transition: all .6s ease-in-out; 
   background-repeat: no-repeat,repeat,repeat;
-  background-size:0px 1000px,700em 1em,3050px 400px;
+  background-size:1300px 1000px,700em 1em,3050px 400px;
   animation: halfmove 50s linear infinite;
   background-position:bottom,100% -100%,center;
   box-shadow: inset 0px 0px 0px rgba(0, 128, 0, 0);
@@ -356,7 +356,6 @@ z-index:20000;
 @keyframes halfmove {
   
 100%{
-  background-size:1200px 1000px,700em 1em,3050px 400px;
 
   background-position:center,-100% 100%,center;
 
@@ -1449,7 +1448,7 @@ inset 5000px 0px 0px rgba(55, 55, 55, 0.784);
 }
   .mlist a li{
 color:rgb(148, 158, 173);
-font-size: 12px;
+font-size: 10px;
 font-family: michroma;
 }
 .mtitle:hover{
@@ -2009,7 +2008,6 @@ align-items:center;
   width:100%;
   align-items: center;
   z-index:1;
-  margin-top: 5px;
   height:25px;
   padding:4px;
 }
