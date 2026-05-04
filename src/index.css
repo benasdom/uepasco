@@ -1052,7 +1052,7 @@ padding:10px;
   padding-left:15px;
 
 }
-.savetext:focus{
+.savebox:hover{
   border:3px solid darkblue;
 
 }
@@ -1060,8 +1060,19 @@ padding:10px;
 background:rgba(171, 217, 240, 0.35) !important;
 }
 .savebox{
-width:100%;
+width:calc(100% - 20px);
+  border:3px solid rgba(198, 198, 255, 0.093);
+  border-radius: 10px;
 
+display: flex;
+justify-content: center;
+align-items: center;
+  transition:1s ease-in-out;
+
+
+}
+.ham{
+  position:relative;
 }
 .savetext::placeholder{
   font-weight:600;
@@ -1074,12 +1085,8 @@ width:100%;
   height:45px;
   margin:auto;
   padding-left:10px;
-  transition:1s ease-in-out;
-  margin-top:10px;
-  margin-bottom:30px;
-  border:3px solid rgba(198, 198, 255, 0.093);
   border-radius:10px;
-  margin-bottom:10px;
+  border:1px solid transparent;
 }
 
 .note{
@@ -1448,7 +1455,7 @@ inset 5000px 0px 0px rgba(55, 55, 55, 0.784);
 }
   .mlist a li{
 color:rgb(148, 158, 173);
-font-size: 10px;
+font-size: 9px;
 font-family: michroma;
 }
 .mtitle:hover{
@@ -2379,7 +2386,7 @@ z-index:0 !important;
   z-index: 1;
   -webkit-backdrop-filter: blur(.2rem);
   backdrop-filter: blur(.2rem);
-  width:max-content;
+  width:100%;
   font-size:15px;
   padding-bottom: 5px;
   padding-top: 5px;
@@ -2394,6 +2401,9 @@ z-index:0 !important;
 }
 .slideb1 p{
     color:#a5b0c5;
+    line-height: 16px;
+    text-align: right;
+    margin-right: 10px;
 
 }
  .reglate2{
@@ -2414,6 +2424,7 @@ z-index:0 !important;
   width:90px;
   padding:0px;
   justify-content: center;
+  margin-top:-50px;
   align-items: center;
   border-radius: 30px;
 }
@@ -2480,7 +2491,7 @@ z-index:0 !important;
   padding:3px;
   font-size:12px;
   width:max-content;
-  margin-top:-60px;
+  margin-top:-40px;
   border-radius: 7px;
   background:rgba(183, 188, 191, 0.772);
 }
@@ -2497,7 +2508,21 @@ z-index:0 !important;
 
 
 }
+.rbackdropa{
+    background:linear-gradient(340deg,rgb(234, 0, 255),rgba(0, 153, 255, 0.72)80%,rgba(0, 91, 82, 0.53) 30%);
+  position:absolute;
+  top:0;
+  width:100%;
+  filter:blur(10rem);
+  -webkit-filter:blur(10rem);
+  margin-top: -130px;
+  margin-left: 100px;
+  opacity: .8;
+  pointer-events:none;
+  z-index:-100;
+  height:300px;
 
+}
   .abs{
     height:60px;
     width:40px;
@@ -3210,6 +3235,7 @@ filter: contrast(2);
   color:rgba(255, 255, 255, 0);
   pointer-events: none;
 }
+
 .tabs2{
   transition: all .5s linear;
   overflow: hidden;
@@ -3289,6 +3315,7 @@ padding:1px;
 justify-content:center;
 height:80px;
 width:80px;
+transform: scale(.7);
 align-items:center;
 }
 .think{

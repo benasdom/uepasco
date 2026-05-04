@@ -294,7 +294,9 @@ useEffect(() => {
   👋🏾
 </span> */}
 </div>
-  <div className="rbackdrop2" style={{opacity:1, width:"100%",margin:"auto",marginTop:"-50px"}}></div>
+  <div className="rbackdropa" ></div>
+  <div className="rbackdropb" ></div>
+  <div className="rbackdropc" ></div>
 
 <div className="welcmessage" id="welcid">
 Practice makes perfect. Keep your self busy with the resources we provide.

@@ -1,4 +1,4 @@
-import { InfoCircleFilled, LockOutlined, MailOutlined, MessageOutlined,UserAddOutlined, PhoneOutlined, ClockCircleOutlined, CheckCircleOutlined } from "@ant-design/icons";
+import { InfoCircleFilled, LockOutlined, MailOutlined, MessageOutlined,UserAddOutlined, PhoneOutlined, ClockCircleOutlined, CheckCircleOutlined, EyeOutlined } from "@ant-design/icons";
 import jess from '../../public/imgs/jess.jpg';
 import brown from '../../public/imgs/brown.jpg';
 import jude from '../../public/imgs/jude.jpg';
@@ -26,6 +26,7 @@ export default function Register({setshows}) {
     const [hasref, sethasref] = useState(false);
     const [counter, setcounter] = useState(10);
     const [temptoken, settemptoken] = useState(""); 
+    const [showkeys, setshowkeys] = useState(false); 
     const [referalCode, setreferalCode] = useState(""); 
     const [bools, setbools] = useState(false)
     const [mountsignup  , setmountsignup  ] = useState(false)
@@ -183,7 +184,7 @@ fetch(domain+"/api/v1/auth/register", options)
 .catch((error)=>{ seterrors(`${error}`);console.log(error); })
 }
 const servererrors=(pop)=>{
-    seterrors(pop.message)
+    seterrors((pop?.message+(pop?.details??"")))
 }
 const userreg=(result)=>{
 populate(result);
@@ -362,13 +363,17 @@ activateuser()
                                 <UserAddOutlined className="micon"/>
                                 <input onChange={(e) => setlastName(e.currentTarget.value)} type="text" placeholder='lastName' className="impbox"/>
                             </div>
-                            <div className="inputform">
-                                <LockOutlined/>
-                                <input onChange={(e) => setpassword(e.currentTarget.value)} type="password" placeholder='PASSWORD' className="impbox"/>
+                            <div className="inputform" >
+                                {!showkeys?<EyeOutlined onClick={()=>setshowkeys(!showkeys)} className="micon"/>
+                            :<LockOutlined onClick={()=>{setshowkeys(!showkeys)}} className="micon" />    
+                            }
+                                <input onChange={(e) => setpassword(e.currentTarget.value)} type={showkeys?"text":"password"} placeholder='PASSWORD' className="impbox"/>
                             </div>
-                            <div className="inputform">
-                                <LockOutlined/>
-                                <input onChange={(e) => setconfirm(e.currentTarget.value)} type="password" placeholder='CONFIRM PASSWORD' className="impbox"/>
+                            <div className="inputform" >
+                                {!showkeys?<EyeOutlined onClick={()=>setshowkeys(!showkeys)}/>
+                            :<LockOutlined onClick={()=>{setshowkeys(!showkeys)}} className="micon"/>    
+                            }
+                                <input onChange={(e) => setconfirm(e.currentTarget.value)} type={showkeys?"text":"password"} placeholder='CONFIRM PASSWORD' className="impbox"/>
                             </div>
                             
                             {hasref ? (
@@ -409,8 +414,10 @@ activateuser()
                                 <input onChange={(e) => setolduseremail(e.currentTarget.value)} type="text" placeholder='username' className="impbox"/>
                             </div>
                             <div className="inputform">
-                                <LockOutlined/>
-                                <input onChange={(e) => setoldpwd(e.currentTarget.value)} type="password" placeholder='PASSWORD' className="impbox"/>
+                                {!showkeys?<EyeOutlined onClick={()=>setshowkeys(!showkeys)}/>
+                            :<LockOutlined onClick={()=>{setshowkeys(!showkeys)}} />    
+                            }
+                                <input onChange={(e) => setoldpwd(e.currentTarget.value)} type={showkeys?"text":"password"} placeholder='PASSWORD' className="impbox"/>
                             </div>
                             
                          

@@ -164,10 +164,16 @@ setIframeLoaded={setIframeLoaded}
             <div className="nbtn refloader" ></div>
             <div className="nbtn refloader" ></div>
             <div className="nbtn refloader" ></div>
-            <div className='nbtn soltoggle' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}><span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>
+            <div className='nbtn soltoggle' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}><span className='fnav'><i className='fa fa-hamburger'></i></span></div>
 
             </div>
-        :<div className="responses"><div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div><div className="nbtn" onClick={()=>{setrawView(false)}}><span><div className="fnav"><i className='fa fa-box'></i></div> Raw</span><span className="prem4"></span></div>
+        :
+        <div className="responses"><div className="rbackdrop" style={{zIndex:0,bottom:0,position:"absolute"}}></div>
+              {<div className='ham' title={`previous queries ${!sideTabs?'toggle':'close'}`} onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}>
+                <div className="prem"></div>
+            <span className='fnav'><i className={!sideTabs?'fa fa-list':'fa fa-close'}></i></span></div>}
+        <div className="nbtn" onClick={()=>{setrawView(false)}}><span><div className="fnav"><i className='fa fa-box'></i></div> Raw</span><span className="prem4"></span></div>
+        
         <div className="nbtn" onClick={()=>{setrawView(true)}}><span>
           <div className="fnav"><i className='fa fa-check'></i></div>  Solved</span><span className="prem4"></span></div>
         {savedquery && 
@@ -176,21 +182,20 @@ setIframeLoaded={setIframeLoaded}
         }
         {<div className='nbtn' onClick={()=>setstoreme(true)} ><span><div className="fnav"><i className="fa fa-save"></i></div> Save</span><span className="prem4"></span></div>}
 
-        {<div className='nbtn' onClick={()=>setSideTabs(!sideTabs)} style={{width:40,aspectRatio:"1/1"}}>
-            <span className='fnav'><i className='fa fa-hamburger'></i></span>more</div>}
+  
         </div>}
          <br></br>
          <div className="midsection">
-            {<div className={extract=="loading" || sideTabs?"tabs":"tabs2"} >
+            {<div className={extract=="loading" || sideTabs?"tabs":"tabs2"}  >
                <div className="history-data">
                             <div className=' soltoggle' onClick={()=>setSideTabs(!sideTabs)} 
-                            style={{position:'absolute',width:50,aspectRatio:"1/1",right:0, marginRight:10}}><div className="fnav"><i style={{fontSize:15}} className='fa fa-hamburger'></i></div></div>
+                            style={{position:'absolute',width:50,aspectRatio:"1/1",right:0, marginRight:10}}><div className="fnav"><i style={{fontSize:15}} className='fa fa-close'></i></div></div>
 
 
             <div className="rlearn" >
                 <img src={racoon_learn} alt="" className="racoon" style={{margin:10}}/>
             </div>
-            <div className="rbackdrop" style={{zIndex:0,opacity:0.2,bottom:0,position:"absolute"}}></div>
+            <div className="rbackdrop" style={{zIndex:0,opacity:0.3,bottom:0,position:"absolute"}}></div>
 
           <div className="history-data-block">
            <div className="history-data-blocka">
@@ -364,9 +369,10 @@ console.log(final)
                 </div>
                     <div className="bbtn2" style={{zIndex:2}} onClick={()=>{setstoreme(false)}}><div className="ba"><CloseCircleOutlined/><span className='prem3'></span></div></div> 
 
-                <p className="note">Note: Dont save bad responses</p>
-                <p className="notemessage">Saving your good responses helps you not to spend your credits for same topics</p>
-                <div className="savebox"><input type="text" onChange={(e) => setnotemessage(e.target.value)} className="savetext" placeholder="Please type the above 'Note'" /></div>
+                <p className="note"><span className="fnav"><i className="fa fa-exclamation-circle fa-dark"></i></span> Note: Dont save bad responses</p>
+                <p className="notemessage">
+                    Saving your good responses helps you not to spend your credits for same topics</p>
+                <div className="savebox"><span className="fnav"><i className="fa fa-save fa-dark"></i></span><input type="text" onChange={(e) => setnotemessage(e.target.value)} className="savetext" placeholder="Please type the above 'Note'" /></div>
                 <div className="download btnlight" onClick={saveme}><div className="ba">{isSaving?"Saving...":"Save"}<span className='prem2'></span></div></div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import guylogs from '../../public/imgs/guylogs.png';
 import rbadge from '../../public/imgs/reff.png'
 import { useState,useEffect } from 'react'
 import {domain, fetchWithAuth } from './authfetch'
+import { ThunderboltFilled } from '@ant-design/icons';
 
 const dp=[bob, jessy,guylogs, brown];
 
