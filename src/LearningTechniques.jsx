@@ -59,7 +59,7 @@ export function LearningTechniques() {
   <div className="rbackdropb" ></div>
   <div className="rbackdropc" ></div>
 
-<div className={[styles.heading],`welcmessage`} id="welcid">
+<div className={`welcmessage`} id="welcid">
 Practice makes perfect. Keep your self busy with the resources we provide.
 </div>
 

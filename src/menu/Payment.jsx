@@ -136,7 +136,18 @@ window.open('', '_self', '');
         <div className="pay-dotgrid" aria-hidden="true" />
         <div className="pay-glow" aria-hidden="true" />
 
-        <button type="button" className="pay-return" onClick={closeme} aria-label="Go back">
+        <button
+          type="button"
+          className="pay-return"
+          onClick={closeme}
+          aria-label="Go back"
+          style={{
+            position: "fixed",
+            top: 16,
+            left: 16,
+            zIndex: 1000,
+          }}
+        >
           <ArrowLeftOutlined />
         </button>
 

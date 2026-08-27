@@ -87,10 +87,7 @@ html[data-theme="light"]{
   *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
 
-button:focus-visible, input:focus-visible, [tabindex]:focus-visible, a:focus-visible{
-  outline: 2px solid var(--accent-cyan);
-  outline-offset: 2px;
-}
+
 /*
   UE Docs UI — component library
   Requires theme-tokens.css to be loaded first (uses its CSS variables).

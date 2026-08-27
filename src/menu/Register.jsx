@@ -85,7 +85,7 @@ export default function Register() {
   const [showPwd,     setshowPwd]     = useState(false);
   const [showPwd2,    setshowPwd2]    = useState(false);
   const [loading,     setloading]     = useState(false);
-const [googleLoading, setgoogleLoading] = useState(false); // NEW
+  const [googleLoading, setgoogleLoading] = useState(false);
 
   const [otpLoading,  setotpLoading]  = useState(false);
   const [counter,     setcounter]     = useState(0);
@@ -104,6 +104,23 @@ const [googleLoading, setgoogleLoading] = useState(false); // NEW
   const [gsiReady, setgsiReady] = useState(false); // true once google.accounts.id is initialized
   const googleContainerNode = useRef(null);        // the currently-mounted overlay node Google renders into
   const googleFlowView      = useRef(VIEW.LOGIN);  // which view's button was rendered/clicked (login vs signup vs forgot)
+
+  // ── FIX: refs that always mirror the latest state, read inside handleGoogleCredential ──
+  // google.accounts.id.initialize() is only ever called ONCE (see the mount-only effect
+  // below), so the `callback` it's holding is a closure frozen at that first render — at
+  // that point referalCode is "", agreed is false, and policyVersion is null. Without these
+  // refs, handleGoogleCredential would keep reading those stale, permanently-empty values
+  // forever, no matter what the user later types or checks. Refs sidestep that: their
+  // `.current` is mutated in place, so the same function reads live data every time it
+  // fires, without needing to re-run `initialize` (and re-render Google's button) on every
+  // keystroke.
+  const referalCodeRef   = useRef(referalCode);
+  const agreedRef        = useRef(agreed);
+  const policyVersionRef = useRef(policyVersion);
+
+  useEffect(() => { referalCodeRef.current = referalCode; }, [referalCode]);
+  useEffect(() => { agreedRef.current = agreed; }, [agreed]);
+  useEffect(() => { policyVersionRef.current = policyVersion; }, [policyVersion]);
 
   const showToast = (message, isSuccess = false) => {
     clearTimeout(toastTimer.current);
@@ -155,11 +172,11 @@ const [googleLoading, setgoogleLoading] = useState(false); // NEW
     persistUserInfo(userData);
     syncWithExtension(userData);
   };
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const activateUser = () => {
-    try { 
-navigate('/'); 
+    try {
+      navigate('/');
     } catch (err) { showToast(String(err)); }
   };
 
@@ -229,7 +246,14 @@ navigate('/');
   // A login-via-Google skips OTP entirely (returning, already-verified user),
   // same as authlogin(). A signup-via-Google still needs phone verification,
   // same as authenticate().
-const handleGoogleCredential = async (response) => {
+  //
+  // NOTE: this function is registered with google.accounts.id.initialize()
+  // exactly once, in the mount-only effect below. Because of that, it must
+  // NOT read referalCode / agreed / policyVersion directly from component
+  // state — those would be frozen at their mount-time values ("", false,
+  // null) forever. Read from the *Ref versions instead, which always hold
+  // the latest value regardless of when this closure was created.
+  const handleGoogleCredential = async (response) => {
     if (!response?.credential) {
       showToast("Google sign-in didn't return a credential — please try again.");
       return;
@@ -240,13 +264,26 @@ const handleGoogleCredential = async (response) => {
       ? `${domain}/api/v1/auth/login`
       : `${domain}/api/v1/auth/google/register`;
 
-    setgoogleLoading(true); // NEW
+    setgoogleLoading(true);
     try {
       const googlePayload = { id_token: response.credential };
+
+      // Referral code only makes sense on signup (matches the SIGNUP-only agreedPolicyVersion
+      // rule below) — read from the ref, not the raw `referalCode` state variable, since this
+      // whole function is registered once with Google and would otherwise always see the
+      // referral field's value from the very first render (i.e. "").
+      if (!isLogin && referalCodeRef.current.trim()) {
+        googlePayload.referalCode = referalCodeRef.current.trim();
+      }
+
       // Google signup only fires from the SIGNUP view, which is blocked until `agreed` is
-      // checked (see GoogleBtn's `blocked={!agreed}` prop), so agreed is true here — but we
-      // still guard on it defensively, same as the email/password register flow.
-      if (!isLogin && agreed && policyVersion) googlePayload.agreedPolicyVersion = `${policyVersion}`;
+      // checked (see GoogleBtn's `blocked={!agreed}` prop), so agreedRef.current should be
+      // true here — but we still guard on it defensively, same as the email/password
+      // register flow. Same staleness reasoning as referalCodeRef above applies to both
+      // agreedRef and policyVersionRef.
+      if (!isLogin && agreedRef.current && policyVersionRef.current) {
+        googlePayload.agreedPolicyVersion = `${policyVersionRef.current}`;
+      }
 
       const res = await fetch(endpoint, {
         method:  "POST",
@@ -269,9 +306,9 @@ const handleGoogleCredential = async (response) => {
     } catch (err) {
       showToast("Network error — please check your connection and try again.");
     } finally {
-      setgoogleLoading(false); // NEW
+      setgoogleLoading(false);
     }
-};
+  };
 
   // Loads the GSI script once and initializes it with our client ID.
   // Does NOT render the button here — Google's rendered button lives inside a
@@ -279,6 +316,11 @@ const handleGoogleCredential = async (response) => {
   // the person will click (you cannot query into it or forward a click to it
   // from outside — that's a browser security boundary, not a bug). Rendering
   // happens in the effect below, keyed to whichever view is currently mounted.
+  //
+  // handleGoogleCredential is captured here ONCE — this is intentional (we
+  // don't want to re-run initialize/re-render Google's iframe on every
+  // keystroke) but it means the function must rely on refs (see above) for
+  // any value that changes after mount.
   useEffect(() => {
     if (!GOOGLE_CLIENT_ID) {
       console.warn("VITE_GOOGLE_CLIENT_ID is not set — Google sign-in is disabled.");
@@ -616,10 +658,11 @@ const handleGoogleCredential = async (response) => {
                     <strong style={{ color:"#fff", fontSize:"1rem" }}>Reset your password</strong>
                     <span>Enter your registered email — we'll send a reset link right away.</span>
                   </div>
-<GoogleBtn
-  googleLoading={googleLoading}
-  containerRef={googleContainerNode}
-/>                  <OrDivider/>
+                  <GoogleBtn
+                    googleLoading={googleLoading}
+                    containerRef={googleContainerNode}
+                  />
+                  <OrDivider/>
                   <div className="inputform">
                     <MailOutlined className="micon"/>
                     <input
@@ -654,14 +697,16 @@ const handleGoogleCredential = async (response) => {
               {/* ══ LOGIN ══ */}
               {view === VIEW.LOGIN && (
                 <div className="mbox">
-          <img className="tlogo" style={{ zIndex:2 }} src={logo} alt=""/>
+                  <img className="tlogo" style={{ zIndex:2 }} src={logo} alt=""/>
 
-        <div className="title">UE LEARN</div>
+                  <div className="title">UE LEARN</div>
 
-<GoogleBtn
-  googleLoading={googleLoading}
-  containerRef={googleContainerNode}
-/>                  <OrDivider/>
+                  <GoogleBtn
+                    googleLoading={googleLoading}
+                    containerRef={googleContainerNode}
+                  />
+
+                  <OrDivider/>
 
                   <div className="inputform">
                     <MailOutlined className="micon"/>
@@ -707,18 +752,40 @@ const handleGoogleCredential = async (response) => {
               {/* ══ SIGN UP ══ */}
               {view === VIEW.SIGNUP && (
                 <div className="mbox">
-          <img className="tlogo" style={{ zIndex:2 }} src={logo} alt=""/>
+                  <img className="tlogo" style={{ zIndex:2 }} src={logo} alt=""/>
 
-        <div className="title">UE LEARN</div>
+                  <div className="title">UE LEARN</div>
 
-<GoogleBtn
-  googleLoading={googleLoading}
-  blocked={!agreed}
-  blockedMessage="Please accept the Terms & Privacy Policy to continue.👇"
-  onBlockedClick={showToast}
-  containerRef={googleContainerNode}
-/>
-              <OrDivider/>
+                  <GoogleBtn
+                    googleLoading={googleLoading}
+                    blocked={!agreed}
+                    blockedMessage="Please accept the Terms & Privacy Policy to continue.👇"
+                    onBlockedClick={showToast}
+                    containerRef={googleContainerNode}
+                  />
+                  {/* referral */}
+                  {hasref ? (
+                    <>
+                      <div className="regbutton" onClick={() => sethasref(false)}>
+                        Remove referral section
+                      </div>
+                      <div className="inputform">
+                        <SafetyCertificateOutlined className="micon"/>
+                        <input className="impbox" type="text"
+                          onChange={(e) => setreferalCode(e.target.value)} placeholder="REFERRAL CODE"/>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="noted">
+                        <InfoCircleFilled className="micon"/> Optional: Add referral code
+                      </div>
+                      <div className="regbutton" onClick={() => sethasref(true)}>
+                        Add referral code
+                      </div>
+                    </>
+                  )}
+                  <OrDivider/>
 
                   <div className="inputform">
                     <MailOutlined className="micon"/>
@@ -761,29 +828,6 @@ const handleGoogleCredential = async (response) => {
                       placeholder="CONFIRM PASSWORD" autoComplete="new-password" className="impbox"
                     />
                   </div>
-
-                  {/* referral */}
-                  {hasref ? (
-                    <>
-                      <div className="regbutton" onClick={() => sethasref(false)}>
-                        Remove referral section
-                      </div>
-                      <div className="inputform">
-                        <SafetyCertificateOutlined className="micon"/>
-                        <input className="impbox" type="text"
-                          onChange={(e) => setreferalCode(e.target.value)} placeholder="REFERRAL CODE"/>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="noted">
-                        <InfoCircleFilled className="micon"/> Optional: Add referral code
-                      </div>
-                      <div className="regbutton" onClick={() => sethasref(true)}>
-                        Add referral code
-                      </div>
-                    </>
-                  )}
 
                   {/* terms checkbox */}
                   <label className="noted" style={{ cursor:"pointer", userSelect:"none", gap:8, alignItems:"flex-start" }}>
@@ -869,7 +913,7 @@ const handleGoogleCredential = async (response) => {
           </div>
 
           <img className="tinylogo" style={{ zIndex:2 }} src={logo} alt=""/>
-                </div>
+        </div>
       </div>
     </div>
   );

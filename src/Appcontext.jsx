@@ -7,6 +7,149 @@ import { fetchWithAuth, domain, AuthError } from './menu/authfetch';
 
 const PASCO_API_URL = "https://benasdom.github.io/ugpascoapi/ugpasco.json";
 
+// ─── animated icons (replace the ⚾ and ☝🏼 emojis in the search hint) ───────────
+
+// Soft pulsing ring standing in for the baseball emoji, mid-word in "code".
+const AnimatedO = ({ size = 15 }) => (
+  <svg
+    width={size} height={size} viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="3"
+    className="anim-o" aria-hidden="true"
+    style={{opacity:.3,margin:"0px 3px "}}
+
+  >
+    <circle cx="12" cy="12" r="8" />
+  </svg>
+);
+
+// Just the chevron (^) — rounded caps/joins, no stem/tail — bouncing upward
+// to point at the search bar above the hint text, standing in for ☝🏼.
+const AnimatedUpArrow = ({ size = 18 }) => (
+  <svg
+    width={size} height={size} viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="3"
+    strokeLinecap="round" strokeLinejoin="round"
+    className="anim-up-arrow" aria-hidden="true"
+    style={{opacity:.3}}
+  >
+    <polyline points="6 15 12 9 18 15" />
+  </svg>
+);
+
+// Wiggling unplugged plug, standing in for 🔌 in the "check your connection"
+// fallback message below.
+const AnimatedPlug = ({ size = 15 }) => (
+  <svg
+    width={size} height={size} viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="2.2"
+    strokeLinecap="round" strokeLinejoin="round"
+    className="anim-plug" aria-hidden="true"
+        style={{opacity:.3}}
+
+  >
+    <path d="M9 7V3M15 7V3" />
+    <path d="M7 7h10v4a5 5 0 0 1-10 0V7Z" />
+    <path d="M12 16v5" />
+  </svg>
+);
+
+// Laptop with a blinking "no signal" dot, standing in for 💻.
+const AnimatedComputer = ({ size = 15 }) => (
+  <svg
+    width={size} height={size} viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="2.2"
+    strokeLinecap="round" strokeLinejoin="round"
+    className="anim-computer" aria-hidden="true"
+        style={{opacity:.3}}
+
+  >
+    <rect x="3" y="4" width="18" height="12" rx="2" />
+    <path d="M2 20h20" />
+    <circle className="anim-computer-dot" cx="12" cy="10" r="1.6" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+// Gently bobbing worried face, standing in for 🥺.
+const AnimatedPleadingFace = ({ size = 16 }) => (
+  <svg
+    width={size} height={size} viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="2.2"
+    strokeLinecap="round" strokeLinejoin="round"
+    className="anim-pleading" aria-hidden="true"
+        style={{opacity:.3}}
+
+  >
+    <circle cx="12" cy="12" r="9" />
+    <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none" />
+    <circle cx="15" cy="10" r="1" fill="currentColor" stroke="none" />
+    <path d="M8.5 16c1-1.2 2.2-1.8 3.5-1.8s2.5.6 3.5 1.8" />
+  </svg>
+);
+
+// Injected once from AppProvider below, since NetworkError is consumed by
+// whatever component renders it (e.g. SearchList.jsx's empty state) and
+// that component has no idea it needs these keyframes.
+const ANIMATED_ICON_STYLES = `
+  @keyframes anim-o-pulse {
+    0%, 100% { transform: scale(1);    opacity: 1;  }
+    50%      { transform: scale(1.18); opacity: .55; }
+  }
+  .anim-o {
+    display: inline-block;
+    vertical-align: -2px;
+    color: #fbbf24;
+    animation: anim-o-pulse 1.3s ease-in-out infinite;
+  }
+
+  @keyframes anim-up-bounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-5px); }
+  }
+  .anim-up-arrow {
+    display: inline-block;
+    vertical-align: -3px;
+    color: #a5b4fc;
+    animation: anim-up-bounce 0.9s ease-in-out infinite;
+  }
+
+  @keyframes anim-plug-shake {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(-8deg); }
+    75%      { transform: rotate(8deg); }
+  }
+  .anim-plug {
+    display: inline-block;
+    vertical-align: -2px;
+    color: #f87171;
+    transform-origin: 50% 15%;
+    animation: anim-plug-shake 1s ease-in-out infinite;
+  }
+
+  .anim-computer {
+    display: inline-block;
+    vertical-align: -2px;
+    color: #93c5fd;
+  }
+  @keyframes anim-computer-blink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: .2; }
+  }
+  .anim-computer-dot {
+    animation: anim-computer-blink 1s ease-in-out infinite;
+  }
+
+  @keyframes anim-pleading-bounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+  }
+  .anim-pleading {
+    display: inline-block;
+    vertical-align: -3px;
+    color: #fbbf24;
+    animation: anim-pleading-bounce 1.1s ease-in-out infinite;
+  }
+`;
+
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
 function readStoredUser() {
@@ -35,7 +178,9 @@ export function AppProvider({ children }) {
 
   const [loader,       setloader]       = useState(true);
   const [NetworkError, setNetworkError] = useState(
-    "Type the course c⚾de in the search bar above ... ☝🏼"
+    <>
+      Type the course c<AnimatedO />de in the search bar above <AnimatedUpArrow />
+    </>
   );
   const [Refreshing,   setRefreshing]   = useState(false);
   const [payload,      setpayload]      = useState([]);
@@ -101,10 +246,15 @@ export function AppProvider({ children }) {
         const firstName = data.firstName ?? "";
         const streak    = data.highestStreakScore ?? 0;
 
-        if (firstName) {
+        // Persist and apply whatever the profile endpoint gave us, even if
+        // firstName happens to be missing on this response — previously the
+        // whole update (including the streak score) was gated on firstName
+        // being truthy, so an odd/partial response could silently leave
+        // maxscore stuck at 0 (or whatever was last cached).
+        if (Object.keys(data).length > 0) {
           writeStoredUser(data);
-          setusername(firstName);
           setmaxscore(streak);
+          if (firstName) setusername(firstName);
         }
       } catch (err) {
         if (cancelled) return;
@@ -133,7 +283,9 @@ export function AppProvider({ children }) {
       .then((res) => setpayload(res.data ?? []))
       .catch((err) => {
         setNetworkError(
-          `Oops! Kindly check your internet connection 🔌💻🥺 (${err.message})`
+          <>
+            Oops! Kindly check your internet connection <AnimatedPlug /><AnimatedComputer /><AnimatedPleadingFace /> ({err.message})
+          </>
         );
         setRefreshing(false);
       });
@@ -158,7 +310,12 @@ export function AppProvider({ children }) {
     writeStoredUser,
   };
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={value}>
+      <style>{ANIMATED_ICON_STYLES}</style>
+      {children}
+    </AppContext.Provider>
+  );
 }
 
 export function useAppContext() {

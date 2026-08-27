@@ -375,7 +375,16 @@
 .db-field-wide {
   grid-column: 1 / -1;
 }
-
+.db-field-input{ 
+  width:100%;
+   background-color:rgba(255,255,255,0.1);
+   outline:none;
+   border:none;
+   color:#fff;
+   padding:5px 10px;
+   border-radius:5px;
+ }
+                    
 .db-field-icon {
   display: flex;
   align-items: center;

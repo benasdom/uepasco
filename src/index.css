@@ -1647,7 +1647,9 @@ font-size:20px;
 }
 .nerror{
   font-size: 16px;
-  color:#b9bec1;
+  font-weight:700;
+  color:#b9bec1d5;
+  letter-spacing:4px;
 }
 .tel{
   display: flex;

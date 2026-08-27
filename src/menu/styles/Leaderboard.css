@@ -158,6 +158,19 @@
   font-weight: 600;
   margin-left: 1px;
 }
+.lb-tabs{
+  display:flex;
+  justify-content:space-around;
+  flex-direction:row;
+  margin-top:20px;
+
+}
+.lb-tab{
+  cursor:pointer;
+  background-color:rgba(255,255,255,0.05);
+  border-radius:"10px";
+  padding:"5px";
+}
 
 /* List ---------------------------------------------------------------------------- */
 

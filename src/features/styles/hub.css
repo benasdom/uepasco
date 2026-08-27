@@ -1,0 +1,237 @@
+/* ==========================================================================
+   hub.css — shared styling for the new Learning Hub features
+   (Flashcards, Mock Tests, Library, Planner, Discussions, badges)
+   Uses the same [data-theme] variable convention as Dashboard.css so
+   toggling theme affects these consistently.
+   ========================================================================== */
+
+:root,
+[data-theme='dark'] {
+  --hub-bg: #0a0b0f;
+  --hub-surface-1: #111319;
+  --hub-surface-2: #171922;
+  --hub-border: #23262f;
+  --hub-text: #f2f3f5;
+  --hub-text-muted: #8a8e99;
+  --hub-accent: #8b5cf6;
+  --hub-accent-2: #35c7e8;
+  --hub-danger: #ef4444;
+  --hub-success: #35e8a0;
+}
+
+[data-theme='light'] {
+  --hub-bg: #f4f5f7;
+  --hub-surface-1: #ffffff;
+  --hub-surface-2: #f8f9fb;
+  --hub-border: #e3e5ea;
+  --hub-text: #14161b;
+  --hub-text-muted: #6b7078;
+  --hub-accent: #7c3aed;
+  --hub-accent-2: #0891b2;
+  --hub-danger: #dc2626;
+  --hub-success: #1fae7c;
+}
+
+.hub-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 16px 120px;
+  color: var(--hub-text);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.hub-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--hub-text-muted);
+}
+
+.hub-title {
+  margin: 4px 0 18px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.hub-card {
+  background: var(--hub-surface-1);
+  border: 1px solid var(--hub-border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.hub-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.hub-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.hub-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  background: var(--hub-accent);
+  color: white;
+  transition: opacity 0.15s ease;
+}
+.hub-btn:hover { opacity: 0.88; }
+.hub-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.hub-btn-ghost {
+  background: transparent;
+  border: 1px solid var(--hub-border);
+  color: var(--hub-text);
+}
+
+.hub-btn-danger { background: var(--hub-danger); }
+
+.hub-input,
+.hub-textarea,
+.hub-select {
+  width: 100%;
+  background: var(--hub-surface-2);
+  border: 1px solid var(--hub-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--hub-text);
+  font-size: 14px;
+  font-family: inherit;
+}
+.hub-textarea { resize: vertical; min-height: 70px; }
+
+.hub-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+.hub-tab {
+  flex: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hub-text-muted);
+  background: var(--hub-surface-2);
+  border: 1px solid var(--hub-border);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.hub-tab.active {
+  color: white;
+  background: var(--hub-accent);
+  border-color: var(--hub-accent);
+}
+
+.hub-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--hub-text-muted);
+  font-size: 13px;
+}
+
+.hub-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--hub-surface-2);
+  border: 1px solid var(--hub-border);
+}
+
+.hub-progress-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--hub-surface-2);
+  overflow: hidden;
+}
+.hub-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--hub-accent), var(--hub-accent-2));
+  transition: width 0.25s ease;
+}
+
+.hub-flashcard {
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+.hub-grade-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+.hub-grade-btn {
+  padding: 10px 4px;
+  font-size: 11px;
+  border-radius: 10px;
+  border: 1px solid var(--hub-border);
+  background: var(--hub-surface-2);
+  color: var(--hub-text);
+  cursor: pointer;
+  font-weight: 600;
+}
+.hub-grade-btn[data-grade="0"]:hover { background: var(--hub-danger); color: white; }
+.hub-grade-btn[data-grade="3"]:hover { background: var(--hub-success); color: white; }
+
+.hub-list-item {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--hub-border);
+  background: var(--hub-surface-2);
+  margin-bottom: 8px;
+}
+
+.hub-error {
+  color: var(--hub-danger);
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.hub-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.hub-nav-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 8px;
+  border-radius: 14px;
+  background: var(--hub-surface-1);
+  border: 1px solid var(--hub-border);
+  cursor: pointer;
+  color: var(--hub-text);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+}
+.hub-nav-tile:hover { border-color: var(--hub-accent); }
+.hub-nav-tile-icon { font-size: 22px; }

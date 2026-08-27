@@ -3,6 +3,12 @@ import {
   MoneyCollectOutlined,
   ArrowDownOutlined,
   SolutionOutlined,
+  CheckCircleOutlined,
+  CodeOutlined,
+  ReloadOutlined,
+  CloseOutlined,
+  FullscreenOutlined,
+  FullscreenExitOutlined,
 } from '@ant-design/icons'
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { marked } from 'marked'
@@ -184,6 +190,7 @@ const Showfiles = ({
   extract,
   dataerror,
   raw,
+  onRegenerate, // ← re-runs the original fetch (PDF + AI solution) so the solution can be regenerated
 }) => {
   const [solnsOpen, setSolnsOpen] = useState(false)
   const [recentItems, setRecentItems] = useState(getRecents)
@@ -198,6 +205,8 @@ const Showfiles = ({
   const [searchTerm, setSearchTerm] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [activeTab, setActiveTab] = useState('saved') // 'saved' | 'recent'
+  const [isRegenerating, setIsRegenerating] = useState(false)
+  const [expanded, setExpanded] = useState(false) // solutions drawer: half-screen vs. full-width
 
   const controllerRef = useRef(null)
   const searchDebounceRef = useRef(null)
@@ -281,6 +290,22 @@ const Showfiles = ({
   const hasError = dataerror?.length > 0 || !extract || extract === 'loading...'
   const hasDownload = /download/gi.test(actualDlink)
 
+  // Once a fresh load starts coming in (isLoading flips true again), drop the
+  // local "regenerating" flag so the button re-appears whatever the outcome.
+  useEffect(() => {
+    if (isLoading) setIsRegenerating(false)
+  }, [isLoading])
+
+  // Regenerating a successful result still spends a credit (getpayload hits the
+  // paid /solutions endpoint every time), so confirm before doing that. A failed
+  // result costs nothing extra to retry, so no prompt needed there.
+  const handleRegenerate = () => {
+    if (!onRegenerate || isRegenerating) return
+    if (!hasError && !confirm('Regenerate will use another credit for a fresh solution. Continue?')) return
+    setIsRegenerating(true)
+    onRegenerate()
+  }
+
   const renderedContent = () => {
     if (hasError && !savedquery) return `<div class='sf-ai-error'>${dataerror}</div>`
     if (rawView) return marked(savedquery?.solution || extract || dataerror || '')
@@ -313,9 +338,17 @@ const Showfiles = ({
                       <ArrowDownOutlined /> Download
                     </a>
                   )}
-                  <button className="sf-pill-btn sf-pill-btn--accent" onClick={() => setSolnsOpen(true)}>
+                  <Link
+                    to="/payment"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="sf-pill-btn sf-pill-btn--topup"
+                  >
+                    <MoneyCollectOutlined /> Top up
+                  </Link>
+                  <div className="sf-pill-btn sf-pill-btn--accent" onClick={() => setSolnsOpen(true)}>
                     ✨Solutions
-                  </button>
+                  </div>
                 </>
               ) : (
                 <>
@@ -336,11 +369,15 @@ const Showfiles = ({
 
         {/* ── Solutions drawer ── */}
         {solnsOpen && (
-          <div className="sf-drawer">
+          <div className={`sf-drawer ${expanded ? 'sf-drawer--expanded' : ''}`}>
             {/* Drawer topbar */}
             <div className="sf-drawer__topbar">
-              <button className="sf-icon-btn" onClick={() => { setSolnsOpen(false); setSavedquery(null) }}>
-                <i className="fa fa-arrow-left" />
+              <button
+                className="sf-icon-btn"
+                onClick={() => { setSolnsOpen(false); setSavedquery(null); setExpanded(false) }}
+                title="Close solutions"
+              >
+                <CloseOutlined />
               </button>
               <span className="sf-drawer__title">
                 {savedquery ? (
@@ -351,6 +388,13 @@ const Showfiles = ({
                   'Solutions'
                 )}
               </span>
+              <button
+                className="sf-icon-btn"
+                onClick={() => setExpanded((v) => !v)}
+                title={expanded ? 'Collapse' : 'Expand to full screen'}
+              >
+                {expanded ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
+              </button>
               <div className="sf-drawer__credits">
                 <Link to="/Payment" target="_blank" rel="noopener noreferrer" className="sf-credits-pill">
                   <i className="fa fa-bolt sf-credits-pill__icon" />
@@ -479,13 +523,13 @@ const Showfiles = ({
                         className={`sf-view-toggle__btn ${rawView ? 'sf-view-toggle__btn--active' : ''}`}
                         onClick={() => setRawView(true)}
                       >
-                        <i className="fa fa-check-circle" /> Solved
+                        <CheckCircleOutlined style={{marginRight:5}}/>{" Solved"}
                       </button>
                       <button
                         className={`sf-view-toggle__btn ${!rawView ? 'sf-view-toggle__btn--active' : ''}`}
                         onClick={() => setRawView(false)}
                       >
-                        <i className="fa fa-code" /> Raw
+                        <CodeOutlined style={{marginRight:5}}/> Raw
                       </button>
                     </div>
                   )}
@@ -500,11 +544,29 @@ const Showfiles = ({
                         Live result
                       </button>
                     )}
+                    {/* Regenerate: shown for the live (not saved/recent) result whether it
+                        succeeded or failed. Red-tinted on failure, neutral on success. */}
+                    {!isLoading && !savedquery && (
+                      <button
+                        className={`sf-pill-btn sf-pill-btn--regenerate ${hasError ? '' : 'sf-pill-btn--regenerate-ok'}`}
+                        onClick={handleRegenerate}
+                        disabled={!onRegenerate || isRegenerating}
+                        title={hasError ? 'Try generating the solution again' : 'Generate a fresh solution (uses a credit)'}
+                      >
+                        {isRegenerating ? (
+                          <span className="sf-modal__spinner sf-modal__spinner--small" />
+                        ) : (
+                          <>
+                            <ReloadOutlined /> Regenerate
+                          </>
+                        )}
+                      </button>
+                    )}
                     {!isLoading && !hasError && (
-  <button className="sf-pill-btn" onClick={() => setSaveOpen(true)}>
-    <i className="fa fa-bookmark" /> Save
-  </button>
-)}
+                      <button className="sf-pill-btn" onClick={() => setSaveOpen(true)}>
+                        <i className="fa fa-bookmark" /> Save
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -601,6 +663,19 @@ const STYLES = `
     background: #111115;
     border-left: 1px solid #1e1e24;
     overflow: hidden;
+    transition: width .22s ease, max-width .22s ease;
+  }
+  /* Extend button toggles this — drawer covers the full window edge to edge,
+     overlaying the PDF pane instead of sharing space with it. */
+  .sf-drawer--expanded {
+    position: fixed;
+    inset: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    border-left: none;
+    z-index: 1150;
+    animation: sf-slide-up .22s ease;
   }
   .sf-drawer__topbar {
     display: flex;
@@ -992,6 +1067,19 @@ const STYLES = `
   .sf-pill-btn--accent:hover { background: #25224f; }
   .sf-pill-btn--active { background: #1c2a14; border-color: #4d7c0f; color: #a3e635; }
 
+  /* Top-up pill next to Download/Solutions in the PDF topbar */
+  .sf-pill-btn--topup { background: #1c1a0e; border-color: #92400e; color: #fbbf24; }
+  .sf-pill-btn--topup:hover { background: #241d0a; color: #fde68a; }
+
+  /* Regenerate pill in the solutions toolbar (red-tinted on failure) */
+  .sf-pill-btn--regenerate { background: #2b0d0d; border-color: #7f1d1d; color: #f87171; }
+  .sf-pill-btn--regenerate:hover:not(:disabled) { background: #3a1010; color: #fca5a5; }
+  .sf-pill-btn--regenerate:disabled { opacity: .6; cursor: not-allowed; }
+
+  /* Regenerate pill when shown on a successful result — neutral, not alarming */
+  .sf-pill-btn--regenerate-ok { background: #1a1a22; border-color: #2a2a38; color: #a0a0b8; }
+  .sf-pill-btn--regenerate-ok:hover:not(:disabled) { background: #22222e; color: #e0e0e8; }
+
   .sf-sidebar-toggle { flex-shrink: 0; }
 
   /* ── Skeleton ── */
@@ -1151,6 +1239,7 @@ const STYLES = `
     animation: sf-spin .6s linear infinite;
     display: inline-block;
   }
+  .sf-modal__spinner--small { width: 12px; height: 12px; border-width: 2px; }
   @keyframes sf-spin { to { transform: rotate(360deg); } }
 
   /* ── Responsive ── */

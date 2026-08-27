@@ -8,9 +8,10 @@ import Nss from "./Nss"
 import Job from "./Job"
 import Products from "./products"
 import Advert from "./Advert"
+import Hub from "../features/Hub"
 import { logout } from "./authfetch"
 export default function Overview({currentView,setcurrentView}) {
-    const views="general-nss-referal-products-earn-leaderboard-advert-job".split("-")
+    const views="general-nss-referal-products-earn-leaderboard-advert-job-hub".split("-")
 const logoutUser=()=>{
         if(confirm("Confirm to Leave")){
           logout();
@@ -29,7 +30,8 @@ const logoutUser=()=>{
           :(currentView==views[4]?<Earn/>
           :(currentView==views[5]?<Leaderboard/>
           :(currentView==views[6]?<Advert/>
-          :(currentView==views[7]?<Job/>:<MissingComp/>)))))))
+          :(currentView==views[7]?<Job/>
+          :(currentView==views[8]?<Hub/>:<MissingComp/>))))))))
           }
           </div>
             <div className="onmenu">
@@ -53,6 +55,8 @@ const logoutUser=()=>{
                      <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-certificate fa-dark'></i></span>Job guide</div></div>
                 <div onClick={()=>{setcurrentView("leaderboard")}} className="in">
                      <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-medal fa-dark'></i></span>leaderboard</div></div>
+                <div onClick={()=>{setcurrentView("hub")}} className="in">
+                     <div className="insp"><div className="prem4"></div><span className="fnav"><i className='fa fa-graduation-cap fa-dark'></i></span>Learning Hub</div></div>
             </div>
 
     </div>

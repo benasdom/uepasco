@@ -13,6 +13,9 @@ import './mobile.css'
 import './print.css'
 import Register from './menu/Register.jsx';
 import { AppProvider } from './Appcontext.jsx';
+import { registerServiceWorker } from './lib/registerServiceWorker';
+
+registerServiceWorker();
 
 const MainRouter = () => {
   const [credits, setCredits] = useState(0);
@@ -27,6 +30,7 @@ const MainRouter = () => {
           <Route path="/login" element={<Register />} />
           <Route path="/about" element={<About />} />
           <Route path="/dashboard" element={<Searchlist />} />
+          <Route path="/dashboard/solution/:filename" element={<Searchlist />} />
           <Route path="/dashboard/:view" element={<Searchlist />} />
           <Route path="/payment" element={<Payment setcredits={setCredits} />} />
           <Route path="*" element={<Notfound />} />

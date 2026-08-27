@@ -4,9 +4,13 @@ import mainlogo   from '/imgs/titled.png'
 
 
 import {
-  SmileFilled, TeamOutlined, MoneyCollectOutlined,PoweroffOutlined
+  SmileFilled, TeamOutlined, MoneyCollectOutlined, PoweroffOutlined, SolutionOutlined
 } from '@ant-design/icons'
 import { logout } from "./menu/authfetch"
+import ThemeToggle from "./features/ThemeToggle"
+import PWAInstallButton from "./PWAInstallButton"
+import { getLastSolution } from "./Searchlist"
+import { useState, useEffect } from "react"
 
 const styles=`
 
@@ -51,8 +55,15 @@ const styles=`
   .amb-nav-item:hover .amb-nav-logo, .amb-nav-item.active .amb-nav-logo { opacity: 1; }
     @media (max-width: 600px) {
     .amb-card { padding: 32px 24px; border-radius: 20px; }
+    .amb-nav {
+      max-width: 94vw;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .amb-nav::-webkit-scrollbar { display: none; }
     .amb-nav-item { padding: 8px 10px; min-width: 44px; }
-    .amb-nav-label { display: none; }
+    .amb-nav-label { font-size: 8px; }
   }
 
 `;
@@ -64,15 +75,35 @@ export function Bottomnav({cname="",active=""}) {
   
       }
     }
+
+   // Computed here (rather than passed as a prop) so every page that
+   // renders Bottomnav — not just App.jsx — gets the shortcut for free
+   // once a solution has been viewed at least once.
+   const [lastSolution, setLastSolution] = useState(null);
+   useEffect(() => {
+     setLastSolution(getLastSolution());
+   }, []);
+
   return (
     <>
     <style>{styles}</style>
+    <ThemeToggle />
     <div className={cname}>
  <nav className={`amb-nav `}>
           <Link to="/" className={`amb-nav-item ${active=="home"?"active":""}`}>
             <span className="amb-nav-icon"><img className="amb-nav-logo" src={mainlogo} alt="" /></span>
             <span className="amb-nav-label">Home</span>
           </Link>
+          {lastSolution && (
+            <Link
+              to={`/dashboard/solution/${lastSolution.namedfile}`}
+              className={`amb-nav-item ${active=="solutions"?"active":""}`}
+              title={lastSolution.courseName || "Your last solution"}
+            >
+              <span className="amb-nav-icon"><SolutionOutlined /></span>
+              <span className="amb-nav-label">Solutions</span>
+            </Link>
+          )}
           <Link to="/about" className={`amb-nav-item ${active=="about"?"active":""}`}>
             <span className="amb-nav-icon"><SmileFilled /></span>
             <span className="amb-nav-label">About</span>
@@ -85,6 +116,7 @@ export function Bottomnav({cname="",active=""}) {
             <span className="amb-nav-icon"><MoneyCollectOutlined /></span>
             <span className="amb-nav-label">Upgrade</span>
           </Link>
+          <PWAInstallButton variant="navitem" />
           <div className={`amb-nav-item`} onClick={logoutUser} >
             <span className="amb-nav-icon"><PoweroffOutlined /></span>
             <span className="amb-nav-label">Logout</span>
