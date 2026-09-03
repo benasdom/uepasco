@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 import App from './App.jsx'
 import './index.css'
-import Searchlist from './Searchlist.jsx';
+
 import About from './About.jsx';
 import Contact from './Contact.jsx';
 import Notfound from './Notfound.jsx';
@@ -14,6 +14,8 @@ import './print.css'
 import Register from './menu/Register.jsx';
 import { AppProvider } from './Appcontext.jsx';
 import { registerServiceWorker } from './lib/registerServiceWorker';
+import PrivacyTermsPage from './menu/privacyTerms.jsx';
+import Searchlist from './Searchlist.jsx';
 
 registerServiceWorker();
 
@@ -33,6 +35,7 @@ const MainRouter = () => {
           <Route path="/dashboard/solution/:filename" element={<Searchlist />} />
           <Route path="/dashboard/:view" element={<Searchlist />} />
           <Route path="/payment" element={<Payment setcredits={setCredits} />} />
+          <Route path="/policy_and_terms" element={<PrivacyTermsPage/>} />
           <Route path="*" element={<Notfound />} />
         </Routes>
       </AppProvider>

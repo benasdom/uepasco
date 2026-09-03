@@ -4,7 +4,7 @@ import {
   EyeOutlined, EyeInvisibleOutlined, GoogleOutlined, ArrowLeftOutlined,
   SafetyCertificateOutlined, LoadingOutlined,
 } from "@ant-design/icons";
-
+import {Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { domain } from "./authfetch";
 
@@ -15,7 +15,6 @@ import guylogs      from "../../public/imgs/guylogs.png";
 import racoon_learn from "../../public/imgs/racoon_learn.jpg";
 import logo         from "../../public/imgs/titled.jpg";
 import { GoogleBtn } from "./Googlebtn";
-import { useNavigate } from 'react-router-dom';
 
 // ─── constants ────────────────────────────────────────────────────────────────
 
@@ -487,14 +486,14 @@ export default function Register() {
     </div>
   );
 
-  const LegalFooter = ({ returnView }) => (
+  const LegalFooter = () => (
     <div className="noted" style={{ fontSize:".72rem", opacity:.55, justifyContent:"center", flexWrap:"wrap", gap:4 }}>
       By continuing you agree to our&nbsp;
-      <span style={{ textDecoration:"underline", cursor:"pointer", color:"cyan" }}
-        onClick={() => { setlegalReturn(returnView); setview(VIEW.TERMS); }}>Terms</span>
+      <Link target="_blank" rel="noopener noreferrer" to="/policy_and_terms" style={{ textDecoration:"underline", cursor:"pointer", color:"cyan" }}
+        >Terms</Link>
       &nbsp;&amp;&nbsp;
-      <span style={{ textDecoration:"underline", cursor:"pointer", color:"cyan" }}
-        onClick={() => { setlegalReturn(returnView); setview(VIEW.POLICY); }}>Privacy Policy</span>
+      <Link target="_blank" rel="noopener noreferrer" to="/policy_and_terms" style={{ textDecoration:"underline", cursor:"pointer", color:"cyan" }}
+        >Privacy Policy</Link>
     </div>
   );
 
@@ -838,16 +837,11 @@ export default function Register() {
                     />
                     <span style={{ fontSize:".78rem", lineHeight:1.6 }}>
                       I agree to the&nbsp;
-                      <span style={{ textDecoration:"underline", cursor:"pointer", color:"cyan" }}
-                        onClick={(e) => { e.preventDefault(); setlegalReturn(VIEW.SIGNUP); setview(VIEW.TERMS); }}>
-                        Terms of Service
-                      </span>
-                      &nbsp;and&nbsp;
-                      <span style={{ textDecoration:"underline", cursor:"pointer", color:"cyan" }}
-                        onClick={(e) => { e.preventDefault(); setlegalReturn(VIEW.SIGNUP); setview(VIEW.POLICY); }}>
-                        Privacy Policy
-                      </span>
-                    </span>
+ <Link target="_blank" rel="noopener noreferrer" to="/policy_and_terms" style={{ textDecoration:"underline", cursor:"pointer", color:"cyan" }}
+        >Terms</Link>
+      &nbsp;&amp;&nbsp;
+      <Link target="_blank" rel="noopener noreferrer" to="/policy_and_terms" style={{ textDecoration:"underline", cursor:"pointer", color:"cyan" }}
+        >Privacy Policy</Link>                    </span>
                   </label>
 
                   <div className="otpverbox">

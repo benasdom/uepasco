@@ -101,16 +101,12 @@ const SaveModal = ({ setstoreme, extract, courseName, selectedVal }) => {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
     try {
-      await fetchWithAuth(
-        domain + '/api/v1/solutions/',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
-          body: JSON.stringify({ courseName, solution: extract, validated: false, modelName: selectedVal }),
-          signal: controller.signal,
-        },
-        refreshToken
-      )
+      await fetchWithAuth(domain + '/api/v1/solutions/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
+        body: JSON.stringify({ courseName, solution: extract, validated: false, modelName: selectedVal }),
+        signal: controller.signal,
+      })
       setToast({ message: 'Saved successfully!', type: 'success' })
       setTimeout(() => setstoreme(false), 1600)
     } catch (err) {
@@ -237,14 +233,10 @@ const Showfiles = ({
     const timeout = setTimeout(() => controllerRef.current?.abort(), FETCH_TIMEOUT_MS)
 
     try {
-      const result = await fetchWithAuth(
-        url,
-        {
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
-          signal: controllerRef.current.signal,
-        },
-        refreshToken
-      )
+      const result = await fetchWithAuth(url, {
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
+        signal: controllerRef.current.signal,
+      })
       const normalised =
         result?.solutions != null         ? result
         : result?.data?.solutions != null  ? result.data

@@ -83,13 +83,13 @@ export default function Discussions() {
     <div className="hub-page">
       <p className="hub-eyebrow">COMMUNITY</p>
       <h2 className="hub-title">Discussions</h2>
-
+ {/* This screen is fully built and ready — it just needs the
+            <code> /api/v1/discussions</code> routes added server-side (documented at the top of this file).
+         */}
       {backendMissing ? (
         <div className="hub-card">
           <p style={{ fontSize: 13 }}>
-            Discussions aren't set up on the backend yet. This screen is fully built and ready — it just needs the
-            <code> /api/v1/discussions</code> routes added server-side (documented at the top of this file).
-          </p>
+            Discussions aren't set up on the backend yet.   </p>
         </div>
       ) : (
         <>

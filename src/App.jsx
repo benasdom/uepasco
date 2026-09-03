@@ -52,6 +52,22 @@ function App() {
 
   const [countdown, setcountdown] = useState(() => formatCountdown(COUNTDOWN_DATE - Date.now()));
 
+  // ── graceful session-expiry handling ──
+  // authfetch.js dispatches this event whenever a session dies unexpectedly
+  // (refresh token invalid/expired, no token at all, or a 401 that survives
+  // the retry) — as opposed to a deliberate logout, which stays silent.
+  // Storage is already cleared by the time this fires; reloading drops the
+  // user back into the logged-out state cleanly, same as the existing
+  // "Log out" button does in Searchlist.jsx.
+  const [sessionExpiredReason, setSessionExpiredReason] = useState(null);
+  useEffect(() => {
+    const onSessionExpired = (e) => {
+      setSessionExpiredReason(e.detail?.reason || 'Your session has expired.');
+    };
+    window.addEventListener('auth:session-expired', onSessionExpired);
+    return () => window.removeEventListener('auth:session-expired', onSessionExpired);
+  }, []);
+
   // ── last-viewed solution (top-nav "Solutions" link falls back to the
   //    dashboard when nothing's cached yet, so it's never a dead link) ──
   const [lastSolution, setlastSolution] = useState(null);
@@ -114,6 +130,57 @@ function App() {
 
   return (
     <div className="page">
+      {sessionExpiredReason && (
+        <div
+          role="alertdialog"
+          aria-modal="true"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            background: 'rgba(0,0,0,0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 20,
+          }}
+        >
+          <div
+            style={{
+              background: '#1a1a1a',
+              color: 'whitesmoke',
+              borderRadius: 12,
+              padding: '28px 24px',
+              maxWidth: 360,
+              width: '100%',
+              textAlign: 'center',
+              boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
+            }}
+          >
+            <div style={{ fontSize: 32, marginBottom: 12 }}>🔒</div>
+            <div style={{ fontWeight: 600, marginBottom: 6 }}>Session expired</div>
+            <div style={{ fontSize: 14, opacity: 0.85, marginBottom: 20 }}>
+              {sessionExpiredReason} Please sign in again to continue.
+            </div>
+            <button
+              type="button"
+              onClick={() => location.reload()}
+              style={{
+                background: 'whitesmoke',
+                color: '#1a1a1a',
+                border: 'none',
+                borderRadius: 8,
+                padding: '10px 24px',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              Sign in
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* ── promo banner ── */}
       <div className="promo" style={{ position: "relative", fontWeight: 600 }}>
         <span className="inv-ico" />

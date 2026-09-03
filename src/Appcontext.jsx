@@ -1,7 +1,7 @@
 import {
   createContext, useContext, useState, useEffect, useRef, useCallback,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getFromLocalStorage } from './menu/fromlocal';
 import { fetchWithAuth, domain, AuthError } from './menu/authfetch';
 
@@ -16,7 +16,6 @@ const AnimatedO = ({ size = 15 }) => (
     fill="none" stroke="currentColor" strokeWidth="3"
     className="anim-o" aria-hidden="true"
     style={{opacity:.3,margin:"0px 3px "}}
-
   >
     <circle cx="12" cy="12" r="8" />
   </svg>
@@ -44,8 +43,7 @@ const AnimatedPlug = ({ size = 15 }) => (
     fill="none" stroke="currentColor" strokeWidth="2.2"
     strokeLinecap="round" strokeLinejoin="round"
     className="anim-plug" aria-hidden="true"
-        style={{opacity:.3}}
-
+    style={{opacity:.3}}
   >
     <path d="M9 7V3M15 7V3" />
     <path d="M7 7h10v4a5 5 0 0 1-10 0V7Z" />
@@ -60,8 +58,7 @@ const AnimatedComputer = ({ size = 15 }) => (
     fill="none" stroke="currentColor" strokeWidth="2.2"
     strokeLinecap="round" strokeLinejoin="round"
     className="anim-computer" aria-hidden="true"
-        style={{opacity:.3}}
-
+    style={{opacity:.3}}
   >
     <rect x="3" y="4" width="18" height="12" rx="2" />
     <path d="M2 20h20" />
@@ -76,8 +73,7 @@ const AnimatedPleadingFace = ({ size = 16 }) => (
     fill="none" stroke="currentColor" strokeWidth="2.2"
     strokeLinecap="round" strokeLinejoin="round"
     className="anim-pleading" aria-hidden="true"
-        style={{opacity:.3}}
-
+    style={{opacity:.3}}
   >
     <circle cx="12" cy="12" r="9" />
     <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none" />
@@ -172,9 +168,13 @@ function writeStoredUser(patch) {
 
 const AppContext = createContext(null);
 
+// Public routes that don't require authentication
+const PUBLIC_ROUTES = ['/contact', '/about', '/policy_and_terms', '/login', '/reset-password'];
+
 export function AppProvider({ children }) {
   // NOTE: this must render *inside* <BrowserRouter>, since it calls useNavigate.
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [loader,       setloader]       = useState(true);
   const [NetworkError, setNetworkError] = useState(
@@ -205,6 +205,15 @@ export function AppProvider({ children }) {
 
   // ── bootstrap from localStorage — redirect to /login if nothing cached ──
   useEffect(() => {
+    // Check if current route is public
+    const isPublicRoute = PUBLIC_ROUTES.includes(location.pathname);
+    
+    // Don't redirect on public routes
+    if (isPublicRoute) {
+      setloader(false);
+      return;
+    }
+
     const stored = readStoredUser();
     if (stored && Object.keys(stored).length > 0) {
       setusername(stored.firstName ?? "");
@@ -213,7 +222,7 @@ export function AppProvider({ children }) {
     } else {
       navigate('/login');
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [location.pathname, navigate]); // Add location.pathname as dependency
 
   // ── cross-tab credit sync (e.g. from the Payment page) ──
   useEffect(() => {
@@ -230,6 +239,13 @@ export function AppProvider({ children }) {
     let cancelled = false;
 
     async function loadProfile() {
+      // Don't fetch profile on public routes
+      const isPublicRoute = PUBLIC_ROUTES.includes(location.pathname);
+      if (isPublicRoute) {
+        setloader(false);
+        return;
+      }
+
       try {
         const profiledata = await fetchWithAuth(`${domain}/api/v1/user/profile`, {
           method:  "GET",
@@ -271,7 +287,7 @@ export function AppProvider({ children }) {
 
     loadProfile();
     return () => { cancelled = true; };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [location.pathname, navigate]); // Add location.pathname as dependency
 
   // ── fetch question bank — only once ──
   useEffect(() => {

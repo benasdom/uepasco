@@ -46,17 +46,13 @@ const Dashboard = () => {
     // POST to record today's visit.
     // Backend is idempotent — safe to call on every app load.
     // No body needed; backend derives everything from the user's lastActiveDate.
-    fetchWithAuth(
-      streakUrl,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
+    fetchWithAuth(streakUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
-      refreshToken
-    )
+    })
       .then((data) => {
         const score = data?.streakScore ?? 0
         const highest = data?.highestStreakScore ?? 0
@@ -161,12 +157,6 @@ const Dashboard = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
-
-      // fetchWithAuth resolves (rather than throws) on some non-2xx server
-      // error bodies, so guard against that shape explicitly.
-      if (data?.success === false || data?.error) {
-        throw new Error(data?.message || 'Failed to update profile.')
-      }
 
       const updated = {
         ...current,
@@ -400,7 +390,7 @@ const Dashboard = () => {
                     <input
                       type="text"
                       className="db-field-input"
-                      style={{ width: '100%', backgroundColor:"" }}
+                      style={{ width: '100%' }}
                       value={formData.firstName}
                       onChange={handleFieldChange('firstName')}
                       disabled={saving}
@@ -442,9 +432,8 @@ const Dashboard = () => {
                   <div
                     type="email"
                     className="db-field-input"
-                    style={{ width: '100%',backgroundColor:"transparent" }}
+                    style={{ width: '100%' }}
                     value={formData.email}
-                    onChange={handleFieldChange('email')}
                     disabled={saving}
                   >{formData.email}</div>
                 ) : (
