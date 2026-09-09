@@ -163,7 +163,7 @@ export default function AIGenerator({ initialText = '', initialSourceLabel = '',
       <div className="hub-page">
         <p className="hub-eyebrow">AI GENERATOR</p>
         <h2 className="hub-title">Saved ✅</h2>
-        <div className="hub-card">
+        <div className="hub-card" style={{paddingBottom:50}}>
           {savedInto.testId && (
             <div className="hub-row" style={{ marginBottom: savedInto.deckId ? 10 : 0 }}>
               <div style={{ fontSize: 13 }}>{savedInto.questionCount} question{savedInto.questionCount !== 1 ? 's' : ''} saved to Mock Tests</div>
@@ -198,7 +198,7 @@ export default function AIGenerator({ initialText = '', initialSourceLabel = '',
         <p className="hub-eyebrow">AI GENERATOR</p>
         <h2 className="hub-title">Results</h2>
 
-        <div className="hub-card" style={{ textAlign: 'center' }}>
+        <div className="hub-card" style={{ textAlign: 'center' ,paddingBottom:50}}>
           {quizItems.length > 0 ? (
             <>
               <div className="hub-score-ring" style={{ '--pct': pct }}>
@@ -220,7 +220,7 @@ export default function AIGenerator({ initialText = '', initialSourceLabel = '',
           {keptCount} of {items.length} selected to save — go back to change your picks.
         </div>
 
-        <div className="hub-card">
+        <div className="hub-card" style={{paddingBottom:50}}>
           {selectedQuizItems.length > 0 && (
             <div style={{ marginBottom: selectedCards.length > 0 ? 12 : 0 }}>
               <label style={{ fontSize: 12, color: 'var(--hub-text-muted)' }}>Mock test title</label>
@@ -280,7 +280,7 @@ export default function AIGenerator({ initialText = '', initialSourceLabel = '',
           <div className="hub-progress-fill" style={{ width: `${((index + 1) / items.length) * 100}%` }} />
         </div>
 
-        <div className="hub-card">
+        <div className="hub-card" style={{paddingBottom:50}}>
           <div className="hub-row" style={{ alignItems: 'flex-start', marginBottom: 10 }}>
             <span className="hub-badge-pill">{meta.icon} {meta.label}</span>
             <label className="hub-switch" title="Save this one" onClick={(e) => e.stopPropagation()}>
