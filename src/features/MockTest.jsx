@@ -28,6 +28,26 @@ export default function MockTest() {
   }
 
   const addQuestion = (setId) => {
+    const typeChoice = prompt('Question type — enter "mcq" for multiple choice or "fill" for fill-in-the-blank:', 'mcq')
+    if (!typeChoice?.trim()) return
+
+    if (typeChoice.trim().toLowerCase().startsWith('fill')) {
+      const q = prompt('Question text (use ___ to mark the blank):')
+      if (!q?.trim()) return
+      const correctAnswer = prompt('Correct answer:')
+      if (!correctAnswer?.trim()) return
+      const hintsRaw = prompt('Optional hints, separated by " | " (leave blank for none):')
+      const hints = hintsRaw ? hintsRaw.split('|').map((h) => h.trim()).filter(Boolean) : []
+
+      const next = sets.map((s) =>
+        s.id === setId
+          ? { ...s, questions: [...s.questions, { id: makeId(), type: 'fillIn', q: q.trim(), correctAnswer: correctAnswer.trim(), hints }] }
+          : s
+      )
+      persistSets(next)
+      return
+    }
+
     const q = prompt('Question text:')
     if (!q?.trim()) return
     const optionsRaw = prompt('Enter 4 options, separated by " | " (e.g. A | B | C | D):')
@@ -39,7 +59,7 @@ export default function MockTest() {
     if (Number.isNaN(correct) || correct < 0 || correct >= options.length) { alert('Invalid choice.'); return }
 
     const next = sets.map((s) =>
-      s.id === setId ? { ...s, questions: [...s.questions, { id: makeId(), q: q.trim(), options, correct }] } : s
+      s.id === setId ? { ...s, questions: [...s.questions, { id: makeId(), type: 'mcq', q: q.trim(), options, correct }] } : s
     )
     persistSets(next)
   }
@@ -86,7 +106,10 @@ export default function MockTest() {
           {sets.map((s) => (
             <div key={s.id} className="hub-card">
               <div className="hub-row">
-                <div style={{ fontWeight: 700 }}>{s.title}</div>
+                <div style={{ fontWeight: 700 }}>
+                  {s.title}
+                  {s.source === 'ai' && <span className="hub-badge-pill" style={{ marginLeft: 8, fontSize: 10 }}>✨ AI</span>}
+                </div>
                 <button className="hub-btn hub-btn-danger" style={{ padding: '6px 10px' }} onClick={() => deleteSet(s.id)}>✕</button>
               </div>
               <div style={{ fontSize: 12, color: 'var(--hub-text-muted)', margin: '6px 0 10px' }}>{s.questions.length} questions</div>
@@ -105,7 +128,10 @@ export default function MockTest() {
           {decks.map((d) => (
             <div key={d.id} className="hub-card hub-row">
               <div>
-                <div style={{ fontWeight: 700 }}>{d.name}</div>
+                <div style={{ fontWeight: 700 }}>
+                  {d.name}
+                  {d.source === 'ai' && <span className="hub-badge-pill" style={{ marginLeft: 8, fontSize: 10 }}>✨ AI</span>}
+                </div>
                 <div style={{ fontSize: 12, color: 'var(--hub-text-muted)' }}>{d.cards.length} cards</div>
               </div>
               <button
@@ -157,10 +183,14 @@ function TestRunner({ set, onFinish, onExit }) {
   const [score, setScore] = useState(0)
   const [selected, setSelected] = useState(null)
   const [revealed, setRevealed] = useState(false)
+  const [answerText, setAnswerText] = useState('')
+  const [checked, setChecked] = useState(false) // fill-in: has the answer been submitted?
+  const [showHint, setShowHint] = useState(false)
   const startRef = useRef(Date.now())
 
   const question = set.questions[index]
   const isLast = index === set.questions.length - 1
+  const isFillIn = !set.recall && question?.type === 'fillIn'
 
   const finish = (finalScore) => {
     const durationSec = (Date.now() - startRef.current) / 1000
@@ -172,11 +202,17 @@ function TestRunner({ set, onFinish, onExit }) {
     setScore(newScore)
     setSelected(null)
     setRevealed(false)
+    setAnswerText('')
+    setChecked(false)
+    setShowHint(false)
     if (isLast) finish(newScore)
     else setIndex((i) => i + 1)
   }
 
   if (!question) return null
+
+  const normalize = (s) => (s || '').trim().toLowerCase().replace(/\s+/g, ' ')
+  const isCorrectFillIn = checked && normalize(answerText) === normalize(question.correctAnswer)
 
   return (
     <div className="hub-page">
@@ -202,6 +238,58 @@ function TestRunner({ set, onFinish, onExit }) {
                 <button className="hub-grade-btn" data-grade="0" onClick={() => nextQuestion(false)}>Got it wrong</button>
                 <button className="hub-grade-btn" data-grade="3" onClick={() => nextQuestion(true)}>Got it right</button>
               </div>
+            )}
+          </>
+        ) : isFillIn ? (
+          <>
+            <input
+              className="hub-input"
+              type="text"
+              placeholder="Type your answer…"
+              value={answerText}
+              disabled={checked}
+              onChange={(e) => setAnswerText(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter' && !checked && answerText.trim()) setChecked(true) }}
+            />
+
+            {question.hints?.length > 0 && !checked && (
+              <div style={{ marginTop: 8 }}>
+                {!showHint ? (
+                  <button className="hub-btn hub-btn-ghost" style={{ fontSize: 12 }} onClick={() => setShowHint(true)}>💡 Show hint</button>
+                ) : (
+                  <div style={{ fontSize: 12, color: 'var(--hub-text-muted)' }}>{question.hints.join(' · ')}</div>
+                )}
+              </div>
+            )}
+
+            {checked && (
+              <div
+                className="hub-list-item"
+                style={{
+                  marginTop: 10,
+                  borderColor: isCorrectFillIn ? 'var(--hub-success)' : 'var(--hub-danger)',
+                }}
+              >
+                <div style={{ fontWeight: 700, marginBottom: 4 }}>
+                  {isCorrectFillIn ? '✅ Correct' : '❌ Not quite'}
+                </div>
+                {!isCorrectFillIn && (
+                  <div style={{ fontSize: 12 }}>Correct answer: {question.correctAnswer}</div>
+                )}
+                {question.explanation && (
+                  <div style={{ fontSize: 12, color: 'var(--hub-text-muted)', marginTop: 4 }}>{question.explanation}</div>
+                )}
+              </div>
+            )}
+
+            {!checked ? (
+              <button className="hub-btn" style={{ marginTop: 10 }} disabled={!answerText.trim()} onClick={() => setChecked(true)}>
+                Submit
+              </button>
+            ) : (
+              <button className="hub-btn" style={{ marginTop: 10 }} onClick={() => nextQuestion(isCorrectFillIn)}>
+                {isLast ? 'Finish' : 'Next'}
+              </button>
             )}
           </>
         ) : (
@@ -232,4 +320,4 @@ function TestRunner({ set, onFinish, onExit }) {
       </div>
     </div>
   )
-}
+}

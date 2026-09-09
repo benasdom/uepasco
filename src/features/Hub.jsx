@@ -8,9 +8,11 @@ import Library from './Library'
 import Planner from './Planner'
 import Discussions from './Discussions'
 import ThemeToggle from './ThemeToggle'
+import AIGenerator from './AIGenerator'
 import './styles/hub.css'
 
 const TILES = [
+  { key: 'ai-generator', icon: '✨', label: 'AI Generator' },
   { key: 'flashcards', icon: '🗂️', label: 'Flashcards' },
   { key: 'mocktest', icon: '⏱️', label: 'Mock Tests' },
   { key: 'library', icon: '🔖', label: 'Library' },
@@ -22,15 +24,32 @@ export default function Hub() {
   const [view, setView] = useState(null)
   const [streakInfo, setStreakInfo] = useState({ highestStreakScore: 0 })
   const [activity, setActivity] = useState({ cardsReviewed: 0, mockTestsTaken: 0 })
+  const [genSeed, setGenSeed] = useState(null) // { text, label } prefill when jumping in from a note
 
   useEffect(() => {
     setStreakInfo(getFromLocalStorage('userInfo', {}))
     setActivity(getActivity())
   }, [view]) // refresh summary whenever user returns to the hub
 
+  const openGeneratorFromNote = (note) => {
+    setGenSeed({ text: note.body, label: note.title })
+    setView('ai-generator')
+  }
+
+  if (view === 'ai-generator') {
+    return (
+      <BackWrap onBack={() => { setGenSeed(null); setView(null) }}>
+        <AIGenerator
+          initialText={genSeed?.text || ''}
+          initialSourceLabel={genSeed?.label || ''}
+          onNavigate={(target) => { setGenSeed(null); setView(target) }}
+        />
+      </BackWrap>
+    )
+  }
   if (view === 'flashcards') return <BackWrap onBack={() => setView(null)}><Flashcards /></BackWrap>
   if (view === 'mocktest') return <BackWrap onBack={() => setView(null)}><MockTest /></BackWrap>
-  if (view === 'library') return <BackWrap onBack={() => setView(null)}><Library /></BackWrap>
+  if (view === 'library') return <BackWrap onBack={() => setView(null)}><Library onGenerateFromNote={openGeneratorFromNote} /></BackWrap>
   if (view === 'planner') return <BackWrap onBack={() => setView(null)}><Planner /></BackWrap>
   if (view === 'discussions') return <BackWrap onBack={() => setView(null)}><Discussions /></BackWrap>
 
@@ -100,4 +119,4 @@ function BackWrap({ children, onBack }) {
       {children}
     </div>
   )
-}
+}

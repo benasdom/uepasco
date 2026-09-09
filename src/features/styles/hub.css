@@ -235,3 +235,94 @@
 }
 .hub-nav-tile:hover { border-color: var(--hub-accent); }
 .hub-nav-tile-icon { font-size: 22px; }
+
+/* ── AI Generator review flow ─────────────────────────────────────── */
+
+.hub-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.hub-switch input { opacity: 0; width: 0; height: 0; }
+.hub-switch-track {
+  position: absolute;
+  inset: 0;
+  background: var(--hub-surface-2);
+  border: 1px solid var(--hub-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.hub-switch-track::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 2px;
+  top: 2px;
+  background: var(--hub-text-muted);
+  border-radius: 50%;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.hub-switch input:checked + .hub-switch-track {
+  background: var(--hub-accent);
+  border-color: var(--hub-accent);
+}
+.hub-switch input:checked + .hub-switch-track::before {
+  transform: translateX(16px);
+  background: white;
+}
+
+.hub-answer-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--hub-border);
+  background: var(--hub-surface-2);
+  color: var(--hub-text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.hub-answer-option:disabled { cursor: default; }
+.hub-answer-option.is-selected { border-color: var(--hub-accent); }
+.hub-answer-option.is-correct { border-color: var(--hub-success); background: color-mix(in srgb, var(--hub-success) 14%, var(--hub-surface-2)); }
+.hub-answer-option.is-incorrect { border-color: var(--hub-danger); background: color-mix(in srgb, var(--hub-danger) 14%, var(--hub-surface-2)); }
+
+.hub-result-banner {
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 13px;
+  border: 1px solid var(--hub-border);
+}
+.hub-result-banner.is-correct { border-color: var(--hub-success); background: color-mix(in srgb, var(--hub-success) 12%, var(--hub-surface-1)); }
+.hub-result-banner.is-incorrect { border-color: var(--hub-danger); background: color-mix(in srgb, var(--hub-danger) 12%, var(--hub-surface-1)); }
+
+.hub-score-ring {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 800;
+  margin: 4px auto 14px;
+  background: conic-gradient(var(--hub-accent) calc(var(--pct) * 1%), var(--hub-surface-2) 0);
+}
+.hub-score-ring-inner {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--hub-surface-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
